@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateOffersTable extends Migration
+class CreateOrderProductTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,19 @@ class CreateOffersTable extends Migration
      */
     public function up()
     {
-        Schema::create('offers', function (Blueprint $table) {
+        Schema::create('order_product', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->timestamp('begin_at')->nullable($value=true);
-            $table->timestamp('end_at')->nullable($value=true);
+            $table->unsignedBigInteger('order_id');
             $table->unsignedBigInteger('product_id');
-            $table->mediumText('promotion_text');
+            $table->unsignedBigInteger('status_id');
+            $table->integer('quantity');
+            $table->float('price',8,2);
+            $table->float('subtotal',8,2);
             $table->timestamps();
 
+            $table->foreign('order_id')->references('id')->on('orders');
             $table->foreign('product_id')->references('id')->on('products');
+            $table->foreign('status_id')->references('id')->on('order_status');
         });
     }
 
@@ -32,6 +36,6 @@ class CreateOffersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('offers');
+        Schema::dropIfExists('order_product');
     }
 }

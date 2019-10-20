@@ -11,6 +11,14 @@
 |
 */
 
+
+
+Route::get('/admin', function () {
+    return view('admin.layout.layout');
+})->name('inicio');
+
+Route::get('admin/users','UsuarioController@index')->name('user');
+
 Route::get('/', function () {
     return view('front.pages.home');
 })->name('inicio');

@@ -6,5 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Rol extends Model
 {
-    protected $table = 'rol';       
+    protected $table = 'rol';     
+    
+    
+    public function user()
+    {
+        return $this->hasMany('App\User');
+    }
 }

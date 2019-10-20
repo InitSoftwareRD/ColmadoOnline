@@ -17,7 +17,7 @@ Route::get('/admin', function () {
     return view('admin.layout.layout');
 })->name('inicio');
 
-Route::get('admin/users','UsuarioController@index')->name('user');
+
 
 Route::get('/', function () {
     return view('front.pages.home');
@@ -45,3 +45,15 @@ Route::get('/iniciar', function () {
 })->name('iniciar');
 
 Auth::routes();
+
+/*User*/
+
+Route::get('admin/users','UsuarioController@index')->name('user');
+Route::post('admin/crear_usuario','UsuarioController@create')->name('crear_usuario');
+Route::get('admin/personal','UsuarioController@personal')->name('personal');
+Route::get('admin/cliente','UsuarioController@cliente')->name('cliente');
+Route::get('status/{id}/{status}','UsuarioController@editStatus')->name('status');
+Route::get('status/{id}/{status}','UsuarioController@editStatusCliente')->name('Clientestatus');
+
+
+

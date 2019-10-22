@@ -53,7 +53,7 @@ Route::post('admin/crear_usuario','UsuarioController@create')->name('crear_usuar
 Route::get('admin/personal','UsuarioController@personal')->name('personal');
 Route::get('admin/cliente','UsuarioController@cliente')->name('cliente');
 Route::get('status/{id}/{status}','UsuarioController@editStatus')->name('status');
-Route::get('status/{id}/{status}','UsuarioController@editStatusCliente')->name('Clientestatus');
+Route::get('cliente/{id}/{status}','UsuarioController@editStatusCliente')->name('Clientestatus');
 
 
 

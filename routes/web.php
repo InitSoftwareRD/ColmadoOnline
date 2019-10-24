@@ -55,5 +55,12 @@ Route::get('admin/cliente','UsuarioController@cliente')->name('cliente');
 Route::get('status/{id}/{status}','UsuarioController@editStatus')->name('status');
 Route::get('cliente/{id}/{status}','UsuarioController@editStatusCliente')->name('Clientestatus');
 
+/*Product*/
+
+/*Category*/
+Route::get('admin/category','ProductsController@category')->name('category');
+Route::post('admin/category','ProductsController@create_category')->name('create_category');
+Route::get('category/{id}/{status}','ProductsController@categorystatus')->name("categorystatus");
+
 
 

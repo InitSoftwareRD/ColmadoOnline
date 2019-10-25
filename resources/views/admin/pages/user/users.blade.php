@@ -1,5 +1,9 @@
 @extends('admin.layout.layout')
 
+@section('title')
+    Crear Usuarios
+@endsection
+
 @section('content')
 
 

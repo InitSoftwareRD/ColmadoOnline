@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\CategoryRequest;
+use App\Http\Requests\ProductosRequest;
 use App\Categories;
+use App\Products;
+use App\ImageProducts;
 
 class ProductsController extends Controller
 {
@@ -15,7 +18,8 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        //
+        $categories = Categories::all();
+        return view('admin.pages.products.create',compact('categories'));
     }
 
     /**
@@ -25,11 +29,47 @@ class ProductsController extends Controller
      */
     public function category()
     {
-        $categories = Categories::all();
+        $categories = Categories::where('status','A')->get();
 
         return view('admin.pages.products.category',compact('categories'));
            
-         
+    }
+
+
+    public function create(ProductosRequest $request)
+    {
+        $productos = new Products;
+        $imagen= new ImageProducts;
+
+        $name="";
+        if($request->hasFile('portada'))
+        {
+             $file = $request->file('portada');
+             $name = time().$file->getClientOriginalName();
+             $file->move(public_path().'/images/',$name);
+
+        }
+
+        $productos->name= $request->nombre;
+        $productos->category_id=$request->categoria;
+        $productos->description=$request->descripcion;
+        $productos->ingredients=$request->ingredientes;
+        $productos->price= $request->precio;
+        
+        $productos->save();
+
+        $imagen->ruta = public_path('images/'.$name);
+        $imagen->product_id = $productos->id;
+        $imagen->tipo='P';
+
+        $imagen->save();
+
+        
+
+        return redirect()->route('producto')->with('status', 'Producto creado de manera correcta!');
+
+
+             
     }
 
 
@@ -42,7 +82,7 @@ class ProductsController extends Controller
     public function create_category(CategoryRequest $request)
     {
         $category=new Categories;
-        $category->name=$request->category;
+        $category->name=$request->categoria;
         $category->status='A';
 
         $category->save();
@@ -92,11 +132,7 @@ class ProductsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        //
-    }
-
+   
     /**
      * Update the specified resource in storage.
      *

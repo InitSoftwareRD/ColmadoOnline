@@ -20,6 +20,7 @@ class CreateProductsTable extends Migration
             $table->mediumText('description');
             $table->mediumText('ingredients');
             $table->float('price',8,2);
+            $table->enum('status', ['A', 'I']);
             $table->timestamps();
 
             $table->foreign('category_id')->references('id')->on('category');

@@ -18,6 +18,7 @@ class CreateOffersTable extends Migration
             $table->timestamp('begin_at')->nullable($value=true);
             $table->timestamp('end_at')->nullable($value=true);
             $table->unsignedBigInteger('product_id');
+            $table->enum('status', ['A', 'I']);
             $table->mediumText('promotion_text');
             $table->timestamps();
 

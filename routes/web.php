@@ -61,6 +61,21 @@ Route::get('cliente/{id}/{status}','UsuarioController@editStatusCliente')->name(
 Route::get('admin/category','ProductsController@category')->name('category');
 Route::post('admin/category','ProductsController@create_category')->name('create_category');
 Route::get('category/{id}/{status}','ProductsController@categorystatus')->name("categorystatus");
+Route::get('admin/producto','ProductsController@index')->name('producto');
+Route::post('admin/producto','ProductsController@create')->name('crear_producto');
+
+
+/*Orden*/
+
+Route::get('admin/orden','OrdenarController@index')->name('ordenar');
+Route::get('admin/listar_productos','OrdenarController@ListarProducto')->name('listarProductos');
+
+// Route::get('/admin/prueba', function () {
+//           dd(rand ( 100000, 999999 ));
+// });
+
+
+
 
 
 

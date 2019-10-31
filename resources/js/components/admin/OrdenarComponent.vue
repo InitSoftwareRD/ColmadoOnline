@@ -5,6 +5,7 @@
             <table v-if="items" id="productos" class="table table-striped  table-sm table-bordered table-responsive">
                     <thead>
                         <tr>
+                            <th>Imagen</th>
                             <th>Nombre</th>
                             <th>Categoria</th>
                             <th>Precio</th>
@@ -13,11 +14,12 @@
                     </thead>
                     <tbody>
                         <tr v-for="(item, key) in items" :key="key">
+                            <th><img src="https://via.placeholder.com/150" width="40" height="40" ></th>
                             <td>{{ item.name }}</td>
                             <td>{{ item.category_id }}</td>
                             <th>{{ item.price }}</th>
                             <th>
-                                <button class="btn btn-success btn-sm" @click="agregar(key)"><i class="fas fa-shopping-cart"></i></button>
+                                <button class="btn btn-success btn-sm" @click="agregarArticulo(item)"><i class="fas fa-shopping-cart"></i></button>
                             </th>
                         </tr>
                     </tbody>
@@ -26,61 +28,103 @@
             </div>
     <div class="col-md-6">
  
-         <div id="carrito"  v-if="carrito">
-            <input class="search" placeholder="Lista" />
-            <table>
-                <!-- IMPORTANT, class="list" have to be at tbody -->
-                <tbody class="list">
-                <tr v-for="(item, key) in carrito" :key="key">
-                    <td class="name">{{ key }}</td>
-                    <td class="name">{{ item.nombre }}</td>
-                    <td class="born">{{ item.Fecha }}</td>
-                    <td class="accion">
-                      <button class="btn btn-danger btn-sm" @click="eliminar(key)"><i class="fas fa-trash-alt"></i></button>
-                    </td>
-                </tr>
-                </tbody>
-        </table>
+    <div id="carrito"  v-if="carrito">
+            <div class="row">
+                <div class="col-md-4">
+                     <input class="search" placeholder="Lista" />
+                </div>
 
+                 <div class="col-md-2">
+                    <button v-if="total > 0" class="btn btn-danger btn-sm" @click="limpiar()"><i class="fas fa-trash-alt"></i> </button>
+                 </div>  
+                <div class="col-md-4">
+                    <h4 v-if="total > 0" >Total:<span class="badge badge-primary">{{ total }}</span></h4>
+                </div>   
+                 
+                <div class="col-md-2">
+                      <button v-if="total > 0" class="btn btn-success" @click="modal()" ><i class="fas fa-shopping-bag"></i></button>
+                </div>
+            </div>
+            
+            
+
+        <table class="table  table-sm table-bordered  mt-2">
+                    <thead>
+                        <tr>
+                        <th scope="col">Articulo</th>
+                        <th scope="col">Precio</th>
+                        <th scope="col">Cantidad</th>
+                        <th scope="col">Suma</th>
+                        <th>Accion</th>
+                        </tr>
+                    </thead>
+            <tbody class="list" >
+                        <tr v-for="(item, key) in carrito" :key="key" >
+                        <td class="name">{{ item.name }}</td>
+                        <td class="born">{{ item.price }}</td>
+                        <td class="accion">
+                            <button class="btn btn-info btn-sm" @click=" sumar(item)" >+</button>
+                              <input type="number"  min="1" max="999" name="cantidad" size="3" v-model="item.cantidad"
+                              readonly>
+                            <button class="btn btn-warning btn-sm" @click="restar(item)" >--</button>  
+
+                        </td>
+                        <th>{{ item.suma }}</th>
+                        <th> <button class="btn btn-danger btn-sm" @click="eliminar(key)"><i class="fas fa-trash-alt"></i></button>
+                        </th>
+                        </tr>
+            </tbody>
+         </table>
+
+        
     </div>
                  
 
         </div>
 
         </div>
+
+
+<div id="modal" >
+            <!-- Modal -->
+            <div class="modal fade" id="aviso" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Confirmar</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <h2>Confirmar Compra!</h2>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-success">Confirmar</button>
+                </div>
+                </div>
+            </div>
+        </div>
+</div>
+
   
       </div>
+
+
+
 </template>
 
 <script>
 
-
+   import datables from 'datatables'
 
     export default {
         mounted() {
-            window.onload = function () {
-            var options = {
-                valueNames: [ 'name', 'born' ]
-            };
 
-            var userList = new List('carrito', options);
+           this.getProductos();
+           this.compras();
 
-               $('#productos').DataTable();
-        }
-
-         axios.get('listar_productos')
-                .then((response)=>{
-                    // handle success
-                   this.items=response.data;
-                })
-                .catch((error)=> {
-                    // handle error
-                    console.log(error);
-        })
-        },
-
-        created(){
-            $('#productos').DataTable();
         },
 
        data()
@@ -88,108 +132,119 @@
            return {
             items: [],
             carrito:[],
-            data:'',
-           }
+            total:0,
+        }
 
        },
 
        methods: {
-           
-           agregar(key)
-           {
-            
-                    this.carrito.push({nombre:key,Fecha:'2006'});
-                    
-                var options = {
-                        valueNames: [ 'name', 'born' ]
-                    };
 
-                    var userList = new List('carrito', options);
+           modal(){
+              $('#aviso').modal('show')
+           },
+
+           limpiar(){
+                this.carrito = [];
+                this.sumatoria();
+           },
+
+
+           sumar(item)
+           {
+               item.cantidad++
+               item.suma =  (item.cantidad * item.price);
+               this.sumatoria();
+
+           },
+
+           restar(item){
+
+               if(item.cantidad > 1){
+                   item.cantidad--
+                   item.suma =  (item.cantidad * item.price);
+                   this.sumatoria();
+               }
+
+
+           },
+
+           sumatoria(){
+                    this.total=0;
+                    
+                     for(let item of this.carrito)
+                     {
+                         this.total = this.total  + item.suma;
+                     }
+           },
+
+
+          compras(){
+               var options = {
+                valueNames: [ 'name', 'born' ]
+            };
+
+            var userList = new List('carrito', options);
+
+          },
+           
+           agregarArticulo(item)
+           {
+              this.carrito.push({
+                  name:item.name,
+                  price:item.price,
+                  cantidad:1,
+                  suma:item.price,
+
+              });  
+              this.compras();
+              this.sumatoria();
            },
 
            eliminar(key){
-                        this.carrito.splice(key,1);
+                    this.carrito.splice(key,1);
+                     this.sumatoria();
+                     
                     var options = {
                             valueNames: [ 'key','name', 'born' ]
                         };
 
-                        var userList = new List('carrito', options);
+                        var userList = new List('carrito', options);        
             },
-           }
+
+            mytable()
+            {
+                $(function () {
+                     $('#productos').DataTable();
+                  });          
+ 
+            },
+
+            getProductos(){
+
+            axios.get('listar_productos')
+                .then((response)=>{
+                    // handle success
+                   this.items=response.data;
+                   this.mytable();
+                })
+                .catch((error)=> {
+                    // handle error
+                    console.log(error);
+               })
+
+            },
+
+           },
+
+
 
        }
 </script>
 
 <style>
 
-.list {
-  font-family:sans-serif;
-}
-td {
-  padding:10px; 
-  border:solid 1px #eee;
-}
-
-input {
-  border:solid 1px #ccc;
-  border-radius: 5px;
-  padding:7px 14px;
-  margin-bottom:10px
-}
-input:focus {
-  outline:none;
-  border-color:#aaa;
-}
-.sort {
-  padding:8px 30px;
-  border-radius: 6px;
-  border:none;
-  display:inline-block;
-  color:#fff;
-  text-decoration: none;
-  background-color: #28a8e0;
-  height:30px;
-}
-.sort:hover {
-  text-decoration: none;
-  background-color:#1b8aba;
-}
-.sort:focus {
-  outline:none;
-}
-.sort:after {
-  display:inline-block;
-  width: 0;
-  height: 0;
-  border-left: 5px solid transparent;
-  border-right: 5px solid transparent;
-  border-bottom: 5px solid transparent;
-  content:"";
-  position: relative;
-  top:-10px;
-  right:-5px;
-}
-.sort.asc:after {
-  width: 0;
-  height: 0;
-  border-left: 5px solid transparent;
-  border-right: 5px solid transparent;
-  border-top: 5px solid #fff;
-  content:"";
-  position: relative;
-  top:4px;
-  right:-5px;
-}
-.sort.desc:after {
-  width: 0;
-  height: 0;
-  border-left: 5px solid transparent;
-  border-right: 5px solid transparent;
-  border-bottom: 5px solid #fff;
-  content:"";
-  position: relative;
-  top:-4px;
-  right:-5px;
+input[type="number"] {
+   width:50px;
 }
 
 </style>

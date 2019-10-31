@@ -92,8 +92,6 @@
 
     
 <script src="{{ asset('js/app.js') }}" defer></script>  
-<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" defer></script>
-<script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" defer></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js"></script>
 <!-- jQuery -->
 <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>

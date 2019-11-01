@@ -18,11 +18,12 @@ class CreateOrdersTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('customer_id');
             $table->float('total',8,2);
-            $table->float('paid_with',8,2);
-            $table->float('change',8,2);
-            $table->string('ping');
-            $table->string('location');   
-            $table->unsignedBigInteger('status_id');        
+            $table->float('paid_with',8,2)->nullable();
+            $table->float('change',8,2)->nullable();
+            $table->string('ping')->nullable();
+            $table->string('location')->nullable();   
+            $table->unsignedBigInteger('status_id');
+            $table->enum('canal', ['I', 'C']);        
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');

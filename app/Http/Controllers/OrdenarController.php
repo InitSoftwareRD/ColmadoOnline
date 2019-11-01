@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Products;
+use Illuminate\Support\Facades\DB;
 
 class OrdenarController extends Controller
 {
@@ -64,9 +65,15 @@ class OrdenarController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function listarClientes()
     {
-        //
+        $clientes=DB::select("SELECT u.id as id, CONCAT(u.name,'  ',u.last_name,' |  ',u.phone ) as nombre FROM 
+        customers c,
+        users u
+        WHERE
+        u.id = c.user_id ");
+
+        return $clientes;
     }
 
     /**

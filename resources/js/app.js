@@ -5,6 +5,7 @@ window.Vue = require('vue');
 
 
 
+
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('ordenar-component', require('./components/admin/OrdenarComponent.vue').default);
 

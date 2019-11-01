@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\UserResquest;
 use App\User;
+use App\Customers;
 
 class UsuarioController extends Controller
 {
@@ -55,6 +56,18 @@ class UsuarioController extends Controller
         $user->rol_id = $request->rol;
 
         $user->save();
+       
+         
+        if($request->rol=='1')
+        {
+            $cliente = new Customers;
+
+            $cliente->user_id = $user->id;
+
+            $cliente->save();
+
+
+        }
 
 
         return redirect()->route('user')->with('status', 'Usuario Registrado Correctamente!');

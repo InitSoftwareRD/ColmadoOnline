@@ -15,6 +15,7 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
+    <link href="{{ asset('plugins/select2/css/select2.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="{{ asset('plugins/fontawesome-free/css/all.min.css') }}">
@@ -90,14 +91,18 @@
     </div>
     <!-- ./wrapper -->
 
-    
-<script src="{{ asset('js/app.js') }}" defer></script>  
+
 <script src="//cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js"></script>
 <!-- jQuery -->
 <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
 <!-- jQuery UI 1.11.4 -->
+
+<script src="{{ asset('plugins/select2/js/select2.min.js') }}"></script>      
 <script src="{{ asset('plugins/jquery-ui/jquery-ui.min.js')}}"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+
+<script src="{{ asset('js/app.js') }}" defer></script>  
+
 <script>
   $.widget.bridge('uibutton', $.ui.button)
 </script>

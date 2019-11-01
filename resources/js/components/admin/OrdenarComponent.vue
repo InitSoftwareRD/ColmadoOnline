@@ -2,6 +2,7 @@
 <div class="container mt-5">  
         <div class="row">
             <div class="col-md-6">
+           <v-select label="Clientes" v-model="customer" :options="clientes"></v-select>
             <table v-if="items" id="productos" class="table table-striped  table-sm table-bordered table-responsive">
                     <thead>
                         <tr>
@@ -35,14 +36,16 @@
                 </div>
 
                  <div class="col-md-2">
-                    <button v-if="total > 0" class="btn btn-danger btn-sm" @click="limpiar()"><i class="fas fa-trash-alt"></i> </button>
+                      <button v-if="total > 0" class="btn btn-success" @click="modal()" ><i class="fas fa-shopping-bag"></i></button>
+                  
                  </div>  
                 <div class="col-md-4">
                     <h4 v-if="total > 0" >Total:<span class="badge badge-primary">{{ total }}</span></h4>
                 </div>   
                  
                 <div class="col-md-2">
-                      <button v-if="total > 0" class="btn btn-success" @click="modal()" ><i class="fas fa-shopping-bag"></i></button>
+                    <button v-if="total > 0" class="btn btn-danger btn-sm" @click="limpiar()"><i class="fas fa-trash-alt"></i> </button>
+
                 </div>
             </div>
             
@@ -91,24 +94,26 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Confirmar</h5>
+                    <h5 class="modal-title" id="exampleModalLongTitle">Cliente</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <h2>Confirmar Compra!</h2>
+            
                 </div>
                 <div class="modal-footer">
+                    <button @click="ordenar()" type="button" class="btn btn-success">Confirmar</button>    
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-success">Confirmar</button>
+                
+
                 </div>
                 </div>
             </div>
         </div>
 </div>
 
-  
+   
       </div>
 
 
@@ -118,12 +123,17 @@
 <script>
 
    import datables from 'datatables'
+   import vSelect from 'vue-select'
+
+   Vue.component('v-select', vSelect)
 
     export default {
         mounted() {
 
            this.getProductos();
            this.compras();
+           this.getClientes();
+           
 
         },
 
@@ -132,6 +142,8 @@
            return {
             items: [],
             carrito:[],
+            clientes:[],
+            customer:'',
             total:0,
         }
 
@@ -141,6 +153,11 @@
 
            modal(){
               $('#aviso').modal('show')
+           },
+
+           ordenar()
+           {
+                console.log(this.customer);
            },
 
            limpiar(){
@@ -233,6 +250,21 @@
                })
 
             },
+
+            getClientes()
+            {
+                axios.get('listar_clientes')
+                .then((response)=>{
+                    // handle success
+                   this.clientes=response.data;
+                
+                })
+                .catch((error)=> {
+                    // handle error
+                    console.log(error);
+               })
+
+            }
 
            },
 

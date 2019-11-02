@@ -70,6 +70,7 @@ Route::post('admin/producto','ProductsController@create')->name('crear_producto'
 Route::get('admin/orden','OrdenarController@index')->name('ordenar');
 Route::get('admin/listar_productos','OrdenarController@ListarProducto')->name('listarProductos');
 Route::get('admin/listar_clientes','OrdenarController@listarClientes')->name('listarClientes');
+Route::post('admin/realizar_orden','OrdenarController@ordenar')->name('realizar_orden');
 
 // Route::get('/admin/prueba', function () {
 //           dd(rand ( 100000, 999999 ));

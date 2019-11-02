@@ -101,7 +101,7 @@
 <script src="{{ asset('plugins/jquery-ui/jquery-ui.min.js')}}"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 
-<script src="{{ asset('js/app.js') }}" defer></script>  
+<script src="{{ asset(mix('js/app.js')) }}" defer></script>  
 
 <script>
   $.widget.bridge('uibutton', $.ui.button)

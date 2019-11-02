@@ -2034,7 +2034,11 @@ __webpack_require__.r(__webpack_exports__);
       $('#aviso').modal('show');
     },
     ordenar: function ordenar() {
-      axios.post('listar_productos').then(function (response) {
+      axios.post('realizar_orden', {
+        'carrito': this.carrito,
+        'customer': this.customer,
+        'total': this.total
+      }).then(function (response) {
         sweetalert2__WEBPACK_IMPORTED_MODULE_1___default.a.fire({
           position: 'center',
           type: 'success',
@@ -2102,6 +2106,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     agregarArticulo: function agregarArticulo(item) {
       this.carrito.push({
+        id: item.id,
         name: item.name,
         price: item.price,
         cantidad: 1,

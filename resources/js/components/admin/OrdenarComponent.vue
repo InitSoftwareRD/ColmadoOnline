@@ -183,7 +183,13 @@
 
            ordenar()
            {
-                axios.post('listar_productos')
+                axios.post('realizar_orden',
+                  {
+                      'carrito':this.carrito,
+                      'customer':this.customer,
+                      'total':this.total,
+                  }
+                )
                 .then((response)=>{
 
                          Swal.fire({
@@ -196,7 +202,7 @@
                 
                 
                 })
-                .catch((error)=> {
+                .catch((error)=>{
                   
                        Swal.fire({
                             position: 'center',
@@ -256,10 +262,11 @@
            agregarArticulo(item)
            {
               this.carrito.push({
-                  name:item.name,
-                  price:item.price,
-                  cantidad:1,
-                  suma:item.price,
+                 id:item.id, 
+                 name:item.name,
+                 price:item.price,
+                 cantidad:1,
+                 suma:item.price,
 
               });  
               this.compras();

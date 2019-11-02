@@ -13,7 +13,8 @@ class CreateOrdersTable extends Migration
      */
     public function up()
     {
-        Schema::create('orders', function (Blueprint $table) {
+        Schema::create('orders', function (Blueprint $table)
+        {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('customer_id');
@@ -22,13 +23,11 @@ class CreateOrdersTable extends Migration
             $table->float('change',8,2)->nullable();
             $table->string('ping')->nullable();
             $table->string('location')->nullable();   
-            $table->unsignedBigInteger('status_id');
             $table->enum('canal', ['I', 'C']);        
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('customer_id')->references('id')->on('customers');
-            $table->foreign('status_id')->references('id')->on('order_status');
         });
     }
 

@@ -11,18 +11,9 @@
 |
 */
 
+Auth::routes();
 
-
-Route::get('/admin', function () {
-    return view('admin.layout.layout');
-})->name('inicio');
-
-
-
-Route::get('/', function () {
-    return view('front.pages.home');
-})->name('inicio');
-
+Route::get('/', 'WelcomeController@index')->name('home');
 
 Route::get('/contacto', function () {
     return view('front.pages.contact');
@@ -44,7 +35,9 @@ Route::get('/iniciar', function () {
     return view('front.pages.login');
 })->name('iniciar');
 
-Auth::routes();
+Route::get('/admin', function () {
+    return view('admin.layout.layout');
+})->name('inicio');
 
 /*User*/
 

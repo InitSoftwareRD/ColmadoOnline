@@ -7,87 +7,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-3 col-md-3">
-                    <div class="product_sidebar">
-                        <div class="product_block">
-                            <div class="sidebar_heading">
-                                <h3>Búsqueda</h3>
-                                <img src="{{ asset('front_template/images/footer_underline.png') }}" alt="image">
-                            </div>
-                            <div class="sidebar_search">
-                                <input type="text" placeholder="¡Busca algún producto!">
-                                <a href="javascript:;"><i class="fa fa-search" aria-hidden="true"></i></a>
-                            </div>
-                        </div>
-    
-                        <div class="product_block">
-                            <div class="sidebar_heading">
-                                <h3>Categorías</h3>
-                                <img src="{{ asset('front_template/images/footer_underline.png') }}" alt="image">
-                            </div>
-                            <div class="product_category">
-                                <ul>
-                                    <li>
-                                        <input type="checkbox" id="cat1" checked>
-                                        <label for="cat1">Todos<span>(16)</span></label>
-                                    </li>
-                                    <li>
-                                        <input type="checkbox" id="cat2">
-                                        <label for="cat2">Categoria 1<span>(12)</span></label>
-                                    </li>
-                                    <li>
-                                        <input type="checkbox" id="cat3">
-                                        <label for="cat3">Categoria 2<span>(156)</span></label>
-                                    </li>
-                                    <li>
-                                        <input type="checkbox" id="cat4">
-                                        <label for="cat4">Categoria3<span>(260)</span></label>
-                                    </li>
-                                    <li>
-                                        <input type="checkbox" id="cat5">
-                                        <label for="cat5">Categoria4<span>(96)</span></label>
-                                    </li>
-                                    <li>
-                                        <input type="checkbox" id="cat6">
-                                        <label for="cat6">Categoria 5<span>(12)</span></label>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="product_block">
-                            <div class="sidebar_heading">
-                                <h3>Descuento</h3>
-                                <img src="{{ asset('front_template/images/footer_underline.png') }}" alt="image">
-                            </div>
-                            <div class="product_category">
-                                <ul>
-                                    <li>
-                                        <input type="checkbox" id="dis1" checked>
-                                        <label for="dis1">Menos de 20%<span>(16)</span></label>
-                                    </li>
-                                    <li>
-                                        <input type="checkbox" id="dis2">
-                                        <label for="dis2">20% o mas<span>(12)</span></label>
-                                    </li>
-                                    <li>
-                                        <input type="checkbox" id="dis3">
-                                        <label for="dis3">30% o mas<span>(156)</span></label>
-                                    </li>
-                                    <li>
-                                        <input type="checkbox" id="dis4">
-                                        <label for="dis4">50% o mas<span>(260)</span></label>
-                                    </li>
-                                    <li>
-                                        <input type="checkbox" id="dis5">
-                                        <label for="dis5">70% o mas<span>(96)</span></label>
-                                    </li>
-                                    <li>
-                                        <input type="checkbox" id="dis6">
-                                        <label for="dis6">80% o mas<span>(12)</span></label>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+                    @include('front.shared._filters')
                 </div>
                 <div class="col-lg-9 col-md-9">
                     <div class="product_section">
@@ -104,7 +24,7 @@
                                         <li><span>Vista</span></li>
                                         <li>
                                             <a href="javascript:;" class="active grid_view">
-                                                <svg 
+                                                <svg
                                                 xmlns="http://www.w3.org/2000/svg"
                                                 xmlns:xlink="http://www.w3.org/1999/xlink"
                                                 width="12px" height="12px">
@@ -115,7 +35,7 @@
                                         </li>
                                         <li>
                                             <a href="javascript:;" class="list_view">
-                                                <svg 
+                                                <svg
                                                 xmlns="http://www.w3.org/2000/svg"
                                                 xmlns:xlink="http://www.w3.org/1999/xlink"
                                                 width="12px" height="10px">
@@ -130,339 +50,37 @@
                         </div>
                         <div class="product_items_section">
                             <ul>
-                                <li>
-                                    <div class="product_item_block">
-                                        <div class="org_product_block">
-                                            <span class="product_label">30% off</span>
-                                            <div class="org_product_image"><img src="https://via.placeholder.com/159x170" alt="image"></div>
-                                            <h4>Producto x</h4>
-                                            <h3><span><i class="fa fa-usd" aria-hidden="true"></i></span>25</h3>
-                                            <a href="javascript:;">Agregar a carrito</a>
-                                        </div>
-                                        <div class="content_block">
-                                            <div class="product_price_box"> 
-                                                <h3>farm sprayer</h3>            
-                                                <h5><span><i class="fa fa-usd" aria-hidden="true"></i></span>25</h5>   
+                                @foreach($productos as $producto)
+                                    <li>
+                                        <div class="product_item_block">
+                                            <div class="org_product_block">
+                                                {{--<span class="product_label">30% off</span>--}}
+                                                <div class="org_product_image"><img src="{{ $producto->imagen_portada }}"></div>
+                                                <h4>{{ $producto->name }}</h4>
+                                                <h3><span><i class="fa fa-usd" aria-hidden="true"></i></span>{{ $producto->price }}</h3>
+                                                <a href="javascript:;">Agregar a carrito</a>
                                             </div>
-                                            <p>+151 vendidas</p>
-                                            
-                                            <a href="product_single.html" style="color: #fec007;"><strong>Ver producto</strong></a>
-                                            <ul class="product_code">
-                                                <li>
-                                                    <p>Disponibilidad: <span>en stock</span></p>
-                                                </li>
-                                            </ul>
-                                            <p>Consectetur adipisicing elit sed do eiusmod tempor incididunt utte labore et dolore magna aliqua Ut enim ad minim</p>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="product_item_block">
-                                        <div class="org_product_block">
-                                            <span class="product_label">30% off</span>
-                                            <div class="org_product_image"><img src="https://via.placeholder.com/159x170" alt="image"></div>
-                                            <h4>farm sprayer</h4>
-                                            <h3><span><i class="fa fa-usd" aria-hidden="true"></i></span>25</h3>
-                                            <a href="javascript:;">add to cart</a>
-                                        </div>
-                                        <div class="content_block">
-                                            <div class="product_price_box"> 
-                                                <h3>farm sprayer</h3>            
-                                                <h5><span><i class="fa fa-usd" aria-hidden="true"></i></span>25</h5>   
-                                            </div>
-                                            <p>Farm & Garden</p>
-                                            <div class="rating_section">
-                                                <span>4.1</span>
-                                                <ul>
-                                                    <li><a class="active" href="javascript:;"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-                                                    <li><a class="active" href="javascript:;"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-                                                    <li><a class="active" href="javascript:;"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-                                                    <li><a href="javascript:;"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-                                                    <li><a href="javascript:;"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+                                            <div class="content_block">
+                                                <div class="product_price_box">
+                                                    <h3>{{ $producto->name }}</h3>
+                                                    <h5><span><i class="fa fa-usd" aria-hidden="true"></i></span>{{ $producto->price }}</h5>
+                                                </div>
+
+                                                <a href="product_single.html" style="color: #fec007;"><strong>Ver producto</strong></a>
+                                                <ul class="product_code">
+                                                    <li>
+                                                        <p>Disponibilidad: <span>en stock</span></p>
+                                                    </li>
                                                 </ul>
-                                                <p>151 reviews</p>
+                                                <p>{{ $producto->description }}</p>
                                             </div>
-                                            <ul class="product_code">
-                                                <li>
-                                                    <p>product code: 12948</p>
-                                                </li>
-                                                <li>
-                                                    <p>availability: <span>in stock</span></p>
-                                                </li>
-                                            </ul>
-                                            <p>Consectetur adipisicing elit sed do eiusmod tempor incididunt utte labore et dolore magna aliqua Ut enim ad minim</p>
                                         </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="product_item_block">
-                                        <div class="org_product_block">
-                                            <span class="product_label">30% off</span>
-                                            <div class="org_product_image"><img src="https://via.placeholder.com/159x170" alt="image"></div>
-                                            <h4>farm sprayer</h4>
-                                            <h3><span><i class="fa fa-usd" aria-hidden="true"></i></span>25</h3>
-                                            <a href="javascript:;">add to cart</a>
-                                        </div>
-                                        <div class="content_block">
-                                            <div class="product_price_box"> 
-                                                <h3>farm sprayer</h3>            
-                                                <h5><span><i class="fa fa-usd" aria-hidden="true"></i></span>25</h5>   
-                                            </div>
-                                            <p>Farm & Garden</p>
-                                            <div class="rating_section">
-                                                <span>4.1</span>
-                                                <ul>
-                                                    <li><a class="active" href="javascript:;"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-                                                    <li><a class="active" href="javascript:;"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-                                                    <li><a class="active" href="javascript:;"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-                                                    <li><a href="javascript:;"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-                                                    <li><a href="javascript:;"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-                                                </ul>
-                                                <p>151 reviews</p>
-                                            </div>
-                                            <ul class="product_code">
-                                                <li>
-                                                    <p>product code: 12948</p>
-                                                </li>
-                                                <li>
-                                                    <p>availability: <span>in stock</span></p>
-                                                </li>
-                                            </ul>
-                                            <p>Consectetur adipisicing elit sed do eiusmod tempor incididunt utte labore et dolore magna aliqua Ut enim ad minim</p>
-                                        </div>
-                                    </div>
-                                </li>  
-                                <li>
-                                    <div class="product_item_block">
-                                        <div class="org_product_block">
-                                            <span class="product_label">30% off</span>
-                                            <div class="org_product_image"><img src="https://via.placeholder.com/159x170" alt="image"></div>
-                                            <h4>farm sprayer</h4>
-                                            <h3><span><i class="fa fa-usd" aria-hidden="true"></i></span>25</h3>
-                                            <a href="javascript:;">add to cart</a>
-                                        </div>
-                                        <div class="content_block">
-                                            <div class="product_price_box"> 
-                                                <h3>farm sprayer</h3>            
-                                                <h5><span><i class="fa fa-usd" aria-hidden="true"></i></span>25</h5>   
-                                            </div>
-                                            <p>Farm & Garden</p>
-                                            <div class="rating_section">
-                                                <span>4.1</span>
-                                                <ul>
-                                                    <li><a class="active" href="javascript:;"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-                                                    <li><a class="active" href="javascript:;"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-                                                    <li><a class="active" href="javascript:;"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-                                                    <li><a href="javascript:;"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-                                                    <li><a href="javascript:;"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-                                                </ul>
-                                                <p>151 reviews</p>
-                                            </div>
-                                            <ul class="product_code">
-                                                <li>
-                                                    <p>product code: 12948</p>
-                                                </li>
-                                                <li>
-                                                    <p>availability: <span>in stock</span></p>
-                                                </li>
-                                            </ul>
-                                            <p>Consectetur adipisicing elit sed do eiusmod tempor incididunt utte labore et dolore magna aliqua Ut enim ad minim</p>
-                                        </div>
-                                    </div>
-                                </li>   
-                                <li>
-                                    <div class="product_item_block">
-                                        <div class="org_product_block">
-                                            <span class="product_label">30% off</span>
-                                            <div class="org_product_image"><img src="https://via.placeholder.com/159x170" alt="image"></div>
-                                            <h4>farm sprayer</h4>
-                                            <h3><span><i class="fa fa-usd" aria-hidden="true"></i></span>25</h3>
-                                            <a href="javascript:;">add to cart</a>
-                                        </div>
-                                        <div class="content_block">
-                                            <div class="product_price_box"> 
-                                                <h3>farm sprayer</h3>            
-                                                <h5><span><i class="fa fa-usd" aria-hidden="true"></i></span>25</h5>   
-                                            </div>
-                                            <p>Farm & Garden</p>
-                                            <div class="rating_section">
-                                                <span>4.1</span>
-                                                <ul>
-                                                    <li><a class="active" href="javascript:;"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-                                                    <li><a class="active" href="javascript:;"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-                                                    <li><a class="active" href="javascript:;"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-                                                    <li><a href="javascript:;"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-                                                    <li><a href="javascript:;"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-                                                </ul>
-                                                <p>151 reviews</p>
-                                            </div>
-                                            <ul class="product_code">
-                                                <li>
-                                                    <p>product code: 12948</p>
-                                                </li>
-                                                <li>
-                                                    <p>availability: <span>in stock</span></p>
-                                                </li>
-                                            </ul>
-                                            <p>Consectetur adipisicing elit sed do eiusmod tempor incididunt utte labore et dolore magna aliqua Ut enim ad minim</p>
-                                        </div>
-                                    </div>
-                                </li>  
-                                <li>
-                                    <div class="product_item_block">
-                                        <div class="org_product_block">
-                                            <span class="product_label">30% off</span>
-                                            <div class="org_product_image"><img src="https://via.placeholder.com/159x170" alt="image"></div>
-                                            <h4>farm sprayer</h4>
-                                            <h3><span><i class="fa fa-usd" aria-hidden="true"></i></span>25</h3>
-                                            <a href="javascript:;">add to cart</a>
-                                        </div>
-                                        <div class="content_block">
-                                            <div class="product_price_box"> 
-                                                <h3>farm sprayer</h3>            
-                                                <h5><span><i class="fa fa-usd" aria-hidden="true"></i></span>25</h5>   
-                                            </div>
-                                            <p>Farm & Garden</p>
-                                            <div class="rating_section">
-                                                <span>4.1</span>
-                                                <ul>
-                                                    <li><a class="active" href="javascript:;"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-                                                    <li><a class="active" href="javascript:;"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-                                                    <li><a class="active" href="javascript:;"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-                                                    <li><a href="javascript:;"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-                                                    <li><a href="javascript:;"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-                                                </ul>
-                                                <p>151 reviews</p>
-                                            </div>
-                                            <ul class="product_code">
-                                                <li>
-                                                    <p>product code: 12948</p>
-                                                </li>
-                                                <li>
-                                                    <p>availability: <span>in stock</span></p>
-                                                </li>
-                                            </ul>
-                                            <p>Consectetur adipisicing elit sed do eiusmod tempor incididunt utte labore et dolore magna aliqua Ut enim ad minim</p>
-                                        </div>
-                                    </div>
-                                </li>  
-                                <li>
-                                    <div class="product_item_block">
-                                        <div class="org_product_block">
-                                            <span class="product_label">30% off</span>
-                                            <div class="org_product_image"><img src="https://via.placeholder.com/159x170" alt="image"></div>
-                                            <h4>farm sprayer</h4>
-                                            <h3><span><i class="fa fa-usd" aria-hidden="true"></i></span>25</h3>
-                                            <a href="javascript:;">add to cart</a>
-                                        </div>
-                                        <div class="content_block">
-                                            <div class="product_price_box"> 
-                                                <h3>farm sprayer</h3>            
-                                                <h5><span><i class="fa fa-usd" aria-hidden="true"></i></span>25</h5>   
-                                            </div>
-                                            <p>Farm & Garden</p>
-                                            <div class="rating_section">
-                                                <span>4.1</span>
-                                                <ul>
-                                                    <li><a class="active" href="javascript:;"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-                                                    <li><a class="active" href="javascript:;"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-                                                    <li><a class="active" href="javascript:;"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-                                                    <li><a href="javascript:;"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-                                                    <li><a href="javascript:;"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-                                                </ul>
-                                                <p>151 reviews</p>
-                                            </div>
-                                            <ul class="product_code">
-                                                <li>
-                                                    <p>product code: 12948</p>
-                                                </li>
-                                                <li>
-                                                    <p>availability: <span>in stock</span></p>
-                                                </li>
-                                            </ul>
-                                            <p>Consectetur adipisicing elit sed do eiusmod tempor incididunt utte labore et dolore magna aliqua Ut enim ad minim</p>
-                                        </div>
-                                    </div>
-                                </li>  
-                                <li>
-                                    <div class="product_item_block">
-                                        <div class="org_product_block">
-                                            <span class="product_label">30% off</span>
-                                            <div class="org_product_image"><img src="https://via.placeholder.com/159x170" alt="image"></div>
-                                            <h4>farm sprayer</h4>
-                                            <h3><span><i class="fa fa-usd" aria-hidden="true"></i></span>25</h3>
-                                            <a href="javascript:;">add to cart</a>
-                                        </div>
-                                        <div class="content_block">
-                                            <div class="product_price_box"> 
-                                                <h3>farm sprayer</h3>            
-                                                <h5><span><i class="fa fa-usd" aria-hidden="true"></i></span>25</h5>   
-                                            </div>
-                                            <p>Farm & Garden</p>
-                                            <div class="rating_section">
-                                                <span>4.1</span>
-                                                <ul>
-                                                    <li><a class="active" href="javascript:;"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-                                                    <li><a class="active" href="javascript:;"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-                                                    <li><a class="active" href="javascript:;"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-                                                    <li><a href="javascript:;"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-                                                    <li><a href="javascript:;"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-                                                </ul>
-                                                <p>151 reviews</p>
-                                            </div>
-                                            <ul class="product_code">
-                                                <li>
-                                                    <p>product code: 12948</p>
-                                                </li>
-                                                <li>
-                                                    <p>availability: <span>in stock</span></p>
-                                                </li>
-                                            </ul>
-                                            <p>Consectetur adipisicing elit sed do eiusmod tempor incididunt utte labore et dolore magna aliqua Ut enim ad minim</p>
-                                        </div>
-                                    </div>
-                                </li>  
-                                <li>
-                                    <div class="product_item_block">
-                                        <div class="org_product_block">
-                                            <span class="product_label">30% off</span>
-                                            <div class="org_product_image"><img src="https://via.placeholder.com/159x170" alt="image"></div>
-                                            <h4>farm sprayer</h4>
-                                            <h3><span><i class="fa fa-usd" aria-hidden="true"></i></span>25</h3>
-                                            <a href="javascript:;">add to cart</a>
-                                        </div>
-                                        <div class="content_block">
-                                            <div class="product_price_box"> 
-                                                <h3>farm sprayer</h3>            
-                                                <h5><span><i class="fa fa-usd" aria-hidden="true"></i></span>25</h5>   
-                                            </div>
-                                            <p>Farm & Garden</p>
-                                            <div class="rating_section">
-                                                <span>4.1</span>
-                                                <ul>
-                                                    <li><a class="active" href="javascript:;"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-                                                    <li><a class="active" href="javascript:;"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-                                                    <li><a class="active" href="javascript:;"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-                                                    <li><a href="javascript:;"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-                                                    <li><a href="javascript:;"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-                                                </ul>
-                                                <p>151 reviews</p>
-                                            </div>
-                                            <ul class="product_code">
-                                                <li>
-                                                    <p>product code: 12948</p>
-                                                </li>
-                                                <li>
-                                                    <p>availability: <span>in stock</span></p>
-                                                </li>
-                                            </ul>
-                                            <p>Consectetur adipisicing elit sed do eiusmod tempor incididunt utte labore et dolore magna aliqua Ut enim ad minim</p>
-                                        </div>
-                                    </div>
-                                </li>  
+                                    </li>
+                                @endforeach
                             </ul>
                         </div>
-                        <div class="blog_pagination_section">
+                        {{ $productos->links() }}
+                       {{-- <div class="blog_pagination_section">
                             <ul>
                                 <li class="blog_page_arrow">
                                     <a href="javascript:;">
@@ -486,14 +104,14 @@
                                     </a>
                                 </li>
                             </ul>
-                        </div>
+                        </div>--}}
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    
+
 
 @endsection
 
-  
+

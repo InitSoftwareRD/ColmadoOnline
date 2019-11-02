@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Products;
+use App\ImageProducts;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class OrdenarController extends Controller
 {
@@ -20,17 +22,22 @@ class OrdenarController extends Controller
 
     public function ListarProducto()
     {
-       
-    $productos=DB::select("
-       SELECT p.name as name, ca.name as category, img.ruta as ruta, p.price as price  FROM image_product img, products as p, category ca
-        WHERE
-        p.id = img.product_id
-        AND p.category_id = ca.id
-        AND img.tipo = 'P'
-        AND p.status != 'I'
-       ");
-
-       return $productos;
+        return Products::query()
+            ->with('category')
+            ->addSelect(['imagen_portada' => ImageProducts::select('ruta')
+                ->whereColumn('image_product.product_id', 'products.id')
+                ->where('tipo', 'p')
+                ->limit(1)
+            ])
+            ->get()
+            ->transform(function ($item) {
+                return [
+                    'name' => $item->name,
+                    'category' => $item->category->name,
+                    'ruta' => url($item->imagen_portada),
+                    'price' => $item->price
+                ];
+            });
     }
 
 

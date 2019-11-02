@@ -58,7 +58,7 @@ class ProductsController extends Controller
         
         $productos->save();
 
-        $imagen->ruta = public_path('images/'.$name);
+        $imagen->ruta = 'images/'.$name;
         $imagen->product_id = $productos->id;
         $imagen->tipo='P';
 

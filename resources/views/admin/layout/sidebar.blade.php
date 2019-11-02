@@ -66,14 +66,14 @@
 
             <ul class="nav nav-treeview">
                 <li class="nav-item">
-                    <a href="./index.html" class="nav-link">
+                <a href="{{ route('create_category') }}" class="nav-link">
                       <i class="fas fa-tags"></i>
                       <p>Categorias</p>
                     </a>
                 </li>
 
               <li class="nav-item">
-                <a href="./index.html" class="nav-link">
+               <a href="{{ route('crear_producto') }}" class="nav-link">
                   <i class="fas fa-plus-circle"></i>
                   <p>Crear Productos</p>
                 </a>
@@ -119,7 +119,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="./index.html" class="nav-link">
+              <a href="{{ route('ordenar') }}" class="nav-link">
                   <i class="fas fa-shopping-bag"></i>
                   <p>Orden</p>
                 </a>

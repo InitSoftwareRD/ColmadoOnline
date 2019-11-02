@@ -2,8 +2,7 @@
 <div class="container mt-5">  
         <div class="row">
             <div class="col-md-6">
-           <v-select label="Clientes" v-model="customer" :options="clientes"></v-select>
-            <table v-if="items" id="productos" class="table table-striped  table-sm table-bordered table-responsive">
+             <table v-if="items" id="productos" class="table table-striped  table-sm table-bordered table-responsive">
                     <thead>
                         <tr>
                             <th>Imagen</th>
@@ -15,9 +14,9 @@
                     </thead>
                     <tbody>
                         <tr v-for="(item, key) in items" :key="key">
-                            <th><img src="https://via.placeholder.com/150" width="40" height="40" ></th>
+                            <th><img v-bind:src="item.ruta" width="40" height="40" ></th>
                             <td>{{ item.name }}</td>
-                            <td>{{ item.category_id }}</td>
+                            <td>{{ item.category}}</td>
                             <th>{{ item.price }}</th>
                             <th>
                                 <button class="btn btn-success btn-sm" @click="agregarArticulo(item)"><i class="fas fa-shopping-cart"></i></button>
@@ -94,17 +93,43 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Cliente</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Cliente:
+                          <strong class="text-primary" v-if="customer">{{ customer.name }} {{ customer.last_name }}</strong>
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" @click="customer ='' " aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
+
+                         <table id="clientes" class="table table-striped  table-sm table-bordered table-responsive">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombres</th>
+                            <th>Apellidos</th>
+                            <th>Telefono</th>
+                            <th>Agregar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="(item, key) in clientes" :key="key">
+                            <td>{{ item.id }}</td>
+                            <td>{{ item.name }}</td>
+                            <td>{{ item.last_name }}</td>
+                            <th>{{ item.phone }}</th>
+                            <th>
+                                <button class="btn btn-success btn-sm" @click="customer = item"><i class="fas fa-user-plus"></i></button>
+                            </th>
+                        </tr>
+                    </tbody>
+                </table>
             
                 </div>
                 <div class="modal-footer">
-                    <button @click="ordenar()" type="button" class="btn btn-success">Confirmar</button>    
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button v-if="customer" @click="ordenar()" type="button" class="btn btn-success">Ordenar</button>  
+                    <button v-else type="button" class="btn btn-success" disabled>Ordenar</button>    
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="customer ='' " >Cerrar</button>
                 
 
                 </div>
@@ -123,18 +148,19 @@
 <script>
 
    import datables from 'datatables'
-   import vSelect from 'vue-select'
+   import Swal from 'sweetalert2'
 
-   Vue.component('v-select', vSelect)
 
     export default {
         mounted() {
 
            this.getProductos();
-           this.compras();
-           this.getClientes();
-           
+           this.compras();       
 
+        },
+
+        created(){
+              this.getClientes();
         },
 
        data()
@@ -157,7 +183,30 @@
 
            ordenar()
            {
-                console.log(this.customer);
+                axios.post('listar_productos')
+                .then((response)=>{
+
+                         Swal.fire({
+                            position: 'center',
+                            type: 'success',
+                            title: 'Orden registrada correctamente',
+                            showConfirmButton: false,
+                            timer: 4000
+                        })
+                
+                
+                })
+                .catch((error)=> {
+                  
+                       Swal.fire({
+                            position: 'center',
+                            type: 'error',
+                            title: 'Error al realizar registro',
+                            showConfirmButton: false,
+                            timer: 4000
+                        })
+               })
+                
            },
 
            limpiar(){
@@ -236,6 +285,13 @@
  
             },
 
+            tablaClientes()
+            {
+                $(function () {
+                     $('#clientes').DataTable();
+               }); 
+            },
+
             getProductos(){
 
             axios.get('listar_productos')
@@ -257,6 +313,7 @@
                 .then((response)=>{
                     // handle success
                    this.clientes=response.data;
+                   this.tablaClientes();
                 
                 })
                 .catch((error)=> {

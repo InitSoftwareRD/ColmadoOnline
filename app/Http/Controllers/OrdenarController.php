@@ -20,7 +20,15 @@ class OrdenarController extends Controller
 
     public function ListarProducto()
     {
-       $productos=Products::all();
+       
+    $productos=DB::select("
+       SELECT p.name as name, ca.name as category, img.ruta as ruta, p.price as price  FROM image_product img, products as p, category ca
+        WHERE
+        p.id = img.product_id
+        AND p.category_id = ca.id
+        AND img.tipo = 'P'
+        AND p.status != 'I'
+       ");
 
        return $productos;
     }
@@ -67,7 +75,7 @@ class OrdenarController extends Controller
      */
     public function listarClientes()
     {
-        $clientes=DB::select("SELECT u.id as id, CONCAT(u.name,'  ',u.last_name,' |  ',u.phone ) as nombre FROM 
+        $clientes=DB::select("SELECT u.id as id, u.name as name , u.last_name as last_name ,u.phone as phone FROM 
         customers c,
         users u
         WHERE

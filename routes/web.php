@@ -11,18 +11,9 @@
 |
 */
 
+Auth::routes();
 
-
-Route::get('/admin', function () {
-    return view('admin.layout.layout');
-})->name('inicio');
-
-
-
-Route::get('/', function () {
-    return view('front.pages.home');
-})->name('inicio');
-
+Route::get('/', 'WelcomeController@index')->name('home');
 
 Route::get('/contacto', function () {
     return view('front.pages.contact');
@@ -44,7 +35,9 @@ Route::get('/iniciar', function () {
     return view('front.pages.login');
 })->name('iniciar');
 
-Auth::routes();
+Route::get('/admin', function () {
+    return view('admin.layout.layout');
+})->name('inicio');
 
 /*User*/
 
@@ -70,13 +63,3 @@ Route::post('admin/producto','ProductsController@create')->name('crear_producto'
 Route::get('admin/orden','OrdenarController@index')->name('ordenar');
 Route::get('admin/listar_productos','OrdenarController@ListarProducto')->name('listarProductos');
 Route::get('admin/listar_clientes','OrdenarController@listarClientes')->name('listarClientes');
-
-// Route::get('/admin/prueba', function () {
-//           dd(rand ( 100000, 999999 ));
-// });
-
-
-
-
-
-

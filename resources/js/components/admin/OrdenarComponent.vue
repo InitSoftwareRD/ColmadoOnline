@@ -207,7 +207,7 @@
                        Swal.fire({
                             position: 'center',
                             type: 'error',
-                            title: 'Error al realizar registro',
+                            title: 'Error al realizar Orden',
                             showConfirmButton: false,
                             timer: 4000
                         })

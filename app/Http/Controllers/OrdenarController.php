@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Products;
+use App\OrderProducts;
 use App\ImageProducts;
+use App\Orders;
+use App\OrderTracking;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -32,6 +35,7 @@ class OrdenarController extends Controller
             ->get()
             ->transform(function ($item) {
                 return [
+                    'id'=> $item->id,
                     'name' => $item->name,
                     'category' => $item->category->name,
                     'ruta' => url($item->imagen_portada),

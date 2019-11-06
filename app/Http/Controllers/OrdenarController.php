@@ -86,6 +86,45 @@ class OrdenarController extends Controller
 
     }
 
+    public function status()
+    {
+        $status=DB::SELECT(" SELECT 
+        o.id as id,
+        o.ping as ping,
+        o.total as total,
+        CONCAT( u.name,' ', u.last_name ) as nombres,
+        u.phone as phone,
+        u.email as email,
+        ( SELECT os.name FROM order_tracking ot ,order_status os
+           WHERE
+              os.id = ot.order_status
+             AND ot.order_id = o.id
+            ORDER by ot.created_at DESC
+           LIMIT 1
+         ) as estatus
+        FROM orders o, customers c , users u
+        WHERE 
+        o.customer_id =c.id 
+        AND c.user_id = u.id
+        ");
+
+        return $status;
+
+    }
+
+
+    public function ListarStatus()
+    { 
+        $estatus=DB::SELECT("SELECT * FROM  order_status
+                     WHERE
+                     order_status.id != 4 
+        ");
+
+        return $estatus;
+
+
+    }
+
 
     /**
      * Store a newly created resource in storage.
@@ -133,9 +172,9 @@ class OrdenarController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function ordenStatus()
     {
-        //
+        return view('admin.pages.orders.orderstatus');
     }
 
     /**

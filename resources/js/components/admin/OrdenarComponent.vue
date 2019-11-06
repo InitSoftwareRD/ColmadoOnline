@@ -199,6 +199,9 @@
                             showConfirmButton: false,
                             timer: 4000
                         })
+
+                        this.carrito = [];
+                        $('#aviso').modal('hide')
                 
                 
                 })

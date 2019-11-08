@@ -66,7 +66,9 @@ Route::get('admin/listar_clientes','OrdenarController@listarClientes')->name('li
 Route::post('admin/realizar_orden','OrdenarController@ordenar')->name('realizar_orden');
 Route::get('admin/orden_status','OrdenarController@ordenStatus')->name('orden_status');
 Route::get('admin/ordenes','OrdenarController@status')->name('status');
+Route::post('admin/cambiar_status','OrdenarController@CambiarStatus')->name('cambiar_status');
 Route::get('admin/listar_status','OrdenarController@ListarStatus')->name('listar_status');
+Route::get('admin/detalle_pedido','OrdenarController@DetallePedido')->name('detalle_pedido');
 
 // Route::get('/admin/prueba', function () {
 //           dd(rand ( 100000, 999999 ));

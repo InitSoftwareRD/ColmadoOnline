@@ -21,8 +21,8 @@ class CreateOrdersTable extends Migration
             $table->float('total',8,2);
             $table->float('paid_with',8,2)->nullable();
             $table->float('change',8,2)->nullable();
-            $table->string('ping')->nullable();
-            $table->string('location')->nullable();   
+            $table->string('ping',8)->nullable();
+            $table->string('location',50)->nullable();   
             $table->enum('canal', ['I', 'C']);        
             $table->timestamps();
 

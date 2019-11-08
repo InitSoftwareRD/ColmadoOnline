@@ -31,7 +31,7 @@
     <div id="carrito"  v-if="carrito">
             <div class="row">
                 <div class="col-md-4">
-                     <input class="search" placeholder="Lista" />
+                     <input class="search" placeholder="buscar" />
                 </div>
 
                  <div class="col-md-2">
@@ -102,7 +102,7 @@
                 </div>
                 <div class="modal-body">
 
-                         <table id="clientes" class="table table-striped  table-sm table-bordered table-responsive">
+         <table id="clientes" class="table table-striped  table-sm table-bordered table-responsive">
                     <thead>
                         <tr>
                             <th>ID</th>

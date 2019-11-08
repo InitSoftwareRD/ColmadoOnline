@@ -106,6 +106,13 @@ class OrdenarController extends Controller
         WHERE 
         o.customer_id =c.id 
         AND c.user_id = u.id
+        AND ( SELECT os.id FROM order_tracking ot ,order_status os
+           WHERE
+              os.id = ot.order_status
+             AND ot.order_id = o.id
+            ORDER by ot.created_at DESC
+           LIMIT 1
+         ) != 5
         ");
 
         return $status;
@@ -126,15 +133,36 @@ class OrdenarController extends Controller
     }
 
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function CambiarStatus(Request $request)
     {
-        //
+        $tracking = new OrderTracking;
+
+        $tracking->order_id = $request->order_id;
+        $tracking->order_status = $request->status;
+
+        $tracking->save();
+         
+    }
+
+    public function DetallePedido(Request $request)
+    {
+        $detalle=DB::SELECT("SELECT 
+                orders.id as id,
+                products.name as nombre,
+                order_product.quantity as cantidad,
+                order_product.price as precio,
+                order_product.subtotal as subtotal,
+                orders.total as total
+                FROM orders , order_product , products
+                WHERE 
+                orders.id = order_product.order_id
+                AND order_product.product_id = products.id
+                AND orders.id = ?
+                ORDER BY  products.name DESC
+        ",[$request->id]);
+
+        return $detalle;
+
     }
 
     /**

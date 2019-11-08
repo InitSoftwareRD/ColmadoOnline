@@ -2288,49 +2288,151 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
-    this.lista();
     this.status();
   },
   created: function created() {
     this.listar_estatus();
+    this.lista();
   },
   data: function data() {
     return {
       estado: [],
-      lista_estatus: []
+      lista_estatus: [],
+      state: '',
+      orden: '',
+      detalle: [],
+      total: 0
     };
   },
   methods: {
-    modal: function modal() {
+    detalle_orden: function detalle_orden(id) {
+      var _this = this;
+
+      this.detalle = [];
+      axios.get('detalle_pedido', {
+        params: {
+          id: id
+        }
+      }).then(function (response) {
+        // handle success
+        _this.detalle = response.data;
+        $('#detalles').modal('show');
+      })["catch"](function (error) {
+        // handle error
+        console.log(error);
+      });
+    },
+    cambiar_estatus: function cambiar_estatus() {
+      var _this2 = this;
+
+      axios.post('cambiar_status', {
+        'order_id': this.orden.id,
+        'status': this.state
+      }).then(function (response) {
+        sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
+          position: 'center',
+          type: 'success',
+          title: 'Orden actulizada',
+          showConfirmButton: false,
+          timer: 5000
+        });
+        $('#status').modal('hide');
+        _this2.orden = '';
+        _this2.state = ' ';
+        _this2.estado = [];
+
+        _this2.status();
+
+        _this2.lista();
+      })["catch"](function (error) {
+        sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
+          position: 'center',
+          type: 'error',
+          title: 'Error al actulizar Orden',
+          showConfirmButton: false,
+          timer: 4000
+        });
+      });
+    },
+    modal: function modal(item) {
+      this.orden = item;
       $('#status').modal('show');
     },
     lista: function lista() {
       var options = {
-        valueNames: ['name', 'born']
+        valueNames: ['nombres', 'estatus']
       };
       var userList = new List('orden', options);
     },
     status: function status() {
-      var _this = this;
+      var _this3 = this;
 
       axios.get('ordenes').then(function (response) {
         // handle success
-        _this.estado = response.data;
+        _this3.estado = response.data;
       })["catch"](function (error) {
         // handle error
         console.log(error);
       });
     },
     listar_estatus: function listar_estatus() {
-      var _this2 = this;
+      var _this4 = this;
 
       axios.get('listar_status').then(function (response) {
         // handle success
-        _this2.lista_estatus = response.data;
-        console.log(_this2.lista_estatus);
+        _this4.lista_estatus = response.data;
       })["catch"](function (error) {
         // handle error
         console.log(error);
@@ -56902,7 +57004,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "col-md-4" }, [
-      _c("input", { staticClass: "search", attrs: { placeholder: "Lista" } })
+      _c("input", { staticClass: "search", attrs: { placeholder: "buscar" } })
     ])
   },
   function() {
@@ -56964,7 +57066,45 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container" }, [
-    _vm._m(0),
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-md-12" }, [
+        _c("nav", [
+          _c(
+            "div",
+            {
+              staticClass: "nav nav-tabs",
+              attrs: { id: "nav-tab", role: "tablist" }
+            },
+            [
+              _c(
+                "a",
+                {
+                  staticClass: "nav-item nav-link active",
+                  attrs: {
+                    id: "nav-home-tab",
+                    "data-toggle": "tab",
+                    href: "#nav-home",
+                    role: "tab",
+                    "aria-controls": "nav-home",
+                    "aria-selected": "true"
+                  }
+                },
+                [
+                  _vm._v("Ordenes Entrantes\r\n                     "),
+                  _vm.estado
+                    ? _c("h4", { staticClass: "badge badge-danger" }, [
+                        _vm._v(_vm._s(_vm.estado.length))
+                      ])
+                    : _vm._e()
+                ]
+              ),
+              _vm._v(" "),
+              _vm._m(0)
+            ]
+          )
+        ])
+      ])
+    ]),
     _vm._v(" "),
     _c("div", { staticClass: "row" }, [
       _c("div", { staticClass: "col-md-12" }, [
@@ -56997,27 +57137,27 @@ var render = function() {
                         { staticClass: "list" },
                         _vm._l(_vm.estado, function(item, key) {
                           return _c("tr", { key: key }, [
-                            _c("td", { staticClass: "name" }, [
+                            _c("td", { staticClass: "id" }, [
                               _vm._v(_vm._s(item.id))
                             ]),
                             _vm._v(" "),
-                            _c("td", { staticClass: "accion" }, [
+                            _c("td", { staticClass: "nombres" }, [
                               _vm._v(_vm._s(item.nombres))
                             ]),
                             _vm._v(" "),
-                            _c("td", { staticClass: "born" }, [
+                            _c("td", { staticClass: "celular" }, [
                               _vm._v(_vm._s(item.phone))
                             ]),
                             _vm._v(" "),
-                            _c("td", { staticClass: "born" }, [
+                            _c("td", { staticClass: "email" }, [
                               _vm._v(_vm._s(item.email))
                             ]),
                             _vm._v(" "),
-                            _c("td", { staticClass: "born" }, [
+                            _c("td", { staticClass: "total" }, [
                               _vm._v(_vm._s(item.total))
                             ]),
                             _vm._v(" "),
-                            _c("td", { staticClass: "born" }, [
+                            _c("td", { staticClass: "estatus" }, [
                               _vm._v(_vm._s(item.estatus))
                             ]),
                             _vm._v(" "),
@@ -57028,7 +57168,7 @@ var render = function() {
                                   staticClass: "btn btn-success btn-sm",
                                   on: {
                                     click: function($event) {
-                                      return _vm.modal()
+                                      return _vm.modal(item)
                                     }
                                   }
                                 },
@@ -57039,7 +57179,19 @@ var render = function() {
                                 ]
                               ),
                               _vm._v(" "),
-                              _vm._m(3, true)
+                              _c(
+                                "button",
+                                {
+                                  staticClass:
+                                    "btn btn-success btn-info btn-sm",
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.detalle_orden(item.id)
+                                    }
+                                  }
+                                },
+                                [_c("i", { staticClass: "fas fa-list-ol" })]
+                              )
                             ])
                           ])
                         }),
@@ -57064,7 +57216,149 @@ var render = function() {
       ])
     ]),
     _vm._v(" "),
-    _vm._m(4)
+    _c(
+      "div",
+      {
+        staticClass: "modal",
+        attrs: { id: "status", tabindex: "-1", role: "dialog" }
+      },
+      [
+        _c(
+          "div",
+          { staticClass: "modal-dialog", attrs: { role: "document" } },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _vm._m(3),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-body" }, [
+                _c("div", { staticClass: "form-group" }, [
+                  _c(
+                    "select",
+                    {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.state,
+                          expression: "state"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: { name: "status", id: "status" },
+                      on: {
+                        change: function($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function(o) {
+                              return o.selected
+                            })
+                            .map(function(o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.state = $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        }
+                      }
+                    },
+                    [
+                      _c("option", { attrs: { value: "" } }, [
+                        _vm._v("Seleccione un estatus")
+                      ]),
+                      _vm._v(" "),
+                      _vm._l(_vm.lista_estatus, function(item, key) {
+                        return _c(
+                          "option",
+                          { key: key, domProps: { value: item.id } },
+                          [_vm._v(_vm._s(item.name))]
+                        )
+                      })
+                    ],
+                    2
+                  )
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-footer" }, [
+                _vm.state
+                  ? _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-primary",
+                        attrs: { type: "button" },
+                        on: {
+                          click: function($event) {
+                            return _vm.cambiar_estatus()
+                          }
+                        }
+                      },
+                      [_vm._v("Cambiar Estatus")]
+                    )
+                  : _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-primary",
+                        attrs: { type: "button", disabled: "" }
+                      },
+                      [_vm._v("Cambiar Estatus")]
+                    )
+              ])
+            ])
+          ]
+        )
+      ]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal",
+        attrs: { id: "detalles", tabindex: "-1", role: "dialog" }
+      },
+      [
+        _c(
+          "div",
+          { staticClass: "modal-dialog", attrs: { role: "document" } },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _vm._m(4),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-body" }, [
+                _c(
+                  "table",
+                  {
+                    staticClass: "table table-striped  table-sm  table-bordered"
+                  },
+                  [
+                    _vm._m(5),
+                    _vm._v(" "),
+                    _c(
+                      "tbody",
+                      _vm._l(_vm.detalle, function(item, key) {
+                        return _c("tr", { key: key }, [
+                          _c("td", [_vm._v(_vm._s(item.id))]),
+                          _vm._v(" "),
+                          _c("td", [_vm._v(_vm._s(item.nombre))]),
+                          _vm._v(" "),
+                          _c("td", [_vm._v(_vm._s(item.cantidad))]),
+                          _vm._v(" "),
+                          _c("th", [_vm._v(_vm._s(item.precio))]),
+                          _vm._v(" "),
+                          _c("th", [_vm._v(_vm._s(item.subtotal))])
+                        ])
+                      }),
+                      0
+                    )
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-footer" })
+            ])
+          ]
+        )
+      ]
+    )
   ])
 }
 var staticRenderFns = [
@@ -57072,58 +57366,24 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-md-12" }, [
-        _c("nav", [
-          _c(
-            "div",
-            {
-              staticClass: "nav nav-tabs",
-              attrs: { id: "nav-tab", role: "tablist" }
-            },
-            [
-              _c(
-                "a",
-                {
-                  staticClass: "nav-item nav-link active",
-                  attrs: {
-                    id: "nav-home-tab",
-                    "data-toggle": "tab",
-                    href: "#nav-home",
-                    role: "tab",
-                    "aria-controls": "nav-home",
-                    "aria-selected": "true"
-                  }
-                },
-                [
-                  _vm._v("Ordenes Entrantes\r\n                     "),
-                  _c("h4", { staticClass: "badge badge-danger" }, [_vm._v("9")])
-                ]
-              ),
-              _vm._v(" "),
-              _c(
-                "a",
-                {
-                  staticClass: "nav-item nav-link",
-                  attrs: {
-                    id: "nav-profile-tab",
-                    "data-toggle": "tab",
-                    href: "#nav-profile",
-                    role: "tab",
-                    "aria-controls": "nav-profile",
-                    "aria-selected": "false"
-                  }
-                },
-                [
-                  _vm._v("Ordenes Internas\r\n                     "),
-                  _c("h4", { staticClass: "badge badge-danger" }, [_vm._v("9")])
-                ]
-              )
-            ]
-          )
-        ])
-      ])
-    ])
+    return _c(
+      "a",
+      {
+        staticClass: "nav-item nav-link",
+        attrs: {
+          id: "nav-profile-tab",
+          "data-toggle": "tab",
+          href: "#nav-profile",
+          role: "tab",
+          "aria-controls": "nav-profile",
+          "aria-selected": "false"
+        }
+      },
+      [
+        _vm._v("Ordenes Internas\r\n                     "),
+        _c("h4", { staticClass: "badge badge-danger" }, [_vm._v("9")])
+      ]
+    )
   },
   function() {
     var _vm = this
@@ -57140,18 +57400,18 @@ var staticRenderFns = [
           "button",
           {
             staticClass: "sort btn-primary btn-sm",
-            attrs: { "data-sort": "name" }
+            attrs: { "data-sort": "nombres" }
           },
-          [_vm._v("Name")]
+          [_vm._v("Nombres")]
         ),
         _vm._v(" "),
         _c(
           "button",
           {
             staticClass: "sort btn-primary btn-sm",
-            attrs: { "data-sort": "born" }
+            attrs: { "data-sort": "estatus" }
           },
-          [_vm._v("Born")]
+          [_vm._v("Estatus")]
         )
       ])
     ])
@@ -57174,7 +57434,7 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Estatus")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Acciiones")])
+        _c("th", [_vm._v("Acciones")])
       ])
     ])
   },
@@ -57182,76 +57442,63 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("button", { staticClass: "btn btn-success btn-info btn-sm" }, [
-      _c("i", { staticClass: "fas fa-list-ol" })
+    return _c("div", { staticClass: "modal-header" }, [
+      _c("h5", { staticClass: "modal-title" }, [
+        _vm._v("Selecciones el siguiente estatus")
+      ]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
     ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass: "modal",
-        attrs: { id: "status", tabindex: "-1", role: "dialog" }
-      },
-      [
-        _c(
-          "div",
-          { staticClass: "modal-dialog", attrs: { role: "document" } },
-          [
-            _c("div", { staticClass: "modal-content" }, [
-              _c("div", { staticClass: "modal-header" }, [
-                _c("h5", { staticClass: "modal-title" }, [
-                  _vm._v("Modal title")
-                ]),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass: "close",
-                    attrs: {
-                      type: "button",
-                      "data-dismiss": "modal",
-                      "aria-label": "Close"
-                    }
-                  },
-                  [
-                    _c("span", { attrs: { "aria-hidden": "true" } }, [
-                      _vm._v("×")
-                    ])
-                  ]
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal-body" }, [
-                _c("select", { attrs: { name: "status", id: "status" } }, [
-                  _c("option", { attrs: { v: "", value: "" } })
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal-footer" }, [
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-secondary",
-                    attrs: { type: "button", "data-dismiss": "modal" }
-                  },
-                  [_vm._v("Close")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  { staticClass: "btn btn-primary", attrs: { type: "button" } },
-                  [_vm._v("Cambiar Estatus")]
-                )
-              ])
-            ])
-          ]
-        )
-      ]
-    )
+    return _c("div", { staticClass: "modal-header" }, [
+      _c("h5", { staticClass: "modal-title" }, [_vm._v("Detalle Orden")]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", [_vm._v("ID")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Producto")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Cantidad")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Precio")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Subtotal")])
+      ])
+    ])
   }
 ]
 render._withStripped = true

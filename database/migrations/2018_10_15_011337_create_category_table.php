@@ -15,7 +15,7 @@ class CreateCategoryTable extends Migration
     {
         Schema::create('category', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name')->nullable($value = false)->unique();
+            $table->string('name',70)->nullable($value = false)->unique();
             $table->enum('status', ['A', 'I']);
             $table->timestamps();
 

@@ -26,12 +26,10 @@
 <div class="tab-content"  id="nav-tabContent">
   <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
     
-    <div id="orden" class="mt-2">
+    <div id="products" class="mt-2">
             <div class="row">
                 <div class="col-md-4">
                       <input class="search" placeholder="Buscar" />
-                      <button class="sort btn-primary btn-sm" data-sort="nombres">Nombres</button>
-                      <button class="sort btn-primary btn-sm" data-sort="estatus">Estatus</button>
                </div>
             </div>
 
@@ -165,12 +163,13 @@
 
      mounted(){
          this.status();
+         //this.lista();
      },
 
      created()
      {
          this.listar_estatus();
-          this.lista();
+
      },
 
      data()
@@ -261,7 +260,7 @@
                 valueNames: [ 'nombres','estatus']
             };
 
-             var userList = new List('orden', options);      
+             var userList = new List('products', options);      
 
          },
 

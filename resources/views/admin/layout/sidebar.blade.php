@@ -14,7 +14,7 @@
           <img src="{{ asset('dist/img/user2-160x160.jpg') }}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Juan Rosario</a>
+        <a href="#" class="d-block">{{  auth()->user()->name.' '.auth()->user()->last_name }}</a>
         </div>
       </div>
 
@@ -23,37 +23,43 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-users"></i>
-              <p>
-                Gestión Usuarios
-                <i class="right fas fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-               <a href="{{ route('user') }}" class="nav-link active">
-                  <i class="fas fa-plus-circle nav-icon"></i>
-                  <p>Crear Usuario</p>
+      
+         <li class="nav-item has-treeview">
+          <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-users"></i>
+            <p>
+              Gestión Usuarios
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+             <a href="{{ route('user') }}" class="nav-link active">
+                <i class="fas fa-plus-circle nav-icon"></i>
+                <p>Crear Usuario</p>
+              </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="{{ route('personal') }}" class="nav-link">
+                  <i class="fas fa-building"></i>
+                  <p>Personal</p>
                 </a>
               </li>
 
-              <li class="nav-item">
-                  <a href="{{ route('personal') }}" class="nav-link">
-                    <i class="fas fa-building"></i>
-                    <p>Personal</p>
-                  </a>
-                </li>
+            <li class="nav-item">
+              <a href="{{ route('cliente') }}" class="nav-link">
+                <i class="fas fa-user-friends nav-icon"></i>
+                <p>Clientes</p>
+              </a>
+            </li>
+          </ul>
+        </li>    
+        
+        
 
-              <li class="nav-item">
-                <a href="{{ route('cliente') }}" class="nav-link">
-                  <i class="fas fa-user-friends nav-icon"></i>
-                  <p>Clientes</p>
-                </a>
-              </li>
-            </ul>
-          </li>
+        
+      
 
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
@@ -97,6 +103,8 @@
             
           </li>
 
+          
+
           {{-- <li class="nav-item">
             <a href="pages/widgets.html" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
@@ -107,6 +115,8 @@
             </a>
           </li> --}}
 
+         
+              
           <li class="nav-header">Cajeros</li>
 
           <li class="nav-item has-treeview">
@@ -132,8 +142,11 @@
               </li>
             </ul>
           </li>
+         
 
 
+
+         
           <li class="nav-header">Delivery</li>
 
           <li class="nav-item has-treeview">
@@ -154,9 +167,13 @@
             </ul>
           </li>
 
+         
+
+          
        
           <li class="nav-header">Estadistica</li>
 
+        
           <li class="nav-item has-treeview">
               <a href="#" class="nav-link">
                   <i class="fas fa-chart-line"></i>
@@ -172,18 +189,11 @@
                     <p>Graficos</p>
                   </a>
                 </li>
+                
               </ul>
             </li>
-
-       
-     
-
-
-          
-         
-
-
-        </ul>
+               
+          </ul>
       </nav>
       <!-- /.sidebar-menu -->
     </div>

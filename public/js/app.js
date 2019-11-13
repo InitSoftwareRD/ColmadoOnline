@@ -2335,16 +2335,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
-    this.status();
+    this.status(); //this.lista();
   },
   created: function created() {
     this.listar_estatus();
-    this.lista();
   },
   data: function data() {
     return {
@@ -2414,7 +2411,7 @@ __webpack_require__.r(__webpack_exports__);
       var options = {
         valueNames: ['nombres', 'estatus']
       };
-      var userList = new List('orden', options);
+      var userList = new List('products', options);
     },
     status: function status() {
       var _this3 = this;
@@ -57123,7 +57120,7 @@ var render = function() {
                 }
               },
               [
-                _c("div", { staticClass: "mt-2", attrs: { id: "orden" } }, [
+                _c("div", { staticClass: "mt-2", attrs: { id: "products" } }, [
                   _vm._m(1),
                   _vm._v(" "),
                   _c(
@@ -57391,28 +57388,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "row" }, [
       _c("div", { staticClass: "col-md-4" }, [
-        _c("input", {
-          staticClass: "search",
-          attrs: { placeholder: "Buscar" }
-        }),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass: "sort btn-primary btn-sm",
-            attrs: { "data-sort": "nombres" }
-          },
-          [_vm._v("Nombres")]
-        ),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass: "sort btn-primary btn-sm",
-            attrs: { "data-sort": "estatus" }
-          },
-          [_vm._v("Estatus")]
-        )
+        _c("input", { staticClass: "search", attrs: { placeholder: "Buscar" } })
       ])
     ])
   },

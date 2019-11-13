@@ -35,9 +35,11 @@ Route::get('/iniciar', function () {
     return view('front.pages.login');
 })->name('iniciar');
 
-Route::get('/admin', function () {
-    return view('admin.layout.layout');
-})->name('inicio');
+
+
+         /* Panel Administrativo */
+Route::get('/admin','AdminController@index')->name('inicioAdmin');
+Route::get('/salir','AdminController@salir')->name('salir');
 
 /*User*/
 

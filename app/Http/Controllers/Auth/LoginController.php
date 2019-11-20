@@ -39,6 +39,10 @@ class LoginController extends Controller
 
     protected function redirectTo()
    {
-          return '/admin';
+        if (auth()->user()->isClient()) {
+            return redirect('/');
+        };
+
+        return redirect('/admin');
    }
 }

@@ -36,7 +36,7 @@ Route::get('/iniciar', function () {
 })->name('iniciar');
 
 
-Route::middleware('onlyStaff')->group(function () {
+Route::middleware(['auth', 'onlyStaff'])->group(function () {
          /* Panel Administrativo */
 Route::get('/admin','AdminController@index')->name('inicioAdmin');
 Route::get('/salir','AdminController@salir')->name('salir');
@@ -73,7 +73,7 @@ Route::post('admin/cambiar_status','OrdenarController@CambiarStatus')->name('cam
 Route::get('admin/listar_status','OrdenarController@ListarStatus')->name('listar_status');
 Route::get('admin/detalle_pedido','OrdenarController@DetallePedido')->name('detalle_pedido');
 
-}); 
+});
 
 // Route::get('/admin/prueba', function () {
 //           dd(rand ( 100000, 999999 ));

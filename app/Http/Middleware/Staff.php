@@ -3,9 +3,8 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use Auth;
 
-class Cajero
+class Staff
 {
     /**
      * Handle an incoming request.
@@ -16,7 +15,7 @@ class Cajero
      */
     public function handle($request, Closure $next)
     {
-        abort_unless(Auth::user()->isAdmin() || Auth::user()->isCajero() , 403);
+        abort_if(auth()->user()->isClient(), 403);
 
         return $next($request);
     }

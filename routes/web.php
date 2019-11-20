@@ -36,7 +36,7 @@ Route::get('/iniciar', function () {
 })->name('iniciar');
 
 
-
+Route::middleware('onlyStaff')->group(function () {
          /* Panel Administrativo */
 Route::get('/admin','AdminController@index')->name('inicioAdmin');
 Route::get('/salir','AdminController@salir')->name('salir');
@@ -58,8 +58,7 @@ Route::post('admin/category','ProductsController@create_category')->name('create
 Route::get('category/{id}/{status}','ProductsController@categorystatus')->name("categorystatus");
 Route::get('admin/producto','ProductsController@index')->name('producto');
 Route::post('admin/producto','ProductsController@create')->name('crear_producto');
-
-
+Route::get('admin/editar-producto','ProductsController@Listar')->name('editar-producto');
 /*Orden*/
 
 Route::get('admin/orden','OrdenarController@index')->name('ordenar');
@@ -71,6 +70,8 @@ Route::get('admin/ordenes','OrdenarController@status')->name('status');
 Route::post('admin/cambiar_status','OrdenarController@CambiarStatus')->name('cambiar_status');
 Route::get('admin/listar_status','OrdenarController@ListarStatus')->name('listar_status');
 Route::get('admin/detalle_pedido','OrdenarController@DetallePedido')->name('detalle_pedido');
+
+}); 
 
 // Route::get('/admin/prueba', function () {
 //           dd(rand ( 100000, 999999 ));

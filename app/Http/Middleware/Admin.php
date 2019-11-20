@@ -17,12 +17,8 @@ class Admin
      */
     public function handle($request, Closure $next)
     {
-        if( Auth::user()->rol_id =! 4 )
-        {
-           Auth::logout();
-           return redirect()->route('inicioAdmin');
-
-        }
+        
+        abort_unless(Auth::user()->isAdmin(), 403);
 
         return $next($request);
     }

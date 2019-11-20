@@ -39,5 +39,27 @@ class User extends Authenticatable
         return $this->belongsTo('App\Rol');
     }
 
+    public function isAdmin()
+    {
+        return $this->rol_id == 4;
+    }
+
+    public function isCajero()
+    {
+        return $this->rol_id == 3;
+    }
+
+
+    public function isDelivery()
+    {
+        return $this->rol_id == 2;
+    }
+
+    public function isClient()
+    {
+        return $this->rol_id == 1;
+    }
+
+
 
 }

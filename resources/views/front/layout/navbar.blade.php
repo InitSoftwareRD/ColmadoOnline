@@ -98,7 +98,7 @@
                         <!-- aqui va el partial del menu -->
                         <div class="clv_menu_nav">
                                 <ul>
-                                <li><a href="{{ route('inicio') }}">Inicio</a></li>
+                                <li><a href="{{ route('home') }}">Inicio</a></li>
                                 <li><a href="{{ route('carrito') }}">Carrito</a></li>
                                 <li><a href="{{ route('orden') }}">Mis Pedidos</a></li>
                                 <li><a href="{{ route('contacto') }}">Contacto</a></li>

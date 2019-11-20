@@ -23,7 +23,8 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-      
+      @if (Auth::user()->isAdmin())
+        
          <li class="nav-item has-treeview">
           <a href="#" class="nav-link">
             <i class="nav-icon fas fa-users"></i>
@@ -54,7 +55,9 @@
               </a>
             </li>
           </ul>
-        </li>    
+        </li>  
+        
+       
         
         
 
@@ -102,7 +105,7 @@
             </ul>
             
           </li>
-
+      @endif
           
 
           {{-- <li class="nav-item">
@@ -116,7 +119,8 @@
           </li> --}}
 
          
-              
+        @if(Auth::user()->isAdmin() || Auth::user()->isCajero() )    
+
           <li class="nav-header">Cajeros</li>
 
           <li class="nav-item has-treeview">
@@ -143,10 +147,12 @@
             </ul>
           </li>
          
+      @endif
 
 
+      
+      @if(Auth::user()->isAdmin() || Auth::user()->isDelivery() ) 
 
-         
           <li class="nav-header">Delivery</li>
 
           <li class="nav-item has-treeview">
@@ -167,9 +173,10 @@
             </ul>
           </li>
 
-         
+         @endif
 
           
+         @if(Auth::user()->isAdmin() ) 
        
           <li class="nav-header">Estadistica</li>
 
@@ -192,6 +199,8 @@
                 
               </ul>
             </li>
+
+            @endif
                
           </ul>
       </nav>

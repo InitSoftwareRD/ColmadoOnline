@@ -105,7 +105,7 @@ class ProductsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function categorystatus($id,$status)
-    {
+   {
 
         $category = Categories::find($id);
 
@@ -130,6 +130,16 @@ class ProductsController extends Controller
 
         return redirect()->route('category')->with('status', $mensaje);
         //
+    }
+
+
+    public function Listar()
+    {
+        $productos = Products::all();
+        $categorias=Categories::all();
+
+        return view('admin.pages.products.edit_product',compact(['productos','categorias']));
+
     }
 
     /**

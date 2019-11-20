@@ -4,6 +4,8 @@
    Ofertas
 @endsection
 
+
+
 @section('content')
 
 <div class="row">
@@ -32,55 +34,55 @@
                               </div>
                               <div class="col-md-4 mb-3">
                                     <label for="nombre">Producto</label>
-                                <select class="producto form-control" name="producto">
+                                <select class="form-control" name="productos">
                                 <option>Seleccione una categoria....</option>
-                                <option value="""></option>
+                                <option value="">1</option>
+                                <option value="">2</option>
+                                <option value="">3</option>
+                                <option value="">4</option>
+                                <option value="">2</option>
+                                <option value="">6</option>
+                                <option value="">8</option>
                                 </select> 
                               </div>
 
                               <div class="col-md-4 mb-3">
-                                <label for="precio">Precio</label>
+                                <label for="precio">Porciento Descuento</label>
                                 <div class="input-group">
                                   <div class="input-group-prepend">
-                                    <span class="input-group-text" id="precio">$</span>
+                                    <span class="input-group-text" id="precio">%</span>
                                   </div>
                                   <input type="number" class="form-control" id="precio" name="precio" placeholder="Precio"  value="{{ old('precio') }}" 
-                                  required min="1" max="99999999" step="0.1" value="50.80" >
+                                  required min="1" max="100" step="1" >
                                 </div>
                               </div>
 
                             </div>
-                            <div class="form-row">
-                              <div class="col-md-6 mb-3">
-                                <label for="ingredientes">Ingredientes</label>
-                              <textarea class="form-control" name="ingredientes" id="ingredientes" cols="30" rows="10" placeholder="Ingredientes" required>{{ old('ingredientes') }}
-                            Los mismos de siempre
-                            </textarea>
-                              </div>
 
-                              <div class="col-md-6 mb-3">
-                                <label for="Descripcion">Descripción</label>
-                              <textarea class="form-control" name="descripcion" id="" cols="30" rows="10" placeholder="Descripción"required>{{ old('descripcion')}}
-                              Los mismo de siempre
+
+                            <div class="form-row">
+                                <div class="col-md-6 mb-3">
+                                  <label for="nombre">Fecha Inicio</label>
+                                  <input  type="datetime-local" class="form-control" id="nombre" name="nombre">
+                                </div>
+
+                                <div class="col-md-6 mb-3">
+                                    <label for="nombre">Fecha Fin</label>
+                                    <input  type="datetime-local" class="form-control" id="nombre" name="nombre">
+                                  </div>
+
+                               
+                              </div>
+                              
+                            <div class="form-row">
+                              <div class="col-md-12 mb-3">
+                                <label for="Descripcion">Texto Promoción</label>
+                              <textarea class="form-control" name="descripcion" id="" cols="2" rows="2" placeholder="Descripción"required>{{ old('descripcion')}}
                             </textarea>
                               </div>
                         
 
-                            </div>
-
-                            <div class="form-row">
-                               <div class="col-md-6">
-                                  <label for="portada">Portada</label>
-                                  <input type="file" class="form-control" name="portada"  accept="image/png, image/jpeg" required>
-                               </div>
-
-                               {{-- <div class="col-md-6">
-                                    <label for="secundareas">Imagen Secundarias</label>
-                                    <input type="file" class="form-control" name="imagen_segundareas"  accept="image/png, image/jpeg">
-                                </div> --}}
-
-                            </div>
-                         
+                            </div>      
                                <br><br>
                             <button class="btn btn-primary btn-block" type="submit">Crear</button>
                           </form>
@@ -91,4 +93,16 @@
 </div>
 
     
+@endsection
+
+
+@section('script')
+
+<script>
+$(document).ready(function() {
+    $('.productos').select2();
+});
+
+</script>
+
 @endsection

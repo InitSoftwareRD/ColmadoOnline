@@ -13,9 +13,15 @@
         <div class="image">
           <img src="{{ asset('dist/img/user2-160x160.jpg') }}" class="img-circle elevation-2" alt="User Image">
         </div>
+
+        @auth
+
         <div class="info">
-        <a href="#" class="d-block">{{  auth()->user()->name.' '.auth()->user()->last_name }}</a>
-        </div>
+          <a href="#" class="d-block">{{  auth()->user()->name.' '.auth()->user()->last_name }}</a>
+          </div>
+            
+        @endauth
+       
       </div>
 
       <!-- Sidebar Menu -->

@@ -19,9 +19,9 @@ class CreateOffersTable extends Migration
             $table->timestamp('end_at')->nullable($value=true);
             $table->unsignedBigInteger('product_id');
             $table->enum('status', ['A', 'I']);
+            $table->integer('porciento')->nullable(false);
             $table->mediumText('promotion_text');
             $table->timestamps();
-
             $table->foreign('product_id')->references('id')->on('products');
         });
     }

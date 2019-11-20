@@ -59,6 +59,8 @@ Route::get('category/{id}/{status}','ProductsController@categorystatus')->name("
 Route::get('admin/producto','ProductsController@index')->name('producto');
 Route::post('admin/producto','ProductsController@create')->name('crear_producto');
 Route::get('admin/editar-producto','ProductsController@Listar')->name('editar-producto');
+Route::get('admin/crear-oferta','OfertaController@index')->name('crear-oferta');
+
 /*Orden*/
 
 Route::get('admin/orden','OrdenarController@index')->name('ordenar');

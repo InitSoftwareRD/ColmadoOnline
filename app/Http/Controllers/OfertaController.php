@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class OfertaControlller extends Controller
+class OfertaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +13,8 @@ class OfertaControlller extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.pages.products.ofertas');
+        
     }
 
     /**

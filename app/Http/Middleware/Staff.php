@@ -15,7 +15,7 @@ class Staff
      */
     public function handle($request, Closure $next)
     {
-        abort_if(auth()->user()->isClient(), 403);
+        abort_if(auth()->check() && auth()->user()->isClient(), 403);
 
         return $next($request);
     }

@@ -60,6 +60,7 @@ Route::get('admin/producto','ProductsController@index')->name('producto');
 Route::post('admin/producto','ProductsController@create')->name('crear_producto');
 Route::get('admin/editar-producto','ProductsController@Listar')->name('editar-producto');
 Route::get('admin/crear-oferta','OfertaController@index')->name('crear-oferta');
+Route::post('admin/registrar-oferta','OfertaController@store')->name('registar-oferta');
 
 /*Orden*/
 

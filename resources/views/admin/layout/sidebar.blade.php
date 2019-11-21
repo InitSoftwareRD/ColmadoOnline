@@ -102,9 +102,9 @@
               </li>
 
               <li class="nav-item">
-                  <a href="./index2.html" class="nav-link">
+              <a href="{{ route('crear-oferta') }}" class="nav-link">
                     <i class="fas fa-percentage"></i>
-                    <p>Ofertas</p>
+                    <p>Crear Ofertas</p>
                   </a>
               </li>
 

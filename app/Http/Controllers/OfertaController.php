@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Products;
+use App\Offers;
+use App\Http\Requests\OfertaRequest;
+
 
 class OfertaController extends Controller
 {
@@ -13,7 +17,8 @@ class OfertaController extends Controller
      */
     public function index()
     {
-        return view('admin.pages.products.ofertas');
+        $productos=Products::where('status','A')->get();
+        return view('admin.pages.products.ofertas', compact('productos'));
         
     }
 
@@ -33,9 +38,22 @@ class OfertaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(OfertaRequest $request)
     {
-        //
+        $oferta = new Offers;
+
+        $oferta->product_id = $request->producto;
+        $oferta->begin_at = $request->inicio;
+        $oferta->end_at= $request->fin;
+        $oferta->status = 'A';
+        $oferta->promotion_text = $request->promocion;
+        $oferta->porciento = $request->descuento;
+
+        $oferta->save();
+
+        return redirect()->route('crear-oferta')->with('status', 'Oferta creada de manera correcta!');
+
+        
     }
 
     /**

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Products;
 use App\Categories;
 use App\ImageProducts;
+use Cart;
 
 class WelcomeController extends Controller
 {
@@ -28,6 +29,13 @@ class WelcomeController extends Controller
                     })->get();
                 })
                 ->paginate()
+        ]);
+    }
+
+    public function cart()
+    {
+        return view('front.pages.card_single', [
+            'carts' => Cart::session(auth()->id())->getContent()
         ]);
     }
 }

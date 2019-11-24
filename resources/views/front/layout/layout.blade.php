@@ -23,10 +23,11 @@
     <link href="https://fonts.googleapis.com/css?family=Pacifico&display=swap" rel="stylesheet">
     <!-- Favicon Link -->
     <link rel="shortcut icon" type="image/png" href="{{ asset('front_template/images/favicon.png') }}">
+    <script src="{{ asset(mix('js/app.js')) }}" defer></script>
 </head>
 <body>
 
-<div class="clv_main_wrapper index_v1">
+<div class="clv_main_wrapper index_v1" id="app">
 
      @include('front.layout.navbar')
      @include('front.layout.breadcrum')
@@ -38,7 +39,7 @@
     @include('front.pages.registro')
     @include('front.pages.login')
 
-    </div>
+</div>
 
 
         <!--Main js file Style-->

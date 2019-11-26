@@ -18,7 +18,7 @@
                             <ul>
                                 @foreach($productos as $producto)
                                     <li>
-                                        <cart-add :product="{{ $producto }}" :is-auth="{{ auth()->check() }}"/>
+                                        <cart-add :product="{{ $producto }}" is-auth="{{ auth()->check() }}"/>
                                     </li>
                                 @endforeach
                             </ul>

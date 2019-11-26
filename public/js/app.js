@@ -2008,8 +2008,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2049,6 +2047,7 @@ __webpack_require__.r(__webpack_exports__);
           timer: 4000
         });
         _this.carrito = [];
+        _this.total = 0;
         $('#aviso').modal('hide');
       })["catch"](function (error) {
         sweetalert2__WEBPACK_IMPORTED_MODULE_1___default.a.fire({
@@ -6897,7 +6896,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\ninput[type=\"number\"] {\r\n   width:50px;\n}\r\n\r\n", ""]);
+exports.push([module.i, "\ninput[type=\"number\"] {\r\n   width:50px;\n}\n#carrito\r\n{\r\n    border-style:solid;\r\n    background: #ffffff\n}\r\n\r\n", ""]);
 
 // exports
 
@@ -56672,60 +56671,11 @@ var render = function() {
       _c("div", { staticClass: "col-md-6" }, [
         _vm.carrito
           ? _c("div", { attrs: { id: "carrito" } }, [
-              _c("div", { staticClass: "row" }, [
-                _vm._m(1),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-md-2" }, [
-                  _vm.total > 0
-                    ? _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-success",
-                          on: {
-                            click: function($event) {
-                              return _vm.modal()
-                            }
-                          }
-                        },
-                        [_c("i", { staticClass: "fas fa-shopping-bag" })]
-                      )
-                    : _vm._e()
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-md-4" }, [
-                  _vm.total > 0
-                    ? _c("h4", [
-                        _vm._v("Total:"),
-                        _c("span", { staticClass: "badge badge-primary" }, [
-                          _vm._v(_vm._s(_vm.total))
-                        ])
-                      ])
-                    : _vm._e()
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-md-2" }, [
-                  _vm.total > 0
-                    ? _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-danger btn-sm",
-                          on: {
-                            click: function($event) {
-                              return _vm.limpiar()
-                            }
-                          }
-                        },
-                        [_c("i", { staticClass: "fas fa-trash-alt" })]
-                      )
-                    : _vm._e()
-                ])
-              ]),
-              _vm._v(" "),
               _c(
                 "table",
                 { staticClass: "table  table-sm table-bordered  mt-2" },
                 [
-                  _vm._m(2),
+                  _vm._m(1),
                   _vm._v(" "),
                   _c(
                     "tbody",
@@ -56817,7 +56767,54 @@ var render = function() {
                     0
                   )
                 ]
-              )
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "row" }, [
+                _c("div", { staticClass: "col-md-4" }, [
+                  _vm.total > 0
+                    ? _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-success",
+                          on: {
+                            click: function($event) {
+                              return _vm.modal()
+                            }
+                          }
+                        },
+                        [_c("i", { staticClass: "fas fa-shopping-bag" })]
+                      )
+                    : _vm._e()
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-4" }, [
+                  _vm.total > 0
+                    ? _c("h4", [
+                        _vm._v("Total:"),
+                        _c("span", { staticClass: "badge badge-primary" }, [
+                          _vm._v(_vm._s(_vm.total))
+                        ])
+                      ])
+                    : _vm._e()
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-4" }, [
+                  _vm.total > 0
+                    ? _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-danger btn-sm",
+                          on: {
+                            click: function($event) {
+                              return _vm.limpiar()
+                            }
+                          }
+                        },
+                        [_c("i", { staticClass: "fas fa-trash-alt" })]
+                      )
+                    : _vm._e()
+                ])
+              ])
             ])
           : _vm._e()
       ])
@@ -56895,7 +56892,7 @@ var render = function() {
                       attrs: { id: "clientes" }
                     },
                     [
-                      _vm._m(3),
+                      _vm._m(2),
                       _vm._v(" "),
                       _c(
                         "tbody",
@@ -56994,14 +56991,6 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", [_vm._v("Agregar")])
       ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-4" }, [
-      _c("input", { staticClass: "search", attrs: { placeholder: "buscar" } })
     ])
   },
   function() {

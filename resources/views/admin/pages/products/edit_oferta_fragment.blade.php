@@ -1,7 +1,7 @@
 @extends('admin.layout.layout')
 
 @section('title')
-   Ofertas
+  Editar Oferta
 @endsection
 
 
@@ -14,14 +14,14 @@
         
             <div class="card card-info">
                     <div class="card-header">
-                      <h3 class="card-title text-center">Ofertas</h3>
+                      <h3 class="card-title text-center">Editar Oferta</h3>
                 </div>
 
                @include('admin.fragment.error')
 
                     <!-- /.card-header -->
                     <!-- form start -->
-              <form class="m-4" method="POST" action="{{ route('registar-oferta') }}" >
+              <form class="m-4" method="POST" action="" >
                          @csrf
                         <div class="form-row">
                               <div class="col-md-6 mb-3">

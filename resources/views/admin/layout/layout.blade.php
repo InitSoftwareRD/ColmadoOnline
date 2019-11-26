@@ -60,7 +60,7 @@
         <section class="content">
           
           <div class="container-fluid" id="app">
-                
+            
                 @yield('content')
             
           </div>

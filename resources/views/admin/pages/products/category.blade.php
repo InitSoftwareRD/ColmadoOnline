@@ -16,8 +16,8 @@
 <div class="row">
        
     <div class="col-md-4">
-            @include('admin.fragment.flashmessage');
-            @include('admin.fragment.error');
+            @include('admin.fragment.flashmessage')
+            @include('admin.fragment.error')
 
     <form class="form-inline" method="post" action="{{ route('create_category') }}">
                     @csrf

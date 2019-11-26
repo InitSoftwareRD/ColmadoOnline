@@ -13,10 +13,10 @@
 
 @section('content')
 
-<div class="row">
-            @include('admin.fragment.flashmessage');
-            @include('admin.fragment.error');
+@include('admin.fragment.flashmessage')
+@include('admin.fragment.error')
 
+<div class="row">
     <div class="col-md-12">
             <table id="productos" class="table table-striped table-bordered" style="width:100%">
                     <thead>
@@ -34,8 +34,9 @@
                             
                        
                        <tr>
+
                        <th> 
-                           <img src=" {{  asset($producto->images->first()->ruta) }} "  width="50" height="50">   
+                           <img src=" {{  asset($producto->images->first()->ruta) }} "  width="50" height="50"/>   
                        </th>    
                        <td>{{ $producto->id }}</td>
                        <td>{{ $producto->name }}</td>
@@ -45,35 +46,39 @@
                             
                             @if ($producto->status=='A')
 
-                            <a href="" class="btn btn-danger btn-sm">
+                       <a href="{{ route('productostatus',[$producto->id, $producto->status ]) }}" class="btn btn-danger btn-sm">
                                     <i class="fas fa-power-off"></i>
                             </a>
 
-                        <button class="btn btn-info btn-sm text-white" data-toggle="modal" data-target="#producto{{ $producto->id }}">
+                        <a href="{{ route('formulario-fragment',$producto->id) }}" class="btn btn-info btn-sm text-white">
                                     <i class="fas fa-edit"></i>
-                            </button>
+                            </a>
                                 
                             @else
 
-                            <a  href="" class="btn btn-success btn-sm">
+                            <a href="{{ route('productostatus',[$producto->id, $producto->status ]) }}"  class="btn btn-success btn-sm">
                                     <i class="fas fa-power-off"></i>
                             </a>
 
-                            <button class="btn btn-info btn-sm text-white" data-toggle="modal" data-target="#producto{{ $producto->id }}">
+                            <a  href="{{ route('formulario-fragment',$producto->id) }}" class="btn btn-info btn-sm text-white">
                                     <i class="fas fa-edit"></i>
-                            </button>
+                            </a>
                                 
                             @endif
                          
                         </td>
-                       </tr>      
-                              @include('admin.pages.products.edit_product_modal');
+
+                       </tr>    
+                                                                                 
                        @endforeach
+
                     </tbody>
             </table>
         
 
     </div>
+
+    
 
 </div>
 
@@ -98,5 +103,6 @@ $(document).ready(function() {
 } );
 
 </script>
-    
+
+
 @endsection

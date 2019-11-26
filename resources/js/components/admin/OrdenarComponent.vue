@@ -29,27 +29,8 @@
     <div class="col-md-6">
  
     <div id="carrito"  v-if="carrito">
-            <div class="row">
-                <div class="col-md-4">
-                     <input class="search" placeholder="buscar" />
-                </div>
 
-                 <div class="col-md-2">
-                      <button v-if="total > 0" class="btn btn-success" @click="modal()" ><i class="fas fa-shopping-bag"></i></button>
-                  
-                 </div>  
-                <div class="col-md-4">
-                    <h4 v-if="total > 0" >Total:<span class="badge badge-primary">{{ total }}</span></h4>
-                </div>   
-                 
-                <div class="col-md-2">
-                    <button v-if="total > 0" class="btn btn-danger btn-sm" @click="limpiar()"><i class="fas fa-trash-alt"></i> </button>
-
-                </div>
-            </div>
-            
-            
-
+        
         <table class="table  table-sm table-bordered  mt-2">
                     <thead>
                         <tr>
@@ -77,6 +58,23 @@
                         </tr>
             </tbody>
          </table>
+
+
+
+           <div class="row">
+                 <div class="col-md-4">
+                      <button v-if="total > 0" class="btn btn-success" @click="modal()" ><i class="fas fa-shopping-bag"></i></button>
+                  
+                 </div>  
+                <div class="col-md-4">
+                    <h4 v-if="total > 0" >Total:<span class="badge badge-primary">{{ total }}</span></h4>
+                </div>   
+                 
+                <div class="col-md-4">
+                    <button v-if="total > 0" class="btn btn-danger btn-sm" @click="limpiar()"><i class="fas fa-trash-alt"></i> </button>
+
+                </div>
+            </div>
 
         
     </div>
@@ -201,6 +199,7 @@
                         })
 
                         this.carrito = [];
+                        this.total = 0;
                         $('#aviso').modal('hide')
                 
                 
@@ -344,6 +343,13 @@
 
 input[type="number"] {
    width:50px;
+}
+
+#carrito
+{
+    border-style:solid;
+    background: #ffffff
+
 }
 
 </style>

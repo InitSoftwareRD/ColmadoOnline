@@ -56,11 +56,17 @@ Route::get('cliente/{id}/{status}','UsuarioController@editStatusCliente')->name(
 Route::get('admin/category','ProductsController@category')->name('category');
 Route::post('admin/category','ProductsController@create_category')->name('create_category');
 Route::get('category/{id}/{status}','ProductsController@categorystatus')->name("categorystatus");
+Route::get('producto/{id}/{status}','ProductsController@Productostatus')->name("productostatus");
 Route::get('admin/producto','ProductsController@index')->name('producto');
 Route::post('admin/producto','ProductsController@create')->name('crear_producto');
 Route::get('admin/editar-producto','ProductsController@Listar')->name('editar-producto');
+Route::post('admin/actualizar-producto','ProductsController@update')->name('actualizar-producto');
+Route::get('admin/editar-fragment/{id}','ProductsController@mostrar')->name('formulario-fragment');
 Route::get('admin/crear-oferta','OfertaController@index')->name('crear-oferta');
 Route::post('admin/registrar-oferta','OfertaController@store')->name('registar-oferta');
+Route::get('admin/editar-oferta','OfertaController@editarPage')->name('editar-oferta');
+Route::get('oferta/{id}/{status}','OfertaController@OfertaEstatus')->name("ofertastatus");
+
 
 /*Orden*/
 

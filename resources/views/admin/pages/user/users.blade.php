@@ -64,7 +64,6 @@
                                     <label for="rol">Rol</label>
                                     <select class="custom-select mr-sm-2" id="rol" name="rol" value="{{ old('rol') }}">
                                             <option selected>Elegir Role</option>
-                                            <option value="1">Cliente</option>
                                             <option value="2">Delivery</option>
                                             <option value="3">Cajero</option>
                                     </select>

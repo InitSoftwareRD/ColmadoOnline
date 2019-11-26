@@ -4,13 +4,6 @@
     Crear Productos
 @endsection
 
-@section('css')
-
-<link rel="stylesheet" href="{{ asset('plugins/select2/css/select2.min.css') }}">
-
-@endsection
-
-
 @section('content')
 
 <div class="row">
@@ -104,8 +97,6 @@
 
 
 @section('script')
-
-<script src="{{ asset('plugins/select2/js/select2.min.js')}}"></script>
 
 <script>
 $(document).ready(function() {

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Products;
 use App\Offers;
 use App\Http\Requests\OfertaRequest;
+use Illuminate\Support\Facades\DB;
 
 
 class OfertaController extends Controller
@@ -15,11 +16,37 @@ class OfertaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+      $this->middleware(['auth','admin']);
+    }
+
+    
+
     public function index()
     {
         $productos=Products::where('status','A')->get();
         return view('admin.pages.products.ofertas', compact('productos'));
         
+    }
+
+    public function editarPage()
+    {
+       $ofertas=DB::SELECT("SELECT 
+        O.ID as id, 
+        O.begin_at as Inicio,
+        O.end_at as Final,
+        O.status as status,
+        O.porciento as Descuento,
+        P.name as Producto
+        FROM offers O, products P
+        WHERE
+        O.product_id = P.id
+        ORDER by o.status");
+
+        return view('admin.pages.products.edit_oferta',compact('ofertas'));
+
     }
 
     /**
@@ -30,6 +57,33 @@ class OfertaController extends Controller
     public function create()
     {
         //
+    }
+
+    public function OfertaEstatus($id, $status)
+    {
+        $oferta = Offers::find($id);
+
+        $mensaje="";
+
+        if($status=='A')
+        {
+            $oferta->status='I';
+
+            $mensaje = "Oferta desactivada Correctamente";
+
+                 
+        }else
+        {
+            $oferta->status='A';
+
+            $mensaje = "Oferta activada Correctamente";
+
+        }
+
+        $oferta->save();
+
+        return redirect()->route('editar-oferta')->with('status', $mensaje);
+
     }
 
     /**

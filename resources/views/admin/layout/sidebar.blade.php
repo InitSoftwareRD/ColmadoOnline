@@ -50,7 +50,7 @@
             <li class="nav-item">
                 <a href="{{ route('personal') }}" class="nav-link">
                   <i class="fas fa-building"></i>
-                  <p>Personal</p>
+                  <p>Empleados</p>
                 </a>
               </li>
 
@@ -95,7 +95,7 @@
               </li>
 
               <li class="nav-item">
-                <a href="./index2.html" class="nav-link">
+              <a href="{{ route('editar-producto') }}" class="nav-link">
                   <i class="far fa-edit"></i>
                   <p>Editar Productos</p>
                 </a>
@@ -107,6 +107,14 @@
                     <p>Crear Ofertas</p>
                   </a>
               </li>
+
+
+              <li class="nav-item">
+                  <a href="{{ route('editar-oferta') }}" class="nav-link">
+                      <i class="far fa-edit"></i>
+                        <p>Editar Oferta</p>
+                      </a>
+                  </li>
 
             </ul>
             
@@ -130,7 +138,7 @@
           <li class="nav-header">Cajeros</li>
 
           <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
+          <a href="#" class="nav-link">
                 <i class="fas fa-cart-arrow-down"></i>
               <p>
                 Ordenar
@@ -145,7 +153,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="./index2.html" class="nav-link">
+                <a href="{{ route('orden_status') }}" class="nav-link">
                   <i class="fas fa-sync-alt"></i>
                   <p>Estatus Orden/Pedido</p>
                 </a>

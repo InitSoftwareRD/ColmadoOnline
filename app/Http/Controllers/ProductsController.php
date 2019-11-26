@@ -133,32 +133,81 @@ class ProductsController extends Controller
     }
 
 
+    public function Productostatus($id,$status)
+   {
+
+        $producto = Products::find($id);
+
+        $mensaje="";
+
+        if($status=='A')
+        {
+            $producto->status='I';
+
+            $mensaje = "Producto desactivado Correctamente";
+
+                 
+        }else
+        {
+            $producto->status='A';
+
+            $mensaje = "Producto activado Correctamente";
+
+        }
+
+        $producto->save();
+
+        return redirect()->route('editar-producto')->with('status', $mensaje);
+        //
+    }
+
+
     public function Listar()
     {
         $productos = Products::all();
-        $categorias=Categories::all();
 
-        return view('admin.pages.products.edit_product',compact(['productos','categorias']));
+        return view('admin.pages.products.edit_product',compact('productos'));
 
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-   
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function Mostrar( $id )
     {
-        //
+        $producto = Products::find($id);
+        $categorias = Categories::where('status','A')->get();
+
+        return view('admin.pages.products.edit_product_fragment',compact(['producto','categorias']));
+    } 
+
+
+    public function update(Request $request)
+    {
+        $productos = Products::find($request->id);
+        $imagen= ImageProducts::find($request->imagen);
+
+        $name="";
+
+        if($request->hasFile('portada'))
+        {
+             $file = $request->file('portada');
+             $name = time().$file->getClientOriginalName();
+             $file->move(public_path().'/images/',$name);
+
+             $imagen->ruta = 'images/'.$name;
+             $imagen->save();
+        }
+
+        $productos->name= $request->nombre;
+        $productos->category_id=$request->categoria;
+        $productos->description=$request->descripcion;
+        $productos->ingredients=$request->ingredientes;
+        $productos->price= $request->precio;
+        
+        $productos->save();
+
+        
+
+        return redirect()->route('editar-producto')->with('status', 'Producto Actualizado de manera correcta!');
+        
     }
 
     /**

@@ -101,7 +101,11 @@
                                 <li><a href="{{ route('home') }}">Inicio</a></li>
                                 <li><a href="{{ route('contacto') }}">Contacto</a></li>
                                 @auth
-                                    <li><a href="{{ route('carrito') }}">Carrito</a></li>
+                                    <li>
+                                        <a href="{{ route('carrito') }}">Carrito
+                                            ( {{ Cart::session(auth()->id())->getContent()->count() }} )
+                                        </a>
+                                    </li>
                                     <li><a href="{{ route('orden') }}">Mis Pedidos</a></li>
                                     <li><a href="{{ route('orden') }}">{{ auth()->user()->name .' '. auth()->user()->last_name }}</a></li>
                                     <li>

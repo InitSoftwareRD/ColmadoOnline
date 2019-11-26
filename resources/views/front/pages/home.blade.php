@@ -14,67 +14,11 @@
                         <div class="ads_section"><img src="https://via.placeholder.com/870x296" alt="image"></div>
                     </div>
                     <div class="product_list_section">
-                        <div class="product_list_filter">
-                            <ul>
-                                <li>
-                                    <p>Mostrando <span>1-6 of 9</span> Resultados</p>
-                                </li>
-                                <li style="float: right;">
-                                    <ul class="list_view_toggle">
-                                        <li><span>Vista</span></li>
-                                        <li>
-                                            <a href="javascript:;" class="active grid_view">
-                                                <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                xmlns:xlink="http://www.w3.org/1999/xlink"
-                                                width="12px" height="12px">
-                                                <path fill-rule="evenodd"  fill="rgb(112, 112, 112)"
-                                                d="M6.861,12.000 L6.861,6.861 L12.000,6.861 L12.000,12.000 L6.861,12.000 ZM6.861,-0.000 L12.000,-0.000 L12.000,5.139 L6.861,5.139 L6.861,-0.000 ZM-0.000,6.861 L5.139,6.861 L5.139,12.000 L-0.000,12.000 L-0.000,6.861 ZM-0.000,-0.000 L5.139,-0.000 L5.139,5.139 L-0.000,5.139 L-0.000,-0.000 Z"/>
-                                                </svg>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:;" class="list_view">
-                                                <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                xmlns:xlink="http://www.w3.org/1999/xlink"
-                                                width="12px" height="10px">
-                                                <path fill-rule="evenodd"  fill="rgb(112, 112, 112)"
-                                                d="M3.847,10.000 L3.847,7.783 L12.000,7.783 L12.000,10.000 L3.847,10.000 ZM3.847,3.892 L12.000,3.892 L12.000,6.108 L3.847,6.108 L3.847,3.892 ZM3.847,-0.000 L12.000,-0.000 L12.000,2.216 L3.847,2.216 L3.847,-0.000 ZM-0.000,7.783 L2.297,7.783 L2.297,10.000 L-0.000,10.000 L-0.000,7.783 ZM-0.000,3.892 L2.297,3.892 L2.297,6.108 L-0.000,6.108 L-0.000,3.892 ZM-0.000,-0.000 L2.297,-0.000 L2.297,2.216 L-0.000,2.216 L-0.000,-0.000 Z"/>
-                                                </svg>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
                         <div class="product_items_section">
                             <ul>
                                 @foreach($productos as $producto)
                                     <li>
-                                        <div class="product_item_block">
-                                            <div class="org_product_block">
-                                                {{--<span class="product_label">30% off</span>--}}
-                                                <div class="org_product_image"><img src="{{ $producto->imagen_portada }}"></div>
-                                                <h4>{{ $producto->name }}</h4>
-                                                <h3><span><i class="fa fa-usd" aria-hidden="true"></i></span>{{ $producto->price }}</h3>
-                                                <a href="javascript:;">Agregar a carrito</a>
-                                            </div>
-                                            <div class="content_block">
-                                                <div class="product_price_box">
-                                                    <h3>{{ $producto->name }}</h3>
-                                                    <h5><span><i class="fa fa-usd" aria-hidden="true"></i></span>{{ $producto->price }}</h5>
-                                                </div>
-
-                                                <a href="product_single.html" style="color: #fec007;"><strong>Ver producto</strong></a>
-                                                <ul class="product_code">
-                                                    <li>
-                                                        <p>Disponibilidad: <span>en stock</span></p>
-                                                    </li>
-                                                </ul>
-                                                <p>{{ $producto->description }}</p>
-                                            </div>
-                                        </div>
+                                        <cart-add :product="{{ $producto }}" :is-auth="{{ auth()->check() }}"/>
                                     </li>
                                 @endforeach
                             </ul>

@@ -12,6 +12,13 @@ class CartController extends Controller
         $this->middleware('auth');
     }
 
+    public function index()
+    {
+        return view('front.pages.card_single', [
+            'carts' => Cart::session(auth()->id())->getContent()
+        ]);
+    }
+
     public function store()
     {
         $product = Products::findOrFail(request('product_id'));
@@ -64,5 +71,13 @@ class CartController extends Controller
 
         return back()
             ->with(['message' => 'Carito vaciado correctamente.']);
+    }
+
+    public function verification()
+    {
+        return view('front.pages.checkout', [
+            'carts' => Cart::session(auth()->id())->getContent(),
+            'total' => number_format(Cart::session(auth()->id())->getTotal()),
+        ]);
     }
 }

@@ -18,109 +18,40 @@
                             <th>Pin</th>
                             <th>Fecha realización</th>
                         </thead>
-    
+
                         <tbody>
-                            <tr>
-                                <td>
-                                    #O-000122
-                                </td>
-                                <td>
-                                    5
-                                </td>
-                                <td>
-                                    <div>
-                                        <h5>$1,200.00</h5>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div>
-                                        <span class="badge badge-pill badge-secondary" style="padding: 10px;">Ordenado</span>
-                                    </div>
-                                </td>
-                                <td>
-                                    00383u1u
-                                </td>
-                                <td>
-                                    15/10/2019
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    #O-000123
-                                </td>
-                                <td>
-                                    5
-                                </td>
-                                <td>
-                                    <div>
-                                        <h5>$1,200.00</h5>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div>
-                                        <span class="badge badge-pill badge-warning" style="padding: 10px;">En proceso</span>
-                                    </div>
-                                </td>
-                                <td>
-                                    00383u1u
-                                </td>
-                                <td>
-                                    15/10/2019
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    #O-000123
-                                </td>
-                                <td>
-                                    5
-                                </td>
-                                <td>
-                                    <div>
-                                        <h5>$1,200.00</h5>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div>
-                                        <span class="badge badge-pill badge-info" style="padding: 10px;">Terminado</span>
-                                    </div>
-                                </td>
-                                <td>
-                                    00383u1u
-                                </td>
-                                <td>
-                                    15/10/2019
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    #O-000122
-                                </td>
-                                <td>
-                                    5
-                                </td>
-                                <td>
-                                    <div>
-                                        <h5>$1,200.00</h5>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div>
-                                        <span class="badge badge-pill badge-success" style="padding: 10px;">Entregado</span>
-                                    </div>
-                                </td>
-                                <td>
-                                    00383u1u
-                                </td>
-                                <td>
-                                    15/10/2019
-                                </td>
-                            </tr>
+                            @forelse($orders as $order)
+                                <tr>
+                                    <td>
+                                        {{ $order->id }}
+                                    </td>
+                                    <td>
+                                        5
+                                    </td>
+                                    <td>
+                                        <div>
+                                            <h5>RD$ {{ $order->total }}</h5>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div>
+                                            <span class="badge badge-pill badge-secondary" style="padding: 10px;">Ordenado</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        {{ $order->ping }}
+                                    </td>
+                                    <td>
+                                        {{ $order->created_at->format('d/m/Y') }}
+                                    </td>
+                                </tr>
+                            @empty
+                            @endforelse
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
 
-    
+
 @endsection

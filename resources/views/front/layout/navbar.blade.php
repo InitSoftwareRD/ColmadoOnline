@@ -102,12 +102,12 @@
                                 <li><a href="{{ route('contacto') }}">Contacto</a></li>
                                 @auth
                                     <li>
-                                        <a href="{{ route('carrito') }}">Carrito
+                                        <a href="{{ route('cart') }}">Carrito
                                             ( {{ Cart::session(auth()->id())->getContent()->count() }} )
                                         </a>
                                     </li>
-                                    <li><a href="{{ route('orden') }}">Mis Pedidos</a></li>
-                                    <li><a href="{{ route('orden') }}">{{ auth()->user()->name .' '. auth()->user()->last_name }}</a></li>
+                                    <li><a href="{{ route('order') }}">Mis Pedidos</a></li>
+                                    <li><a>{{ auth()->user()->name .' '. auth()->user()->last_name }}</a></li>
                                     <li>
                                         <a href="{{ route('logout') }}"
                                            onclick = "event.preventDefault();

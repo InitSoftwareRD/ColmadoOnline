@@ -6949,7 +6949,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\ninput[type=\"number\"] {\r\n   width:50px;\n}\n#carrito\r\n{\r\n    border-style:solid;\r\n    background: #ffffff\n}\r\n\r\n", ""]);
+exports.push([module.i, "\ninput[type=\"number\"] {\n   width:50px;\n}\n#carrito\n{\n    border-style:solid;\n    background: #ffffff\n}\n\n", ""]);
 
 // exports
 
@@ -56900,7 +56900,7 @@ var render = function() {
                       attrs: { id: "exampleModalLongTitle" }
                     },
                     [
-                      _vm._v("Cliente:\r\n                          "),
+                      _vm._v("Cliente:\n                          "),
                       _vm.customer
                         ? _c("strong", { staticClass: "text-primary" }, [
                             _vm._v(
@@ -57129,7 +57129,7 @@ var render = function() {
                   }
                 },
                 [
-                  _vm._v("Ordenes Entrantes\r\n                     "),
+                  _vm._v("Ordenes Entrantes\n                     "),
                   _vm.estado
                     ? _c("h4", { staticClass: "badge badge-danger" }, [
                         _vm._v(_vm._s(_vm.estado.length))
@@ -57419,7 +57419,7 @@ var staticRenderFns = [
         }
       },
       [
-        _vm._v("Ordenes Internas\r\n                     "),
+        _vm._v("Ordenes Internas\n                     "),
         _c("h4", { staticClass: "badge badge-danger" }, [_vm._v("9")])
       ]
     )
@@ -70119,8 +70119,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\CafeOnline\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\CafeOnline\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /home/cristian/code/colmado/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /home/cristian/code/colmado/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

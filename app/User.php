@@ -39,6 +39,11 @@ class User extends Authenticatable
         return $this->belongsTo('App\Rol');
     }
 
+    public function customer()
+    {
+        return $this->belongsTo(Customers::class);
+    }
+
     public function isAdmin()
     {
         return $this->rol_id == 4;

@@ -4,7 +4,7 @@
             <h3>Búsqueda</h3>
             <img src="{{ asset('front_template/images/footer_underline.png') }}" alt="image">
         </div>
-        <button type="submit">Filtrar</button>
+        <button class="btn btn-outline-warning btn-block mb-4" type="submit">Filtrar</button>
         <div class="sidebar_search">
             <input type="text" name="search" placeholder="¡Busca algún producto!" value="{{ old('search', request('search')) }}">
             <a><i class="fa fa-search" aria-hidden="true"></i></a>

@@ -70,11 +70,18 @@
                             </td>
                         </tr>
                     @empty
+                        <tr>
+                            <td class="text-center" colspan="5">
+                               <h3 class="font-weight-bold"> Ningun articulo añadido al carrito.</h3>
+                            </td>
+                        </tr>
                     @endforelse
                 </table>
-                <div class="checkout_btn_block">
-                    <a href="checkout.html" class="clv_btn checkout-button">¡Ordenar!</a>
-                </div>
+                @if($carts->count())
+                    <div class="checkout_btn_block">
+                        <a href="{{ route('cart.verification') }}" class="clv_btn checkout-button">¡Ordenar!</a>
+                    </div>
+                @endif
             </div>
         </div>
     </div>

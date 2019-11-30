@@ -19,25 +19,20 @@ Route::get('/contacto', function () {
     return view('front.pages.contact');
 })->name('contacto');
 
-Route::get('/carrito', 'WelcomeController@cart')->name('carrito');
-
-Route::get('/order', function () {
-    return view('front.pages.order');
-})->name('orden');
-
-Route::get('/verificacion', function () {
-    return view('front.pages.checkout');
-})->name('verificacion');
-
 Route::get('/iniciar', function () {
     return view('front.pages.login');
 })->name('iniciar');
 
+Route::get('carts', 'CartController@index')->name('cart');
 Route::post('carts', 'CartController@store')->name('cart.store');
 Route::put('carts/{products}', 'CartController@update')->name('cart.update');
 Route::delete('carts/{products}', 'CartController@delete')->name('cart.delete');
 Route::delete('carts/{products}/http', 'CartController@deleteHTTP')->name('cart.delete.http');
 Route::get('carts/delete/all', 'CartController@deleteAll')->name('cart.deleteAll');
+Route::get('carts/confirmation', 'CartController@verification')->name('cart.verification');
+
+Route::get('client/order', 'ClientOrderController@index')->name('order');
+Route::post('client/order', 'ClientOrderController@store')->name('order.store');
 
 Route::middleware(['auth', 'onlyStaff'])->group(function () {
          /* Panel Administrativo */

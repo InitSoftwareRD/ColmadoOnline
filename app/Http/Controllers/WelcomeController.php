@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Products;
 use App\Categories;
 use App\ImageProducts;
-use Cart;
 
 class WelcomeController extends Controller
 {
@@ -23,19 +22,12 @@ class WelcomeController extends Controller
                 ->when(request('search') ?? null, function ($query, $search) {
                     return $query->where('name', 'like', "%{$search}%");
                 })
-                ->when(request('productos') ?? null, function ($query, $category) {
-                    return $query->whereHas('category', function ($query) use($category) {
+                ->when(request('categories') ?? null, function ($query, $category) {
+                    return $query->whereHas('category', function ($query) use ($category) {
                         $query->whereIn('id', $category);
-                    })->get();
+                    });
                 })
                 ->paginate()
-        ]);
-    }
-
-    public function cart()
-    {
-        return view('front.pages.card_single', [
-            'carts' => Cart::session(auth()->id())->getContent()
         ]);
     }
 }

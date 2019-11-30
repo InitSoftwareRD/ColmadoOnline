@@ -20,18 +20,20 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="shortcut icon" href="{{ asset('dist/img/logo.png')}}" type="image/png">
 
+    <style>
+            body{
+              background-image: url("{{ asset('img/cafeteria.jpg') }}"); /* The image used */
+              background-color: #cccccc; /* Used if the image is unavailable */
+              background-position: center; /* Center the image */
+              background-repeat: repeat; /* Do not repeat the image */
+              background-size: cover; /* Resize the background image to cover the entire container */
+            }
+    </style>
+
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    Acceder
-                </a>
-            </div>
-        </nav>
-
-        <main class="py-4">
+        <main class="mt-5">
             @yield('content')
         </main>
     </div>

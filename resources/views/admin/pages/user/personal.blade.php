@@ -16,7 +16,7 @@
 <div class="row">
     <div class="col-md-12">
 
-            @include('admin.fragment.flashmessage');
+            @include('admin.fragment.flashmessage')
 
             <table id="empleados" class="table table-striped table-bordered" style="width:100%">
                     <thead>
@@ -53,19 +53,19 @@
                             <td>
                                 @if ($user->status=='A')
 
-                            <a href="{{ route('status',[$user->id,$user->status]) }}" class="btn btn-danger btn-sm">
+                                       <a href="{{ route('Personalstatus',[$user->id,$user->status]) }}" class="btn btn-danger btn-sm">
                                         <i class="fas fa-power-off"></i>
                                 </a>
                                     
                                 @else
 
-                                <a  href="{{ route('status',[$user->id,$user->status]) }}"  class="btn btn-success btn-sm">
+                                <a  href="{{ route('Personalstatus',[$user->id,$user->status]) }}"  class="btn btn-success btn-sm">
                                         <i class="fas fa-power-off"></i>
                                 </a>
                                     
                                 @endif
                              
-                               <a href="" class="btn btn-warning btn-sm text-white">
+                            <a href="{{ route('editar-empleado',$user->id) }}" class="btn btn-warning btn-sm text-white">
                                     <i class="fas fa-user-edit"></i>
                                </a>
 

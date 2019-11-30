@@ -107,7 +107,7 @@ class ProductsController extends Controller
     public function categorystatus($id,$status)
    {
 
-        $category = Categories::find($id);
+        $category = Categories::findOrFail($id);
 
         $mensaje="";
 
@@ -136,7 +136,7 @@ class ProductsController extends Controller
     public function Productostatus($id,$status)
    {
 
-        $producto = Products::find($id);
+        $producto = Products::findOrFail($id);
 
         $mensaje="";
 
@@ -172,7 +172,7 @@ class ProductsController extends Controller
 
     public function Mostrar( $id )
     {
-        $producto = Products::find($id);
+        $producto = Products::findOrFail($id);
         $categorias = Categories::where('status','A')->get();
 
         return view('admin.pages.products.edit_product_fragment',compact(['producto','categorias']));
@@ -181,8 +181,8 @@ class ProductsController extends Controller
 
     public function update(Request $request)
     {
-        $productos = Products::find($request->id);
-        $imagen= ImageProducts::find($request->imagen);
+        $productos = Products::findOrFail($request->id);
+        $imagen= ImageProducts::findOrFail($request->imagen);
 
         $name="";
 

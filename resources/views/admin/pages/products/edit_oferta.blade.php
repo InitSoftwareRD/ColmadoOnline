@@ -61,7 +61,7 @@
                                   
                                @endif
 
-                               <a href="" class="btn btn-warning btn-sm text-white">
+                            <a href="{{ route('oferta-fragment',$oferta->id) }}" class="btn btn-warning btn-sm text-white">
                                     <i class="fas fa-user-edit"></i>
                                </a>
 

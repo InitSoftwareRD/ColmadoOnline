@@ -27,7 +27,7 @@ class UsuarioController extends Controller
 
     public function personal()
     {
-        $users=User::whereIn('rol_id', [2, 3, 4])->get();
+        $users=User::whereIn('rol_id', [2, 3])->get();
 
         return view('admin.pages.user.personal',compact('users'));
 
@@ -89,8 +89,27 @@ class UsuarioController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function updateEmpleado(Request $request)
     {
+        $user = User::findOrFail($request->id);
+      
+        $user->name= $request->nombre;
+        $user->last_name = $request->apellido;
+        $user->email = $request->correo;
+        $user->phone = $request->celular;
+        $user->rol_id = $request->rol;
+
+        
+        if( strlen($request->contrasena) > 0 )
+        {
+            $user->password = bcrypt($request->contrasena);
+        }
+
+        $user->save();
+
+
+        return redirect()->route('personal')->with('status', 'Empleado Actualizado Correctamente!');
+
       
     
     }
@@ -101,9 +120,12 @@ class UsuarioController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function EditEmpleado($id)
     {
-        //
+        $user = User::findOrFail($id);
+        
+
+        return view('admin.pages.user.edit-personal',compact('user'));
     }
 
     /**
@@ -114,7 +136,7 @@ class UsuarioController extends Controller
      */
     public function editStatus($id, $status)
     {
-        $user = User::find($id);
+        $user = User::findOrFail($id);
 
         $mensaje="";
 
@@ -142,7 +164,7 @@ class UsuarioController extends Controller
 
     public function editStatusCliente($id, $status)
     {
-        $user = User::find($id);
+        $user = User::findOrFail($id);
 
         $mensaje="";
 

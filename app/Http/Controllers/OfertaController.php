@@ -61,7 +61,7 @@ class OfertaController extends Controller
 
     public function OfertaEstatus($id, $status)
     {
-        $oferta = Offers::find($id);
+        $oferta = Offers::findOrFail($id);
 
         $mensaje="";
 
@@ -116,32 +116,31 @@ class OfertaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
-        //
+        $oferta = Offers::findOrFail($id);
+
+        return view('admin.pages.products.edit_oferta_fragment',compact('oferta'));
+        
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+
+    public function update(Request $request)
     {
-        //
+
+        $oferta = Offers::findOrFail($request->id);
+
+        $oferta->begin_at = $request->inicio;
+        $oferta->end_at= $request->fin;
+        $oferta->promotion_text= $request->promocion;
+        $oferta->porciento=$request->descuento;
+        
+        $oferta->save();
+
+        return redirect()->route('editar-oferta')->with('status', 'Oferta actulizada correctamente!');
+
+
     }
 
     /**

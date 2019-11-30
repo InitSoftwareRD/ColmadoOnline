@@ -64,7 +64,7 @@ class OrdenarController extends Controller
       $order = new Orders;
       $tracking = new OrderTracking;
 
-      $order->user_id = 1;
+      $order->user_id = auth()->id();
       $order->customer_id= $request->customer['id'];
       $order->total=$request->total;
       $order->ping = rand ( 100000, 999999 );

@@ -50,8 +50,10 @@ Route::get('admin/users','UsuarioController@index')->name('user');
 Route::post('admin/crear_usuario','UsuarioController@create')->name('crear_usuario');
 Route::get('admin/personal','UsuarioController@personal')->name('personal');
 Route::get('admin/cliente','UsuarioController@cliente')->name('cliente');
-Route::get('status/{id}/{status}','UsuarioController@editStatus')->name('status');
+Route::get('personal/status/{id}/{status}','UsuarioController@editStatus')->name('Personalstatus');
 Route::get('cliente/{id}/{status}','UsuarioController@editStatusCliente')->name('Clientestatus');
+Route::get('admin/editar-empleado/{id}','UsuarioController@EditEmpleado')->name('editar-empleado');
+Route::post('actualizar-empleado','UsuarioController@updateEmpleado')->name('actualizarEmpleado');
 
 /*Product*/
 
@@ -69,6 +71,10 @@ Route::get('admin/crear-oferta','OfertaController@index')->name('crear-oferta');
 Route::post('admin/registrar-oferta','OfertaController@store')->name('registar-oferta');
 Route::get('admin/editar-oferta','OfertaController@editarPage')->name('editar-oferta');
 Route::get('oferta/{id}/{status}','OfertaController@OfertaEstatus')->name("ofertastatus");
+Route::get('admin/oferta-fragment/{id}','OfertaController@edit')->name('oferta-fragment');
+Route::post('admin/oferta-actulizar','OfertaController@update')->name('oferta-actulizar');
+
+
 
 
 /*Orden*/
@@ -82,6 +88,7 @@ Route::get('admin/ordenes','OrdenarController@status')->name('status');
 Route::post('admin/cambiar_status','OrdenarController@CambiarStatus')->name('cambiar_status');
 Route::get('admin/listar_status','OrdenarController@ListarStatus')->name('listar_status');
 Route::get('admin/detalle_pedido','OrdenarController@DetallePedido')->name('detalle_pedido');
+
 
 });
 

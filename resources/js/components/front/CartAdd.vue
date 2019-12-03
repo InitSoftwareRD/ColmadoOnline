@@ -13,11 +13,13 @@
 </template>
 
 <script>
+    import toastr from 'toastr';
+
     export default {
-        props: ['product', 'isAuth'],
+        props: ['product', 'isAuth', 'hasProduct'],
         data() {
             return {
-                remove: false
+                remove: this.hasProduct
             }
         },
         methods: {
@@ -26,12 +28,14 @@
                     'product_id': this.product.id,
                     'quantity': 1
                 }).then(() => {
-                    this.remove = true;
+                    this.remove = 1;
+                    toastr.success(this.product.name + ', Agregado al carrito')
                 });
             },
             removeCart() {
                 window.axios.delete(`carts/${this.product.id}`).then(() => {
-                    this.remove = false;
+                    this.remove = 0;
+                    toastr.info(this.product.name + ', Eliminado del carrito')
                 });
             }
         }

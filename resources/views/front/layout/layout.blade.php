@@ -20,7 +20,8 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('front_template/css/range.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('front_template/css/nice-select.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('front_template/css/style.css') }}">
-    <link href="https://fonts.googleapis.com/css?family=Pacifico&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Pacifico&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     <!-- Favicon Link -->
     <link rel="shortcut icon" type="image/png" href="{{ asset('front_template/images/favicon.png') }}">
     <script src="{{ asset(mix('js/app.js')) }}" defer></script>

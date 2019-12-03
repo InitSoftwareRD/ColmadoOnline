@@ -22,7 +22,7 @@
                         <tr>
                             <td>
                                 <div class="product_img">
-                                    <img src="https://via.placeholder.com/60x60" alt="image">
+                                    <img width="75" height="75" src="{{ \App\Products::find($item['id'])->images[0]['ruta'] ?: 'https://via.placeholder.com/60x60' }}" alt="image">
                                     <h6>{{ $item['name'] }}</h6>
                                 </div>
                             </td>

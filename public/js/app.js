@@ -2968,6 +2968,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+!(function webpackMissingModule() { var e = new Error("Cannot find module 'toastr'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
 //
 //
 //
@@ -2982,11 +2983,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['product', 'isAuth'],
+  props: ['product', 'isAuth', 'hasProduct'],
   data: function data() {
     return {
-      remove: false
+      remove: this.hasProduct
     };
   },
   methods: {
@@ -2997,14 +2999,16 @@ __webpack_require__.r(__webpack_exports__);
         'product_id': this.product.id,
         'quantity': 1
       }).then(function () {
-        _this.remove = true;
+        _this.remove = 1;
+        !(function webpackMissingModule() { var e = new Error("Cannot find module 'toastr'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()).success(_this.product.name + ', Agregado al carrito');
       });
     },
     removeCart: function removeCart() {
       var _this2 = this;
 
       window.axios["delete"]("carts/".concat(this.product.id)).then(function () {
-        _this2.remove = false;
+        _this2.remove = 0;
+        !(function webpackMissingModule() { var e = new Error("Cannot find module 'toastr'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()).info(_this2.product.name + ', Eliminado del carrito');
       });
     }
   }

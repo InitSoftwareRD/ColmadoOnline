@@ -23,6 +23,7 @@
                         <th scope="col">Email</th>
                         <th scope="col">Total</th>
                         <th scope="col">Estatus</th>
+                        <th scope="col">Delivery</th>
                         <th>Acciones</th>
                         </tr>
                     </thead>
@@ -34,9 +35,11 @@
                         <td class="email">{{ item.email }}</td>
                         <td class="total">{{ item.total }}</td>
                         <td class="estatus">{{ item.estatus }}</td>
+                        <td class="total">{{ item.delivery }}</td>
                         <th> 
                             <button class="btn btn-success btn-sm" @click="modal(item)" ><i class="fas fa-exchange-alt"></i></button>  
-                            <button class="btn btn-success btn-info btn-sm" @click="detalle_orden(item.id)"><i class="fas fa-list-ol"></i></button>                         
+                            <button class="btn btn-success btn-info btn-sm" @click="detalle_orden(item.id)"><i class="fas fa-list-ol"></i></button>                      
+                            <button class="btn btn-warning btn-sm" @click="listarDelivery(item.id)" ><i class="fas fa-motorcycle"></i></button>                      
                         </th>
                     </tr>
             </tbody>
@@ -52,7 +55,7 @@
 </div>
 
 
-<div class="modal" id="statusInterno" tabindex="-1" role="dialog">
+<div class="modal" id="Onlinestatus" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -82,7 +85,37 @@
 </div>
 
 
-<div class="modal" id="detalles" tabindex="-1" role="dialog">
+<div class="modal" id="delivery" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Selecciones el  Delivery</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+
+           <select class="form-control" v-model="delivery" name="delivery">
+               <option value="">Seleccione un Delivery</option>
+               <option v-for="(item, key) in deliveries" :key="key" :value="item.name">{{ item.name + ' ' + item.last_name }}</option>  
+           </select>
+
+        </div>
+            
+      </div>
+
+      <div class="modal-footer">
+        <button v-if="delivery" type="button" class="btn btn-primary" @click="AsignarDelivery()" >Asignar Delivery</button>  
+        <button v-else type="button" class="btn btn-primary" disabled>Asignar Delivery</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal" id="detallesOnline" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -94,7 +127,7 @@
       <div class="modal-body">
 
         
-         <table class="table table-striped  table-sm  table-bordered">
+         <table id="detalle" class="table table-striped  table-sm  table-bordered">
                     <thead>
                         <tr>
                             <th>ID</th>
@@ -131,6 +164,8 @@
 <script>
 
  import Swal from 'sweetalert2'
+ import datables from 'datatables'
+
 
  export default 
  {
@@ -154,13 +189,28 @@
              state:'',
              orden:'',
              detalle:[],
+             deliveries:[],
+             delivery:'',
              total:0,
+             orden_envio:'',
          }
 
      },
 
      methods:
      {
+
+        tablaDetalle()
+        {
+                $(function () {
+                     $('#detalle').DataTable({
+                       dom: 'Bfrtip',
+                        buttons: [
+                            'print'
+                        ]
+                     });
+               }); 
+        },
 
          detalle_orden(id)
          {
@@ -173,7 +223,8 @@
                 .then((response)=>{
                     // handle success
                    this.detalle=response.data;
-                  $('#detalles').modal('show');
+                   this.tablaDetalle();
+                  $('#detallesOnline').modal('show');
                   
 
                 })
@@ -200,7 +251,7 @@
                             timer: 5000
                         })
 
-                         $('#statusInterno').modal('hide');
+                         $('#Onlinestatus').modal('hide');
                         this.orden = '';
                         this.state = ' ';
                         this.estado=[];
@@ -225,7 +276,63 @@
          modal(item)
          {
              this.orden = item;
-             $('#statusInterno').modal('show');
+             $('#Onlinestatus').modal('show');
+         },
+
+         listarDelivery(item)
+         {
+            this.orden_envio = item;
+
+            axios.get('deliveries')
+                .then((response)=>{
+                    // handle success
+                   this.deliveries=response.data;
+                })
+                .catch((error)=> {
+                    // handle error
+                    console.log(error);
+               })
+
+             $('#delivery').modal('show');
+
+         },
+
+         AsignarDelivery()
+         {
+           axios.post('asignardelivery',{ 
+                
+                     'order_id':this.orden_envio,  
+                     'delivery':this.delivery,
+                 }
+                )
+                .then((response)=>{
+
+                         Swal.fire({
+                            position: 'center',
+                            type: 'success',
+                            title: 'Delivery Asignado',
+                            showConfirmButton: false,
+                            timer: 5000
+                        })
+
+                        $('#delivery').modal('hide');
+                        this.orden = '';
+                        this.delivery='';
+                        this.deliveries=[];
+                        this.estado=[];
+                        this.status();
+                
+                })
+                .catch((error)=>{
+                  
+                       Swal.fire({
+                            position: 'center',
+                            type: 'error',
+                            title: 'Error al Asignar Delivery',
+                            showConfirmButton: false,
+                            timer: 4000
+                        })
+               })
          },
 
          lista()
@@ -240,7 +347,7 @@
 
          status()
          {
-            axios.get('ordenes')
+            axios.get('Onlineordenes')
                 .then((response)=>{
                     // handle success
                    this.estado=response.data;
@@ -254,7 +361,7 @@
 
          listar_estatus()
          {
-             axios.get('listar_status')
+             axios.get('listar_statusOnline')
                 .then((response)=>{
                     // handle success
                    this.lista_estatus=response.data;

@@ -23,6 +23,8 @@ class CreateOrdersTable extends Migration
             $table->float('change',8,2)->nullable();
             $table->string('ping',8)->nullable();
             $table->string('location',50)->nullable();   
+            $table->unsignedBigInteger('delivery_id');
+            $table->string('delivery',50)->nullable();   
             $table->enum('canal', ['I', 'C']);        
             $table->timestamps();
 

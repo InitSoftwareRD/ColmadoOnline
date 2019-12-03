@@ -39,6 +39,12 @@ class LoginController extends Controller
 
     protected function redirectTo()
    {
+       if (auth()->user()->status == 'I'){
+           abort(401, 'Su usuario ha sido desactivo.');
+
+           auth()->logout();
+       }
+
         if (auth()->user()->isClient()) {
             return '/';
         };

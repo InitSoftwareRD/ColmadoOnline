@@ -1960,6 +1960,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
@@ -2063,6 +2065,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var datatables__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! datatables */ "./node_modules/datatables/media/js/jquery.dataTables.js");
 /* harmony import */ var datatables__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(datatables__WEBPACK_IMPORTED_MODULE_1__);
+//
+//
 //
 //
 //
@@ -2718,6 +2722,8 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
 /* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_0__);
+//
+//
 //
 //
 //
@@ -57303,7 +57309,16 @@ var render = function() {
                       0
                     )
                   ]
-                )
+                ),
+                _vm._v(" "),
+                _vm.detalle.length > 0
+                  ? _c("h5", { staticClass: "text-info" }, [
+                      _vm._v(" Total "),
+                      _c("strong", [
+                        _vm._v(" $" + _vm._s(_vm.detalle[0].total))
+                      ])
+                    ])
+                  : _vm._e()
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "modal-footer" })
@@ -57718,7 +57733,16 @@ var render = function() {
                       0
                     )
                   ]
-                )
+                ),
+                _vm._v(" "),
+                _vm.detalle.length > 0
+                  ? _c("h5", { staticClass: "text-info" }, [
+                      _vm._v(" Total "),
+                      _c("strong", [
+                        _vm._v(" $" + _vm._s(_vm.detalle[0].total))
+                      ])
+                    ])
+                  : _vm._e()
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "modal-footer" })
@@ -58513,7 +58537,16 @@ var render = function() {
                       0
                     )
                   ]
-                )
+                ),
+                _vm._v(" "),
+                _vm.detalle.length > 0
+                  ? _c("h5", { staticClass: "text-info" }, [
+                      _vm._v(" Total "),
+                      _c("strong", [
+                        _vm._v(" $" + _vm._s(_vm.detalle[0].total))
+                      ])
+                    ])
+                  : _vm._e()
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "modal-footer" })

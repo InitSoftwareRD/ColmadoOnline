@@ -114,6 +114,8 @@
                         </tr>
                     </tbody>
             </table>
+             <h5 v-if="detalle.length > 0" class="text-info"> Total <strong> ${{ detalle[0].total  }}</strong></h5>
+
       </div>
       <div class="modal-footer">
           

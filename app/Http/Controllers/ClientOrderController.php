@@ -29,7 +29,7 @@ class ClientOrderController extends Controller
             ])->id,
             'total' => Cart::session(auth()->id())->getTotal(),
             'ping' => rand (100000, 999999),
-            'canal' => 'C',
+            'canal' => 'I',
             'paid_with' => request('paid_with'),
             'location' => request('lat') .','. request('lng')
         ]);

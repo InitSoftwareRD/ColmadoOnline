@@ -179,9 +179,9 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="./index2.html" class="nav-link">
-                  <i class="fas fa-sync-alt"></i>
-                  <p>Estatus Pedidos</p>
+                <a href="{{ route('delivery') }}" class="nav-link">
+                  <i class="fas fa-truck"></i>
+                  <p>Envios</p>
                 </a>
               </li>
             </ul>

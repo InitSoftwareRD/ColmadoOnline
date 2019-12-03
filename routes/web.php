@@ -80,9 +80,21 @@ Route::get('admin/listar_clientes','OrdenarController@listarClientes')->name('li
 Route::post('admin/realizar_orden','OrdenarController@ordenar')->name('realizar_orden');
 Route::get('admin/orden_status','OrdenarController@ordenStatus')->name('orden_status');
 Route::get('admin/ordenes','OrdenarController@status')->name('status');
+Route::get('admin/Onlineordenes','OrdenarController@Onlinestatus')->name('Onlinestatus');
 Route::post('admin/cambiar_status','OrdenarController@CambiarStatus')->name('cambiar_status');
 Route::get('admin/listar_status','OrdenarController@ListarStatus')->name('listar_status');
+Route::get('admin/listar_statusOnline','OrdenarController@ListarStatusOnline')->name('listar_statusOnline');
 Route::get('admin/detalle_pedido','OrdenarController@DetallePedido')->name('detalle_pedido');
+Route::get('admin/deliveries','OrdenarController@delivery')->name('deliveries');
+
+Route::post('admin/asignardelivery','OrdenarController@Asignar_delivery')->name('asignar_delivery');
+Route::get('admin/ordenes_salientes','DeliveryController@OrdenesEntregar')->name('ordenes_saliente');
+Route::get('admin/delivery','DeliveryController@DeliveryPage')->name('delivery');
+Route::get('admin/detalle_envio','DeliveryController@DetallePedido')->name('detalle_envio');
+Route::post('admin/cambiar_envios','DeliveryController@CambiarStatus')->name('cambiar_envios');
+
+
+
 
 
 });

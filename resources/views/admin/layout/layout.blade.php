@@ -84,6 +84,8 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js"></script>
 <!-- jQuery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+
 <!-- jQuery UI 1.11.4 -->   
 <script src="{{ asset('plugins/jquery-ui/jquery-ui.min.js')}}"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
@@ -119,8 +121,9 @@
 <!-- AdminLTE App -->
 <script src="{{ asset('dist/js/adminlte.js')}}"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="{{ asset('dist/js/demo.js')}}"></script>
+
 <script src="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/js/select2.min.js" defer></script>
+
 
 <script>
 
@@ -129,6 +132,7 @@
       $('.productos').select2({
         placeholder: 'Seleccione un Producto'
       });
+
 
   });
   

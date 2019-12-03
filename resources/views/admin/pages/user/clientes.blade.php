@@ -38,7 +38,7 @@
                        <tr>
                             <td>{{ $user->name }}</td>
                             <td>{{ $user->last_name }}</td>
-                            <td>{{ $user->phone }}</td>
+                            <td class="celular">{{ $user->phone }}</td>
                             <td>{{ $user->email }}</td>
                             <td>{{ $user->sex }}</td>
                             @if ($user->status=='A')
@@ -100,8 +100,26 @@
 
 $(document).ready(function() {
     $('#clientes').DataTable();
+   
+
 } );
 
 </script>
+    
+@endsection
+
+@section('script')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js" ></script>
+
+<script>
+$(document).ready(function() {
+    $('.celular').mask('(000) 000-0000');
+   
+
+} );
+
+</script>
+
+
     
 @endsection

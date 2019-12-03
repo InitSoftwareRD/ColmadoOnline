@@ -6,6 +6,7 @@ use App\Products;
 use App\OrderProducts;
 use App\ImageProducts;
 use App\Orders;
+use App\User;
 use App\OrderTracking;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -113,13 +114,14 @@ class OrdenarController extends Controller
         WHERE 
         o.customer_id =c.id 
         AND c.user_id = u.id
+        AND o.canal = 'C'
         AND ( SELECT os.id FROM order_tracking ot ,order_status os
            WHERE
               os.id = ot.order_status
              AND ot.order_id = o.id
             ORDER by ot.created_at DESC
            LIMIT 1
-         ) != 5
+         ) != 3
         ");
 
         return $status;
@@ -127,12 +129,55 @@ class OrdenarController extends Controller
     }
 
 
+    public function Onlinestatus()
+    {
+        $status=DB::SELECT(" SELECT 
+        o.id as id,
+        o.ping as ping,
+        o.total as total,
+        o.delivery as delivery,
+        CONCAT( u.name,' ', u.last_name ) as nombres,
+        u.phone as phone,
+        u.email as email,
+        ( SELECT os.name FROM order_tracking ot ,order_status os
+           WHERE
+              os.id = ot.order_status
+             AND ot.order_id = o.id
+            ORDER by ot.created_at DESC
+           LIMIT 1
+         ) as estatus
+        FROM orders o, customers c , users u
+        WHERE 
+        o.customer_id =c.id 
+        AND c.user_id = u.id
+        AND o.canal = 'I'
+        AND ( SELECT os.id FROM order_tracking ot ,order_status os
+           WHERE
+              os.id = ot.order_status
+             AND ot.order_id = o.id
+            ORDER by ot.created_at DESC
+           LIMIT 1
+         ) != 3
+        ");
+
+        return $status;
+
+    }
+
+
+    
     public function ListarStatus()
     { 
-        $estatus=DB::SELECT("SELECT * FROM  order_status
-                     WHERE
-                     order_status.id != 4 
-        ");
+        $estatus=DB::SELECT("SELECT * FROM  order_status WHERE  order_status.id != 2 ");
+
+        return $estatus;
+
+
+    }
+
+    public function ListarStatusOnline()
+    { 
+        $estatus=DB::SELECT("SELECT * FROM  order_status");
 
         return $estatus;
 
@@ -172,6 +217,19 @@ class OrdenarController extends Controller
 
     }
 
+  
+
+    public function Asignar_delivery(Request $request)
+    {
+        dd($request->all());
+        $order = Orders::findOrFail($request->order_id);
+
+        $order->delivery = $request->delivery;
+
+        $order->save();
+
+    }
+
     /**
      * Display the specified resource.
      *
@@ -200,6 +258,15 @@ class OrdenarController extends Controller
         return $clientes;
     }
 
+
+    public function delivery()
+    {
+        $delivery = User::where('status','A')->where('rol_id',2)->get();
+         
+        return $delivery;
+
+    }
+
     /**
      * Update the specified resource in storage.
      *
@@ -212,6 +279,7 @@ class OrdenarController extends Controller
         return view('admin.pages.orders.orderstatus');
     }
 
+   
     /**
      * Remove the specified resource from storage.
      *

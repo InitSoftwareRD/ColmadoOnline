@@ -20,7 +20,7 @@
                                     <li>
                                         <cart-add :product="{{ $producto }}"
                                                   is-auth="{{ auth()->check() }}"
-                                                  has-product="{{ false }}"/>
+                                                  has-product="{{ Cart::session(auth()->id())->get($producto->id) ? 1 : 0 }}"/>
                                     </li>
                                 @endforeach
                             </ul>

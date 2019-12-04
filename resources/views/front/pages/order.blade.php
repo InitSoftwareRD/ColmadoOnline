@@ -26,16 +26,18 @@
                                         {{ $order->id }}
                                     </td>
                                     <td>
-                                        5
+                                        {{ $order->products->sum('pivot.quantity') }}
                                     </td>
                                     <td>
                                         <div>
-                                            <h5>RD$ {{ $order->total }}</h5>
+                                            <h5>RD$ {{ number_format($order->total) }}</h5>
                                         </div>
                                     </td>
                                     <td>
                                         <div>
-                                            <span class="badge badge-pill badge-secondary" style="padding: 10px;">Ordenado</span>
+                                            <span class="badge badge-pill badge-secondary" style="padding: 10px;">
+                                                {{ \App\OrderStatus::find($order->last_status)->name }}
+                                            </span>
                                         </div>
                                     </td>
                                     <td>

@@ -6,8 +6,8 @@
             </div>
             <h4>{{ product.name }}</h4>
             <h3><span><i class="fa fa-usd" aria-hidden="true"></i></span>{{ product.price }}</h3>
-            <a @click="removeCart"v-if="remove" v-show="isAuth">Quiter del carrito</a>
-            <a @click="addCart" v-else v-show="isAuth">Agregar a carrito</a>
+            <a style="background-color: #AF0000; color:#fff;" @click="removeCart"v-if="remove == 1" v-show="isAuth">Quiter del carrito</a>
+            <a style="color:#fff" @click="addCart" v-else v-show="isAuth">Agregar a carrito</a>
         </div>
     </div>
 </template>

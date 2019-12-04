@@ -80,4 +80,9 @@ class CartController extends Controller
             'total' => number_format(Cart::session(auth()->id())->getTotal()),
         ]);
     }
+
+    public function cartCount()
+    {
+        return Cart::session(auth()->id())->getContent()->count();
+    }
 }

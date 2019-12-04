@@ -30,6 +30,7 @@ Route::delete('carts/{products}', 'CartController@delete')->name('cart.delete');
 Route::delete('carts/{products}/http', 'CartController@deleteHTTP')->name('cart.delete.http');
 Route::get('carts/delete/all', 'CartController@deleteAll')->name('cart.deleteAll');
 Route::get('carts/confirmation', 'CartController@verification')->name('cart.verification');
+Route::get('carts/count', 'CartController@cartCount')->name('cart.count');
 
 Route::get('client/order', 'ClientOrderController@index')->name('order');
 Route::post('client/order', 'ClientOrderController@store')->name('order.store');

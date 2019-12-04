@@ -10,12 +10,31 @@ use Cart;
 
 class ClientOrderController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+
+        $this->middleware(function ($request, $next) {
+            if (! auth()->user()->isClient()) {
+                abort(403);
+            }
+
+            return $next($request);
+        });
+    }
+
     public function index()
     {
         return view('front.pages.order', [
             'orders' => Orders::where('customer_id', Customers::firstOrCreate([
                 'user_id' => auth()->id()
             ])->id)
+                ->addSelect(['last_status' => OrderTracking::select('order_status')
+                    ->whereColumn('order_id', 'orders.id')
+                    ->orderBy('id', 'desc')
+                    ->limit(1)
+                ])
+                ->with('products')
                 ->orderByDesc('id')
                 ->paginate()
         ]);

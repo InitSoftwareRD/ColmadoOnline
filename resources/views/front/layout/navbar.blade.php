@@ -103,7 +103,7 @@
                                 @auth
                                     <li>
                                         <a href="{{ route('cart') }}">Carrito
-                                            ( {{ Cart::session(auth()->id())->getContent()->count() }} )
+                                            <cart-count/>
                                         </a>
                                     </li>
                                     <li><a href="{{ route('order') }}">Mis Pedidos</a></li>

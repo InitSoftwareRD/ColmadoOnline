@@ -9,6 +9,7 @@ Vue.component('status-component', require('./components/admin/StatusComponent.vu
 Vue.component('onlinestatus-component', require('./components/admin/OnlinestatusComponent.vue').default);
 Vue.component('delivery-component', require('./components/admin/DeliveryComponent.vue').default);
 Vue.component('cart-add', require('./components/front/CartAdd').default);
+Vue.component('cart-count', require('./components/front/CartCount').default);
 
 
 const app = new Vue({

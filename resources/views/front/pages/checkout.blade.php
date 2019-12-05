@@ -60,7 +60,9 @@
                         <ul>
                             @foreach($carts as $item)
                                 <li>
-                                    <div class="product_img"><img src="https://via.placeholder.com/60x60" alt="image"></div>
+                                    <div class="product_img">
+                                        <img width="75" height="75" src="{{ url(\App\Products::find($item['id'])->images[0]['ruta']) ?: 'https://via.placeholder.com/60x60' }}" alt="image">
+                                    </div>
                                     <div class="product_quantity">
                                         <h6>{{ $item['name'] }}</h6>
                                         <p>x{{ $item['quantity'] }}</p>

@@ -64,7 +64,7 @@
                                         </g>
                                         </svg>
                                     </span>
-                                    <p>( +61 ) 1800-1234-1245</p>
+                                    <p>809-573-0000</p>
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -88,7 +88,7 @@
                                         </g>
                                         </svg>
                                     </span>
-                                    <p>Cultivation@example.com</p>
+                                    <p>cafeteria3a@gmail.com</p>
                                 </div>
                             </div>
                         </div>

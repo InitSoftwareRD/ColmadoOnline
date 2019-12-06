@@ -15,7 +15,7 @@
                         <th></th>
                         <th>Cantidad</th>
                         <th>Precio</th>
-                        <th>total</th>
+                        <th>Sub total</th>
                         <th>remover</th>
                     </tr>
                     @forelse($carts as $item)
@@ -39,12 +39,12 @@
                             </td>
                             <td>
                                 <div class="pro_price">
-                                    <h5>{{ number_format($item['price']) }}</h5>
+                                    <h5>$ {{ number_format($item['price']) }}</h5>
                                 </div>
                             </td>
                             <td>
                                 <div class="pro_price">
-                                    <h5>{{ number_format($item->getPriceSum()) }}</h5>
+                                    <h5>$ {{ number_format($item->getPriceSum()) }}</h5>
                                 </div>
                             </td>
                             <td>

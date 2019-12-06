@@ -7,6 +7,7 @@ use App\OrderProducts;
 use App\Orders;
 use App\OrderTracking;
 use Cart;
+use Illuminate\Support\Facades\DB;
 
 class ClientOrderController extends Controller
 {
@@ -16,7 +17,7 @@ class ClientOrderController extends Controller
 
         $this->middleware(function ($request, $next) {
             if (! auth()->user()->isClient()) {
-                abort(403);
+                abort(403, 'Solo los clientes puedes realizar ordenes por este canal.');
             }
 
             return $next($request);
@@ -41,36 +42,43 @@ class ClientOrderController extends Controller
     }
     public function store()
     {
-        $order = Orders::create([
-            'user_id' => auth()->id(),
-            'customer_id' => Customers::firstOrCreate([
+        DB::transaction(function () {
+
+            $customer = Customers::firstOrCreate([
                 'user_id' => auth()->id()
-            ])->id,
-            'total' => Cart::session(auth()->id())->getTotal(),
-            'ping' => rand (100000, 999999),
-            'canal' => 'I',
-            'paid_with' => request('paid_with'),
-            'location' => request('lat') .','. request('lng')
-        ]);
-
-        foreach(Cart::session(auth()->id())->getContent() as $item )
-        {
-            OrderProducts::create([
-                'order_id' => $order->id,
-                'product_id' => $item['id'],
-                'quantity' => $item['quantity'],
-                'price' => $item['price'],
-                'subtotal' => $item['price'] * $item['quantity'],
+            ], [
+                'location' => request()->location_store ? request('lat') .','. request('lng') : null
             ]);
-        }
 
-        OrderTracking::create([
-            'order_id' => $order->id,
-            'order_status' => 1
-        ]);
+            $order = Orders::create([
+                'user_id' => auth()->id(),
+                'customer_id' => $customer->id,
+                'total' => Cart::session(auth()->id())->getTotal(),
+                'ping' => rand (100000, 999999),
+                'canal' => 'I',
+                'paid_with' => request('paid_with'),
+                'location' => request()->location_default ? $customer->location : request('lat') .','. request('lng')
+            ]);
 
-        Cart::session(auth()->id())->clear();
+            foreach(Cart::session(auth()->id())->getContent() as $item )
+            {
+                OrderProducts::create([
+                    'order_id' => $order->id,
+                    'product_id' => $item['id'],
+                    'quantity' => $item['quantity'],
+                    'price' => $item['price'],
+                    'subtotal' => $item['price'] * $item['quantity'],
+                ]);
+            }
 
+            OrderTracking::create([
+                'order_id' => $order->id,
+                'order_status' => 1
+            ]);
+
+            Cart::session(auth()->id())->clear();
+
+        });
         return redirect()->route('order');
     }
 }

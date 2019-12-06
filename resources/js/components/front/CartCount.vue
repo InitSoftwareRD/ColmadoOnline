@@ -15,7 +15,7 @@
         },
         methods: {
             getCount() {
-                axios.get('carts/count').then((response) => {
+                axios.get('/carts/count').then((response) => {
                    this.count = response.data;
                 });
             }

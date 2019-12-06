@@ -22,6 +22,16 @@
                                     <div class="col-md-6">
                                         <div class="form_block"><input type="text" class="form_field" placeholder="Email" readonly value="{{ auth()->user()->email }}"></div>
                                     </div>
+                                    <div class="col-md-12">
+                                        @if($hasLocation)
+                                            <label><input type="checkbox" name="location_default" value="1" checked> Usar mi ubicacion por defecto</label>
+                                        @else
+                                            <span>Aparentemente no hay una ubicación predeterminada, seleccione la ubicación y márquela como predeterminada</span>
+                                            <br>
+                                            <br>
+                                        @endif
+                                    </div>
+
                                 </div>
                             </div>
                             <div class="checkout_heading">
@@ -33,11 +43,16 @@
                                         <div class="form_block">
                                             <input type="hidden" class="form_field" id="lat" name="lat" value="19.224167">
                                             <input type="hidden" class="form_field" id="lng" name="lng" value="-70.528333">
-                                            <div class="mt-4" id="map"></div>
+                                            <div style="height: 300px; width: 100%;" class="mt-4" id="map"></div>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <div class="form_block"><input type="number" name="paid_with" class="form_field" placeholder="Pagaré con: RD$" min="1"></div>
+                                    <div class="col-md-12">
+                                        <label><input type="checkbox" name="location_store" value="1"> Marcar esta ubicacion predeterminada</label>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form_block">
+                                            <input type="number" name="paid_with" class="form_field" placeholder="Pagaré con: RD$" min="{{$total}}" max="999999">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -64,7 +79,7 @@
                                         <img width="75" height="75" src="{{ url(\App\Products::find($item['id'])->images[0]['ruta']) ?: 'https://via.placeholder.com/60x60' }}" alt="image">
                                     </div>
                                     <div class="product_quantity">
-                                        <h6>{{ $item['name'] }}</h6>
+                                        <h6 title="{{$item['name']}}" class="text-black-50">{{ Str::limit($item['name'], 10, '...') }}</h6>
                                         <p>x{{ $item['quantity'] }}</p>
                                     </div>
                                     <div class="product_price">
@@ -73,8 +88,7 @@
                                 </li>
                             @endforeach
                         </ul>
-                        <h5>Total: RD$ {{ $total }}</h5>
-                        <!-- <a href="javascript:;">Codigo?</a> -->
+                        <h5>Total: RD$ {{ number_format($total) }}</h5>
                     </div>
 
                 </div>

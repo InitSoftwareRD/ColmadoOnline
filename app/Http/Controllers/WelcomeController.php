@@ -28,6 +28,9 @@ class WelcomeController extends Controller
                     });
                 })
                 ->paginate()
+                ->transform(function ($item) {
+                    return array_merge($item->toArray(), ['price' => number_format($item->price)]);
+                })
         ]);
     }
 }

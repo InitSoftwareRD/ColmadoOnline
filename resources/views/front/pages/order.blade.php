@@ -36,7 +36,7 @@
                                     <td>
                                         <div>
                                             <span class="badge badge-pill badge-secondary" style="padding: 10px;">
-                                               <!-- \App\OrderStatus::find($order->last_status)->name -->
+                                               {{ optional(\App\OrderStatus::find($order->last_status))->name ?: 'Sin estatus'  }}
                                             </span>
                                         </div>
                                     </td>

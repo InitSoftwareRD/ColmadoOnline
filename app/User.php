@@ -42,7 +42,7 @@ class User extends Authenticatable
 
     public function customer()
     {
-        return $this->belongsTo(Customers::class);
+        return $this->hasOne(Customers::class);
     }
 
     public function isAdmin()

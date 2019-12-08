@@ -43,7 +43,7 @@ CREATE TABLE `category` (
 INSERT INTO `category` (`id`, `name`, `status`, `created_at`, `updated_at`) VALUES
 (1, 'BEBIDA', 'A', '2019-11-02 20:44:06', '2019-11-02 20:44:06'),
 (2, 'COMIDAS', 'A', '2019-11-04 20:28:05', '2019-11-04 20:28:05'),
-(3, 'JUGO NATURALES', 'I', '2019-11-15 22:27:21', '2019-11-15 22:27:27');
+(3, 'JUGO NATURALES', 'A', '2019-11-15 22:27:21', '2019-11-15 22:27:27');
 
 -- --------------------------------------------------------
 
@@ -58,14 +58,6 @@ CREATE TABLE `customers` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Volcado de datos para la tabla `customers`
---
-
-INSERT INTO `customers` (`id`, `user_id`, `location`, `created_at`, `updated_at`) VALUES
-(1, 1, NULL, '2019-11-02 20:43:40', '2019-11-02 20:43:40'),
-(2, 2, NULL, '2019-11-30 01:52:13', '2019-11-30 01:52:13');
 
 -- --------------------------------------------------------
 
@@ -158,14 +150,6 @@ CREATE TABLE `offers` (
   `porciento` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Volcado de datos para la tabla `offers`
---
-
-INSERT INTO `offers` (`id`, `begin_at`, `end_at`, `product_id`, `status`, `promotion_text`, `created_at`, `updated_at`, `porciento`) VALUES
-(1, '2019-11-22 04:00:00', '2019-11-26 04:00:00', 2, 'I', 'Hola mundo', '2019-11-21 02:35:54', '2019-11-30 02:03:26', 15),
-(2, '2019-11-21 04:00:00', '2019-11-26 04:00:00', 2, 'I', 'Hola mundo', '2019-11-21 02:37:41', '2019-11-26 21:56:06', 10);
-
 -- --------------------------------------------------------
 
 --
@@ -188,22 +172,6 @@ CREATE TABLE `orders` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Volcado de datos para la tabla `orders`
---
-
-INSERT INTO `orders` (`id`, `user_id`, `customer_id`, `total`, `paid_with`, `change`, `ping`, `location`, `canal`, `delivery_id`, `delivery`, `created_at`, `updated_at`) VALUES
-(9, 1, 1, 15550.00, NULL, NULL, '255995', NULL, 'C', NULL, NULL, '2019-11-04 20:31:53', '2019-11-04 20:31:53'),
-(10, 1, 1, 61200.00, NULL, NULL, '367042', NULL, 'C', NULL, NULL, '2019-11-04 20:32:48', '2019-11-04 20:32:48'),
-(11, 1, 1, 45450.00, NULL, NULL, '860709', NULL, 'C', NULL, NULL, '2019-11-04 20:33:42', '2019-11-04 20:33:42'),
-(12, 1, 1, 30700.00, NULL, NULL, '142204', NULL, 'C', NULL, NULL, '2019-11-15 21:51:46', '2019-11-15 21:51:46'),
-(13, 1, 1, 15200.00, NULL, NULL, '503080', NULL, 'C', NULL, NULL, '2019-11-15 22:42:11', '2019-11-15 22:42:11'),
-(14, 1, 1, 15850.00, NULL, NULL, '825689', NULL, 'C', NULL, NULL, '2019-11-24 18:38:37', '2019-11-24 18:38:37'),
-(15, 1, 1, 15850.00, NULL, NULL, '900804', NULL, 'C', NULL, NULL, '2019-11-24 18:39:34', '2019-11-24 18:39:34'),
-(16, 1, 1, 200.00, NULL, NULL, '365655', NULL, 'C', NULL, NULL, '2019-11-26 00:43:42', '2019-11-26 00:43:42'),
-(17, 2, 2, 1750.00, 1000.00, NULL, '885662', '19.222140873485163,-70.52730303173826', 'I', NULL, 'Juan Rosario', '2019-11-30 01:52:13', '2019-11-30 01:52:13'),
-(18, 2, 2, 200.00, NULL, NULL, '255234', '19.229515853948172,-70.52597265606687', 'I', NULL, NULL, '2019-12-03 22:44:04', '2019-12-03 22:44:04');
-
 -- --------------------------------------------------------
 
 --
@@ -220,49 +188,6 @@ CREATE TABLE `order_product` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Volcado de datos para la tabla `order_product`
---
-
-INSERT INTO `order_product` (`id`, `order_id`, `product_id`, `quantity`, `price`, `subtotal`, `created_at`, `updated_at`) VALUES
-(3, 9, 1, 1, 200.00, 200.00, '2019-11-04 20:31:53', '2019-11-04 20:31:53'),
-(4, 9, 2, 1, 150.00, 150.00, '2019-11-04 20:31:53', '2019-11-04 20:31:53'),
-(5, 9, 3, 1, 15000.00, 15000.00, '2019-11-04 20:31:53', '2019-11-04 20:31:53'),
-(6, 9, 4, 1, 100.00, 100.00, '2019-11-04 20:31:53', '2019-11-04 20:31:53'),
-(7, 9, 5, 1, 100.00, 100.00, '2019-11-04 20:31:53', '2019-11-04 20:31:53'),
-(8, 10, 2, 4, 150.00, 600.00, '2019-11-04 20:32:48', '2019-11-04 20:32:48'),
-(9, 10, 1, 3, 200.00, 600.00, '2019-11-04 20:32:48', '2019-11-04 20:32:48'),
-(10, 10, 3, 4, 15000.00, 60000.00, '2019-11-04 20:32:48', '2019-11-04 20:32:48'),
-(11, 11, 1, 1, 200.00, 200.00, '2019-11-04 20:33:42', '2019-11-04 20:33:42'),
-(12, 11, 2, 1, 150.00, 150.00, '2019-11-04 20:33:42', '2019-11-04 20:33:42'),
-(13, 11, 3, 3, 15000.00, 45000.00, '2019-11-04 20:33:42', '2019-11-04 20:33:42'),
-(14, 11, 4, 1, 100.00, 100.00, '2019-11-04 20:33:42', '2019-11-04 20:33:42'),
-(15, 12, 2, 1, 150.00, 150.00, '2019-11-15 21:51:46', '2019-11-15 21:51:46'),
-(16, 12, 3, 1, 15000.00, 15000.00, '2019-11-15 21:51:46', '2019-11-15 21:51:46'),
-(17, 12, 4, 1, 100.00, 100.00, '2019-11-15 21:51:46', '2019-11-15 21:51:46'),
-(18, 12, 5, 3, 100.00, 300.00, '2019-11-15 21:51:46', '2019-11-15 21:51:46'),
-(19, 12, 3, 1, 15000.00, 15000.00, '2019-11-15 21:51:46', '2019-11-15 21:51:46'),
-(20, 12, 2, 1, 150.00, 150.00, '2019-11-15 21:51:47', '2019-11-15 21:51:47'),
-(21, 13, 3, 1, 15000.00, 15000.00, '2019-11-15 22:42:11', '2019-11-15 22:42:11'),
-(22, 13, 6, 1, 200.00, 200.00, '2019-11-15 22:42:11', '2019-11-15 22:42:11'),
-(23, 14, 1, 1, 200.00, 200.00, '2019-11-24 18:38:37', '2019-11-24 18:38:37'),
-(24, 14, 2, 1, 150.00, 150.00, '2019-11-24 18:38:37', '2019-11-24 18:38:37'),
-(25, 14, 3, 1, 15000.00, 15000.00, '2019-11-24 18:38:37', '2019-11-24 18:38:37'),
-(26, 14, 4, 1, 100.00, 100.00, '2019-11-24 18:38:37', '2019-11-24 18:38:37'),
-(27, 14, 5, 1, 100.00, 100.00, '2019-11-24 18:38:37', '2019-11-24 18:38:37'),
-(28, 14, 5, 3, 100.00, 300.00, '2019-11-24 18:38:37', '2019-11-24 18:38:37'),
-(29, 15, 1, 1, 200.00, 200.00, '2019-11-24 18:39:34', '2019-11-24 18:39:34'),
-(30, 15, 2, 1, 150.00, 150.00, '2019-11-24 18:39:34', '2019-11-24 18:39:34'),
-(31, 15, 3, 1, 15000.00, 15000.00, '2019-11-24 18:39:34', '2019-11-24 18:39:34'),
-(32, 15, 4, 1, 100.00, 100.00, '2019-11-24 18:39:34', '2019-11-24 18:39:34'),
-(33, 15, 5, 1, 100.00, 100.00, '2019-11-24 18:39:34', '2019-11-24 18:39:34'),
-(34, 15, 5, 3, 100.00, 300.00, '2019-11-24 18:39:34', '2019-11-24 18:39:34'),
-(35, 16, 1, 1, 200.00, 200.00, '2019-11-26 00:43:42', '2019-11-26 00:43:42'),
-(36, 17, 2, 1, 150.00, 150.00, '2019-11-30 01:52:13', '2019-11-30 01:52:13'),
-(37, 17, 1, 5, 200.00, 1000.00, '2019-11-30 01:52:13', '2019-11-30 01:52:13'),
-(38, 17, 4, 6, 100.00, 600.00, '2019-11-30 01:52:13', '2019-11-30 01:52:13'),
-(39, 18, 1, 1, 200.00, 200.00, '2019-12-03 22:44:04', '2019-12-03 22:44:04');
 
 -- --------------------------------------------------------
 
@@ -304,21 +229,6 @@ CREATE TABLE `order_tracking` (
 -- Volcado de datos para la tabla `order_tracking`
 --
 
-INSERT INTO `order_tracking` (`id`, `order_id`, `order_status`, `created_at`, `updated_at`) VALUES
-(25, 14, 1, '2019-11-24 18:38:37', '2019-11-24 18:38:37'),
-(26, 15, 1, '2019-11-24 18:39:34', '2019-11-24 18:39:34'),
-(27, 16, 1, '2019-11-26 00:43:42', '2019-11-26 00:43:42'),
-(28, 17, 1, '2019-11-30 01:52:13', '2019-11-30 01:52:13'),
-(29, 14, 3, '2019-12-01 23:53:15', '2019-12-01 23:53:15'),
-(30, 17, 2, '2019-12-02 00:07:19', '2019-12-02 00:07:19'),
-(31, 16, 3, '2019-12-02 00:13:21', '2019-12-02 00:13:21'),
-(32, 15, 1, '2019-12-02 00:13:35', '2019-12-02 00:13:35'),
-(33, 17, 2, '2019-12-03 00:56:23', '2019-12-03 00:56:23'),
-(34, 17, 2, '2019-12-03 21:35:09', '2019-12-03 21:35:09'),
-(35, 18, 1, '2019-12-03 22:44:04', '2019-12-03 22:44:04');
-
--- --------------------------------------------------------
-
 --
 -- Estructura de tabla para la tabla `password_resets`
 --
@@ -354,7 +264,7 @@ CREATE TABLE `products` (
 INSERT INTO `products` (`id`, `name`, `category_id`, `description`, `ingredients`, `price`, `status`, `created_at`, `updated_at`) VALUES
 (1, 'COCA COLA', 1, 'Los mismo de siempre', 'Los mismos de siempre', 200.00, 'A', '2019-11-02 20:44:36', '2019-11-26 02:33:30'),
 (2, 'SEVEN UP', 1, 'Los mismo de siempre', 'Los mismos de siempre', 150.00, 'A', '2019-11-04 20:30:02', '2019-11-04 20:30:02'),
-(3, 'SANDWICH', 2, 'Los mismo de siempre', 'Los mismos de siempre', 15000.00, 'A', '2019-11-04 20:30:26', '2019-11-04 20:30:26'),
+(3, 'SANDWICH', 2, 'Los mismo de siempre', 'Los mismos de siempre', 150.00, 'A', '2019-11-04 20:30:26', '2019-11-04 20:30:26'),
 (4, 'JUGO DE LIMON', 1, 'Los mismo de siempre', 'Los mismos de siempre', 100.00, 'A', '2019-11-04 20:30:52', '2019-11-04 20:30:52'),
 (5, 'BATIDO DE LECHOZA', 1, 'Los mismo de siempre', 'Los mismos de siempre', 100.00, 'A', '2019-11-04 20:31:20', '2019-11-04 20:31:20'),
 (6, 'JUGO NARANJA', 3, 'Los mismo de siempre', 'Los mismos de siempre', 200.00, 'A', '2019-11-15 22:30:50', '2019-11-15 22:30:50');
@@ -410,9 +320,10 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `last_name`, `sex`, `email`, `email_verified_at`, `password`, `identity`, `phone`, `status`, `rol_id`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Cristian', 'Gomez', 'M', 'cgomez@alaver.com.do', NULL, '$2y$10$M0OCL5HfGw75O/wLAeEqjetCoa0sltct1QU/m5PFkdsOV2ni7Qx1q', NULL, '8292956010', 'A', 1, NULL, '2019-11-02 20:43:40', '2019-11-29 00:43:05'),
-(2, 'Randy', 'Dilone', 'M', 'rdilone@alaver.com.do', NULL, '$2y$10$VG7A1YEtIttjSKgMhM7U3OICVLLh8Q/6VSnXwgDNf5d6wLyMNzDCy', NULL, '8292956010', 'A', 4, '87WtP1vTDJsXcylmZ2htOLfiTFMVAEbVfwpcWrmxMMSk57pb9LrCTtlVw0KH', '2019-11-09 23:50:13', '2019-11-09 23:50:13'),
-(3, 'Juan', 'Reyes', 'M', 'reyes@reyes.com', NULL, '$2y$10$CpkSsxU5DijHLa9cLTmAQ.LBSB2TOF3dloiArHc3CQGgV8xY1s4DC', NULL, '8292956010', 'A', 2, NULL, '2019-11-15 22:23:49', '2019-11-29 01:20:25');
+(1, 'Cristian', 'Gomez', 'M', 'cgomez@colmado.com.do', NULL, '$2y$10$73J70CrMxQOI8tt/YGMtf.zreDn63JOsoFRvXalcEuSZHTE07BEsu', NULL, '8292956010', 'A', 1, NULL, '2019-11-02 20:43:40', '2019-11-29 00:43:05'),
+(2, 'Randy', 'Dilone', 'M', 'rdilone@colmado.com.do', NULL, '$2y$10$73J70CrMxQOI8tt/YGMtf.zreDn63JOsoFRvXalcEuSZHTE07BEsu', NULL, '8292956010', 'A', 4, '87WtP1vTDJsXcylmZ2htOLfiTFMVAEbVfwpcWrmxMMSk57pb9LrCTtlVw0KH', '2019-11-09 23:50:13', '2019-11-09 23:50:13'),
+(3, 'Juan', 'Reyes', 'M', 'reyes@colmado.com.do', NULL, '$2y$10$73J70CrMxQOI8tt/YGMtf.zreDn63JOsoFRvXalcEuSZHTE07BEsu', NULL, '8292956010', 'A', 2, NULL, '2019-11-15 22:23:49', '2019-11-29 01:20:25'),
+(4, 'Cliente', 'Prueba', 'M', 'client@client.com.do', NULL, '$2y$10$73J70CrMxQOI8tt/YGMtf.zreDn63JOsoFRvXalcEuSZHTE07BEsu', NULL, '8292956010', 'A', 2, NULL, '2019-11-15 22:23:49', '2019-11-29 01:20:25');
 
 --
 -- Índices para tablas volcadas
@@ -529,7 +440,7 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT de la tabla `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT de la tabla `failed_jobs`
@@ -553,19 +464,19 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT de la tabla `offers`
 --
 ALTER TABLE `offers`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT de la tabla `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT de la tabla `order_product`
 --
 ALTER TABLE `order_product`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT de la tabla `order_status`
@@ -577,7 +488,7 @@ ALTER TABLE `order_status`
 -- AUTO_INCREMENT de la tabla `order_tracking`
 --
 ALTER TABLE `order_tracking`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT de la tabla `products`
@@ -595,7 +506,7 @@ ALTER TABLE `rol`
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Restricciones para tablas volcadas

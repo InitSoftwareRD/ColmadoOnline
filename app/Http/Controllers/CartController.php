@@ -77,7 +77,8 @@ class CartController extends Controller
     {
         return view('front.pages.checkout', [
             'carts' => Cart::session(auth()->id())->getContent(),
-            'total' => number_format(Cart::session(auth()->id())->getTotal()),
+            'total' => Cart::session(auth()->id())->getTotal(),
+            'hasLocation' => optional(auth()->user()->customer)->location ? 1 : 0
         ]);
     }
 

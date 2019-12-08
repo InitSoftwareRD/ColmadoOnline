@@ -205,7 +205,7 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="./index2.html" class="nav-link">
+                  <a href="{{ route('graficos') }}" class="nav-link">
                     <i class="fas fa-chart-pie"></i>
                     <p>Graficos</p>
                   </a>

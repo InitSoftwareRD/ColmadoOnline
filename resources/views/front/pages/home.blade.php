@@ -18,9 +18,9 @@
                             <ul>
                                 @foreach($productos as $producto)
                                     <li>
-                                        <cart-add :product="{{ $producto }}"
+                                        <cart-add :product='@json($producto)'
                                                   is-auth="{{ auth()->check() }}"
-                                                  has-product="{{ auth()->check() && Cart::session(auth()->id())->get($producto->id) ? 1 : 0 }}"/>
+                                                  has-product="{{ auth()->check() && Cart::session(auth()->id())->get($producto['id']) ? 1 : 0 }}"/>
                                     </li>
                                 @endforeach
                             </ul>

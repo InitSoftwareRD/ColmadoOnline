@@ -92,37 +92,48 @@ class ChartController extends Controller
     }
 
 	// obtiene a los delivery por cantidad de ordenes entregadas
-    public function getOrderCountDelivery () : ?array
+    public function getOrderCountDelivery () : array
     {
+    	$data = [
+    		'labels' => [],
+    		'values' => []
+    	];
+
     	// ejecuto la consulta de lugar
     	$result = DB::select("
 			SELECT
 				CONCAT(u.`name`, ' ', u.last_name) AS delivery,
-				COUNT(1) AS cantidad
+				COUNT(1) AS total
 			FROM
 				orders AS o
 			 		INNER JOIN
 			 	users AS u ON o.delivery_id = u.id
+			WHERE
+				EXISTS
+				(
+					SELECT
+						*
+					FROM
+						order_tracking AS ot
+					WHERE
+						ot.order_id = o.id
+							AND ot.order_status = 3
+				)
 			GROUP BY
 				CONCAT(u.`name`, ' ', u.last_name)
 		");
-
+    	
     	// me aseguro que exista data resultante del query
     	if(count($result))
     	{
-    		$data = [
-	    		'labels' => [],
-	    		'values' => []
-	    	];
-
-	    	foreach ($result as $value)
+    		foreach ($result as $value)
 	    	{
 	    		$data['labels'][] = $value->delivery;
-	    		$data['values'][] = $value->cantidad;
+	    		$data['values'][] = $value->total;
 	    	}
     	}
 
-    	return $data ?? null;
+    	return $data;
     }
 
     // obtiene a los clientes que más compras han realizado

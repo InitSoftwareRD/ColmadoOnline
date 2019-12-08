@@ -112,4 +112,6 @@ Route::post('admin/cambiar_envios','DeliveryController@CambiarStatus')->name('ca
 Route::get('/admin/graficos', 'ChartController@index')->name('graficos');
 Route::post('/admin/ingresos', 'ChartController@getRevenue')->name('ingresos');
 
-Route::get('test', 'ChartController@getSalesRevenue');
+Route::get('test', function () {
+	echo  date("Y");
+});

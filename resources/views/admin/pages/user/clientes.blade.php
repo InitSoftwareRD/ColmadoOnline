@@ -66,7 +66,7 @@
                                     
                                 @endif
                              
-                               <a href="" class="btn btn-warning btn-sm text-white">
+                            <a href="{{ route('editar-cliente',$user->id) }}" class="btn btn-warning btn-sm text-white">
                                     <i class="fas fa-user-edit"></i>
                                </a>
 

@@ -36,7 +36,7 @@ class DeliveryController extends Controller
         o.location as ubicacion,
         o.delivery as delivery,
         CONCAT( u.name,' ', u.last_name ) as nombres,
-        u.phone as phone
+        CONCAT('(',SUBSTRING(u.phone,1,3),')','-',SUBSTRING(u.phone,4,3),'-',SUBSTRING(u.phone,7,4) ) as phone
         FROM orders o, customers c , users u
         WHERE 
         o.customer_id =c.id 

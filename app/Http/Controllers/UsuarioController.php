@@ -114,6 +114,29 @@ class UsuarioController extends Controller
     
     }
 
+
+    public function updateCliente(Request $request)
+    {
+        $user = User::findOrFail($request->id);
+      
+        $user->name= $request->name;
+        $user->last_name = $request->last_name;
+        $user->email = $request->email;
+        $user->phone = $request->phone;
+        $user->sex = $request->sex;
+        
+        if( strlen($request->password) > 0 )
+        {
+            $user->password = bcrypt($request->password);
+        }
+
+        $user->save();
+
+
+        return redirect()->route('cliente')->with('status', 'Cliente Actualizado Correctamente!');
+
+    }
+
     /**
      * Display the specified resource.
      *
@@ -126,6 +149,13 @@ class UsuarioController extends Controller
         
 
         return view('admin.pages.user.edit-personal',compact('user'));
+    }
+
+    public function EditCliente($id)
+    {
+        $user = User::findOrFail($id);
+        
+        return view('admin.pages.user.edit-cliente',compact('user'));
     }
 
     /**

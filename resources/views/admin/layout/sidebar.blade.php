@@ -41,7 +41,7 @@
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-             <a href="{{ route('user') }}" class="nav-link active">
+             <a href="{{ route('user') }}" class="nav-link">
                 <i class="fas fa-plus-circle nav-icon"></i>
                 <p>Crear Usuario</p>
               </a>

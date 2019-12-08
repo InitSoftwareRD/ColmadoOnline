@@ -49,7 +49,9 @@ Route::get('admin/cliente','UsuarioController@cliente')->name('cliente');
 Route::get('personal/status/{id}/{status}','UsuarioController@editStatus')->name('Personalstatus');
 Route::get('cliente/{id}/{status}','UsuarioController@editStatusCliente')->name('Clientestatus');
 Route::get('admin/editar-empleado/{id}','UsuarioController@EditEmpleado')->name('editar-empleado');
+Route::get('admin/editar-cliente/{id}','UsuarioController@EditCliente')->name('editar-cliente');
 Route::post('actualizar-empleado','UsuarioController@updateEmpleado')->name('actualizarEmpleado');
+Route::post('actualizar-cliente','UsuarioController@updateCliente')->name('actualizarCliente');
 
 /*Product*/
 

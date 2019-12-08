@@ -101,7 +101,7 @@ class OrdenarController extends Controller
         o.ping as ping,
         o.total as total,
         CONCAT( u.name,' ', u.last_name ) as nombres,
-        u.phone as phone,
+        CONCAT('(',SUBSTRING(u.phone,1,3),')','-',SUBSTRING(u.phone,4,3),'-',SUBSTRING(u.phone,7,4) ) as phone,
         u.email as email,
         ( SELECT os.name FROM order_tracking ot ,order_status os
            WHERE
@@ -137,7 +137,7 @@ class OrdenarController extends Controller
         o.total as total,
         o.delivery as delivery,
         CONCAT( u.name,' ', u.last_name ) as nombres,
-        u.phone as phone,
+        CONCAT('(',SUBSTRING(u.phone,1,3),')','-',SUBSTRING(u.phone,4,3),'-',SUBSTRING(u.phone,7,4) ) as phone,
         u.email as email,
         ( SELECT os.name FROM order_tracking ot ,order_status os
            WHERE
@@ -158,6 +158,7 @@ class OrdenarController extends Controller
             ORDER by ot.created_at DESC
            LIMIT 1
          ) != 3
+         order by o.id desc
         ");
 
         return $status;
@@ -221,7 +222,6 @@ class OrdenarController extends Controller
 
     public function Asignar_delivery(Request $request)
     {
-        dd($request->all());
         $order = Orders::findOrFail($request->order_id);
 
         $order->delivery = $request->delivery;

@@ -11,8 +11,7 @@
                         <span></span>
                         <div class="contact_icon"><img src="{{ asset('front_template/images/contact_icon1.png') }}" alt="image" /></div>
                         <h4>Contacto</h4>
-                        <p>+1-202-555-0101</p>
-                        <p>+1-202-555-0132</p>
+                        <p>809-573-0000</p>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-4">
@@ -20,8 +19,7 @@
                         <span></span>
                         <div class="contact_icon"><img src="{{ asset('front_template/images/contact_icon2.png') }}" alt="image" /></div>
                         <h4>email</h4>
-                        <p>agriculture@example.com</p>
-                        <p>Cultivation@example.in</p>
+                        <p>cafeteria3a@gmail.com</p>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-4">
@@ -29,8 +27,7 @@
                         <span></span>
                         <div class="contact_icon"><img src="{{ asset('front_template/images/contact_icon3.png') }}" alt="image" /></div>
                         <h4>Dirección</h4>
-                        <p>8654 Bellevue Drive</p>
-                        <p>Rock Hill, SC 29730</p>
+                        <p>La Vega RD</p>
                     </div>
                 </div>
             </div>
@@ -77,7 +74,7 @@
                         </div>
                         <div class="tollfree_block">
                             <h5>Puedes llamarnos al</h5>
-                            <h3>+1-202-555-0101</h3>
+                            <h3>809-000-0000</h3>
                         </div>
                     </div>
                 </div>

@@ -15,12 +15,14 @@ class ChartController extends Controller
 			'product' => $this->getCountSoldProducts(),
 			'revenue' => $this->getSalesRevenue(),
 			'category' => $this->getCountProductCategory(),
-			'years' => $this->getYears()
+			'years' => $this->getYears(),
+			'channel' => $this->getCountOrderChannel(),
+			'estatus' => $this->getCountOrderStatus()
 		]);
 	}
 
 	// obtiene una lista con los años en que se ha efectuado un pedido
-    public function getYears () : array
+    public function getYears () : ?array
     {
     	// ejecuto la consulta de lugar
     	$result = DB::select("
@@ -54,10 +56,10 @@ class ChartController extends Controller
 	}
 
 	// obtiene los ingresos por venta, mes y año
-    public function getSalesRevenue (int $year = null)
+    public function getSalesRevenue (int $year = null) : ?array
     {
     	if(is_null($year))
-    		$year = 2019;
+    		$year = date('Y');
 
     	// ejecuto la consulta de lugar
     	$result = DB::select("
@@ -92,39 +94,50 @@ class ChartController extends Controller
 	// obtiene a los delivery por cantidad de ordenes entregadas
     public function getOrderCountDelivery () : array
     {
+    	$data = [
+    		'labels' => [],
+    		'values' => []
+    	];
+
     	// ejecuto la consulta de lugar
     	$result = DB::select("
 			SELECT
 				CONCAT(u.`name`, ' ', u.last_name) AS delivery,
-				COUNT(1) AS cantidad
+				COUNT(1) AS total
 			FROM
 				orders AS o
 			 		INNER JOIN
 			 	users AS u ON o.delivery_id = u.id
+			WHERE
+				EXISTS
+				(
+					SELECT
+						*
+					FROM
+						order_tracking AS ot
+					WHERE
+						ot.order_id = o.id
+							AND ot.order_status = 3
+				)
 			GROUP BY
 				CONCAT(u.`name`, ' ', u.last_name)
 		");
-
+    	
     	// me aseguro que exista data resultante del query
     	if(count($result))
     	{
-    		$data = [
-	    		'labels' => [],
-	    		'values' => []
-	    	];
-
-	    	foreach ($result as $value)
+    		foreach ($result as $value)
 	    	{
 	    		$data['labels'][] = $value->delivery;
-	    		$data['values'][] = $value->cantidad;
+	    		$data['values'][] = $value->total;
 	    	}
     	}
 
-    	return $data ?? null;
+    	return $data;
     }
 
     // obtiene a los clientes que más compras han realizado
-    public function getOrderCountCustomer () : array
+    public function getOrderCountCustomer () : ?array
     {
     	// ejecuto la consulta de lugar
     	$result = DB::select("
@@ -158,7 +171,7 @@ class ChartController extends Controller
     }
 
     // obtiene los productos que más se han vendido
-    public function getCountSoldProducts () : array
+    public function getCountSoldProducts () : ?array
     {
     	// ejecuto la consulta de lugar
     	$result = DB::select("
@@ -194,7 +207,7 @@ class ChartController extends Controller
     }
 
     // obtiene los productos que más se han vendido por categoría
-    public function getCountProductCategory () : array
+    public function getCountProductCategory () : ?array
     {
     	// ejecuto la consulta de lugar
     	$result = DB::select("
@@ -223,6 +236,94 @@ class ChartController extends Controller
 	    	foreach ($result as $value)
 	    	{
 	    		$data['labels'][] = $value->categoria;
+	    		$data['values'][] = $value->cantidad;
+	    	}
+    	}
+
+    	return $data ?? null;
+    }
+
+    // obtiene la cantidad de ordenes por canales
+    public function getCountOrderChannel () : ?array
+    {
+    	// ejecuto la consulta de lugar
+    	$result = DB::select("
+			SELECT
+				CASE o.canal
+					WHEN 'I' THEN 'Online'
+					WHEN 'C' THEN 'Local'
+					ELSE 'Otro'
+				END AS canal,
+				COUNT(1) AS cantidad
+			FROM
+				orders AS o
+			GROUP BY
+				o.canal
+			;
+		");
+
+    	// me aseguro que exista data resultante del query
+    	if(count($result))
+    	{
+    		$data = [
+	    		'labels' => [],
+	    		'values' => []
+	    	];
+
+	    	foreach ($result as $value)
+	    	{
+	    		$data['labels'][] = $value->canal;
+	    		$data['values'][] = $value->cantidad;
+	    	}
+    	}
+
+    	return $data ?? null;
+    }
+
+    // obtiene la cantidad de ordenes por estados
+    public function getCountOrderStatus () : ?array
+    {
+    	// ejecuto la consulta de lugar
+    	$result = DB::select("
+			SELECT
+				`status`,
+				COUNT(1) AS cantidad
+			FROM
+				(
+					SELECT
+						ot_1.order_id,
+						ot_1.`order_status`,
+						os.`name` AS `status`,
+						COUNT(1) AS row_number
+					FROM
+						order_tracking AS ot_1
+							INNER JOIN
+						order_tracking ot_2 ON ot_1.order_id = ot_2.order_id AND ot_1.order_status <= ot_2.order_status
+							INNER JOIN
+						order_status AS os ON ot_1.`order_status` = os.id
+					GROUP BY
+						ot_1.order_id,
+						ot_1.order_status,
+						os.`name`
+				) AS orders
+			WHERE
+				row_number = 1
+			GROUP BY
+				`status`
+			;
+		");
+
+    	// me aseguro que exista data resultante del query
+    	if(count($result))
+    	{
+    		$data = [
+	    		'labels' => [],
+	    		'values' => []
+	    	];
+
+	    	foreach ($result as $value)
+	    	{
+	    		$data['labels'][] = $value->status;
 	    		$data['values'][] = $value->cantidad;
 	    	}
     	}

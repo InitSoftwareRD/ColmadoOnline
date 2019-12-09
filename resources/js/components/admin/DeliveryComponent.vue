@@ -30,7 +30,7 @@
                   <th> {{ item.phone }} </th>
                   <th>{{ item.total }}</th>
                   <th> {{ item.pagado }}</th>
-                  <th>{{ item.pagado - item.total  }}</th>
+                  <th>{{ item.devuelta  }}</th>
                   <th> <a :href=" 'https://maps.google.com/?q=' + item.ubicacion " target="_blank" ><i class="fas fa-map-marked-alt"></i></a> </th>
                   <th> {{ item.ping }}</th>
                   <th> {{ item.delivery }}</th>

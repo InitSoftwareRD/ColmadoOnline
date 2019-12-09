@@ -52,7 +52,13 @@ class DeliveryController extends Controller
          ) != 3
         ");
 
-        return $ordenes;
+        return collect($ordenes)->map(function ($item) {
+            return array_merge(collect($item)->toArray(), [
+                'total' => number_format($item->total),
+                'pagado' => number_format($item->pagado),
+                'devuelta' => number_format($item->total - $item->pagado)
+            ]);
+        })->toArray();    
 
     }
 

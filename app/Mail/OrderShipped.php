@@ -28,10 +28,10 @@ class OrderShipped extends Mailable
      */
     public function build()
     {
-        return $this->from(config('app.name'))
+        return $this->from('cafeteria3a@gmail.com')
             ->markdown('emails.orders.shipped')
             ->with([
-                'clientName' => 'test'
+                'clientName' => $this->email
             ]);
     }
 }

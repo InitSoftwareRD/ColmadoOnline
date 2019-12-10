@@ -56,7 +56,7 @@ class DeliveryController extends Controller
             return array_merge(collect($item)->toArray(), [
                 'total' => number_format($item->total),
                 'pagado' => number_format($item->pagado),
-                'devuelta' => number_format($item->total - $item->pagado)
+                'devuelta' => number_format($item->pagado - $item->total)
             ]);
         })->toArray();    
 

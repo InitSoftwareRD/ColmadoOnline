@@ -5,22 +5,20 @@ namespace App\Mail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
-use App\User;
 use Illuminate\Queue\SerializesModels;
 
-class OrderShipped extends Mailable
+class Proceso extends Mailable
 {
     use Queueable, SerializesModels;
-   
-     public $user;
+
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(User $user)
+    public function __construct()
     {
-        $this->$user = $user;
+        //
     }
 
     /**
@@ -31,7 +29,8 @@ class OrderShipped extends Mailable
     public function build()
     {
         return $this->from('cafeteria3a@gmail.com')
-            ->markdown('emails.orders.shipped')
+            ->markdown('emails.orders.proceso')
+            ->cc('cafeteria3a@gmail.com')
             ->subject('Notificación Cafeteria AAA')
             ->with([
                 'clientName' => 'Hola'

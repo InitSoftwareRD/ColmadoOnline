@@ -7,10 +7,12 @@ use App\OrderProducts;
 use App\ImageProducts;
 use App\Orders;
 use App\User;
+use App\Mail\Enviado;
 use App\OrderTracking;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Mail;
 
 class OrdenarController extends Controller
 {
@@ -192,9 +194,22 @@ class OrdenarController extends Controller
 
         $tracking->order_id = $request->order_id;
         $tracking->order_status = $request->status;
-
         $tracking->save();
-         
+
+        $order=Orders::findOrFail($request->order_id);
+        $user = User::find($order->customer_id);
+        
+        if($request->status==2){
+           
+            Mail::to($user->email)
+            ->send(new Enviado($user));
+        }
+
+        if($request->status==2){
+           
+            Mail::to($user->email)
+            ->send(new Enviado($user));
+        }
     }
 
     public function DetallePedido(Request $request)

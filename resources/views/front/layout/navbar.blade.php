@@ -107,7 +107,7 @@
                                         </a>
                                     </li>
                                     <li><a href="{{ route('order') }}">Mis Pedidos</a></li>
-                                    <li><a>{{ auth()->user()->name .' '. auth()->user()->last_name }}</a></li>
+                                    <li><a href="{{ route('change_password') }}">{{ auth()->user()->name .' '. auth()->user()->last_name }}</a></li>
                                     <li>
                                         <a href="{{ route('logout') }}"
                                            onclick = "event.preventDefault();

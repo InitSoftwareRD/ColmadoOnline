@@ -13,9 +13,10 @@
 
 Auth::routes();
 
-//Route::post('logoutOthers', 'Auth\LogoutOtherController@logoutOtherDevices');
-
 Route::get('/', 'WelcomeController@index')->name('home');
+
+Route::get('profile/change-password', 'Auth\LogoutOtherController@index')->name('change_password');
+Route::post('logoutOthers', 'Auth\LogoutOtherController@logoutOtherDevices');
 
 Route::get('/contacto', function () {
     return view('front.pages.contact');

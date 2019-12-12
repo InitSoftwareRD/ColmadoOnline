@@ -1,8 +1,8 @@
 @component('mail::message')
-# Tu ordern No.1 , ha sido procesada correctamente.
+# Hola {{ $clientName }}
 
 @component('mail::panel')
-Tiene una nueva orden, para ver mas detalles de la misma pulsa el boton que estas mas abajo.
+Su orden está en proceso, en unos instante estaremos enviado su pedido
 @endcomponent
 
 

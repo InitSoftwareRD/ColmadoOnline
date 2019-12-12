@@ -7,10 +7,15 @@ use App\OrderProducts;
 use App\ImageProducts;
 use App\Orders;
 use App\User;
+use App\Mail\Proceso;
+use App\Mail\Finalizado;
+use App\Mail\Enviado;
+use App\Mail\repartidor;
 use App\OrderTracking;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Mail;
 
 class OrdenarController extends Controller
 {
@@ -90,6 +95,16 @@ class OrdenarController extends Controller
        $tracking->save();
 
 
+       $user = User::find($request->customer['id']);
+       
+        try{
+            Mail::to($user->email)
+               ->send(new Proceso($user));
+           }catch(\Exception  $e){
+              
+        }
+
+
 
 
     }
@@ -113,7 +128,7 @@ class OrdenarController extends Controller
         FROM orders o, customers c , users u
         WHERE 
         o.customer_id =c.id 
-        AND c.user_id = u.id
+        AND c.id = u.id
         AND o.canal = 'C'
         AND ( SELECT os.id FROM order_tracking ot ,order_status os
            WHERE
@@ -192,9 +207,28 @@ class OrdenarController extends Controller
 
         $tracking->order_id = $request->order_id;
         $tracking->order_status = $request->status;
-
         $tracking->save();
-         
+
+        $order=Orders::findOrFail($request->order_id);
+        $user = User::find($order->customer_id);
+        
+        if(in_array($request->status, [2])){
+            try{
+                Mail::to($user->email)
+                ->send(new Enviado($user));
+            }catch(\Exception  $e){
+               
+            }
+        }
+
+        if(in_array($request->status, [3])){
+            try{
+                Mail::to($user->email)
+                ->send(new Finalizado($user));
+            }catch(\Exception  $e){
+               
+            }
+        }
     }
 
     public function DetallePedido(Request $request)
@@ -225,8 +259,16 @@ class OrdenarController extends Controller
         $order = Orders::findOrFail($request->order_id);
 
         $order->delivery = $request->delivery;
+        $order->delivery_id  = $request->delivery_id;
 
         $order->save();
+
+        try{
+            Mail::to('cafeteria3a@gmail.com')
+               ->send(new repartidor($request->delivery));
+           }catch(\Exception  $e){
+              
+        }
 
     }
 
@@ -249,11 +291,14 @@ class OrdenarController extends Controller
      */
     public function listarClientes()
     {
-        $clientes=DB::select("SELECT u.id as id, u.name as name , u.last_name as last_name ,u.phone as phone FROM 
+        $clientes=DB::select("SELECT u.id as id, u.identity as identificador , u.name as name , u.last_name as last_name ,u.phone as phone FROM 
         customers c,
         users u
         WHERE
-        u.id = c.user_id ");
+        u.id = c.user_id
+        and u.rol_id = 1 
+        and u.status = 'A'
+        ");
 
         return $clientes;
     }

@@ -2,11 +2,19 @@
   
 <div class="container">
 
+  <div class="row" v-if="loader" >
+     <div class="col-md-6">
+
+     </div>
+      <div class="col-md-6 mb-6">
+         <div class="loader"></div>
+      </div>
+  </div>
+
   <div class="row">
-
       <div class="col-md-12">
-
-
+           
+                  
        <div class="table-responsive">
 
                     
@@ -61,8 +69,8 @@
         </button>
       </div>
       <div class="modal-body">
-
-        
+    
+         
          <table class="table table-striped  table-sm  table-bordered">
                     <thead>
                         <tr>
@@ -114,7 +122,8 @@
      {
          return{
              ordenes:[],
-             detalle:[],           
+             detalle:[],
+             loader:false,          
          }
 
      },
@@ -179,7 +188,7 @@
 
          finalizar(item)
          {    
-               
+               this.loader = true;
                 axios.post('cambiar_envios',{ 
                 
                      'order_id':item,  
@@ -188,6 +197,7 @@
                 )
                 .then((response)=>{
 
+                        this.loader =false;
                          Swal.fire({
                             position: 'center',
                             type: 'success',
@@ -200,7 +210,7 @@
                       this.envios();
                 })
                 .catch((error)=>{
-                  
+                   this.loader =false;
                        Swal.fire({
                             position: 'center',
                             type: 'error',
@@ -219,3 +229,30 @@
 
     }
 </script>
+
+
+<style>
+
+.loader {
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  width: 70px;
+  height: 70px;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 2s linear infinite;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+
+</style>

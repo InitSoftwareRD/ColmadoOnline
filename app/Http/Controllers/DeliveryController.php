@@ -7,9 +7,12 @@ use App\Products;
 use App\OrderProducts;
 use App\ImageProducts;
 use App\Orders;
+use App\User;
 use App\OrderTracking;
+use App\Mail\Finalizado;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Mail;
 
 class DeliveryController extends Controller
 {
@@ -56,7 +59,7 @@ class DeliveryController extends Controller
             return array_merge(collect($item)->toArray(), [
                 'total' => number_format($item->total),
                 'pagado' => number_format($item->pagado),
-                'devuelta' => number_format($item->total - $item->pagado)
+                'devuelta' => number_format($item->pagado - $item->total)
             ]);
         })->toArray();    
 
@@ -93,6 +96,12 @@ class DeliveryController extends Controller
         $tracking->order_status = $request->status;
 
         $tracking->save();
+
+        $order=Orders::findOrFail($request->order_id);
+        $user = User::find($order->customer_id);
+
+        Mail::to($user->email)
+        ->send(new Finalizado($user));
          
     }
 

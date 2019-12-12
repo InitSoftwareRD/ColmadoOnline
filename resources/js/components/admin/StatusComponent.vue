@@ -68,6 +68,8 @@
                <option value="">Seleccione un estatus</option>
                <option v-for="(item, key) in lista_estatus" :key="key" :value="item.id">{{ item.name }}</option>  
            </select>
+             
+             <div v-if="loader" class="loader"></div>
 
         </div>
             
@@ -157,6 +159,7 @@
              orden:'',
              detalle:[],
              total:0,
+             loader:false,
          }
 
      },
@@ -186,6 +189,7 @@
          },
          cambiar_estatus()
          {    
+            this.loader = true;
             axios.post('cambiar_status',{ 
                 
                      'order_id':this.orden.id,  
@@ -193,7 +197,8 @@
                  }
                 )
                 .then((response)=>{
-
+                    this.loader = false;
+                      $('#statusInterno').modal('hide');
                          Swal.fire({
                             position: 'center',
                             type: 'success',
@@ -202,7 +207,7 @@
                             timer: 5000
                         })
 
-                         $('#statusInterno').modal('hide');
+                        
                         this.orden = '';
                         this.state = ' ';
                         this.estado=[];
@@ -211,7 +216,7 @@
                 
                 })
                 .catch((error)=>{
-                  
+                    this.loader =false;
                        Swal.fire({
                             position: 'center',
                             type: 'error',
@@ -273,3 +278,27 @@
  }
 
 </script>
+
+
+<style>
+.loader {
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  width: 70px;
+  height: 70px;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 2s linear infinite;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+</style>

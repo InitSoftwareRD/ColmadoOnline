@@ -1,5 +1,5 @@
 @component('mail::message')
-# Hola {{ $clientName }}
+# Tu ordern No.1 , ha sido procesada correctamente.
 
 Tienes una nueva orden, para ver mas detalles de la misma pulsa el boton que estas mas abajo.
 

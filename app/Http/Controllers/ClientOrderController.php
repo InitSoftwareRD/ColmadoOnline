@@ -85,10 +85,10 @@ class ClientOrderController extends Controller
                 Mail::to(auth()->user()->email)
                 ->send(new Proceso(auth()->user()));
             }catch(\Exception  $e){
-               
+
             }
 
         });
-        return redirect()->route('order');
+        return redirect()->route('order')->with(['success' => 'Orden completada correctamente']);
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Offers;
 use App\Products;
 use Cart;
 
@@ -23,10 +24,18 @@ class CartController extends Controller
     {
         $product = Products::findOrFail(request('product_id'));
 
+        $product = $product->addSelect(['oferta' => Offers::select('porciento')
+            ->whereColumn('offers.product_id', 'products.id')
+            ->whereStatus('A')
+            ->whereDate('begin_at', '<=', now())
+            ->whereDate('end_at', '>=', now())
+            ->limit(1)
+        ])->first();
+
         Cart::session(auth()->id())->add([
             'id' => $product->id,
             'name' => $product->name,
-            'price' => $product->price,
+            'price' => $product->oferta ? $this->calculateNewPrice($product->price, $product->oferta) : $product->price,
             'quantity' => request('quantity')
         ]);
 
@@ -36,10 +45,18 @@ class CartController extends Controller
 
     public function update(Products $products)
     {
+        $products = $products->addSelect(['oferta' => Offers::select('porciento')
+            ->whereColumn('offers.product_id', 'products.id')
+            ->whereStatus('A')
+            ->whereDate('begin_at', '<=', now())
+            ->whereDate('end_at', '>=', now())
+            ->limit(1)
+        ])->first();
+
         Cart::session(auth()->id())->update($products->id, [
             'id' => $products->id,
             'name' => $products->name,
-            'price' => $products->price,
+            'price' => $products->oferta ? $this->calculateNewPrice($products->price, $products->oferta) : $products->price,
             'quantity' => [
                 'relative' => false,
                 'value' => request('quantity')
@@ -85,5 +102,10 @@ class CartController extends Controller
     public function cartCount()
     {
         return Cart::session(auth()->id())->getContent()->count();
+    }
+
+    private function calculateNewPrice($price, $discount)
+    {
+        return $price - ($price *  $discount / 100);
     }
 }

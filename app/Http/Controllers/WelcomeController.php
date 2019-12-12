@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Offers;
 use App\Products;
 use App\Categories;
 use App\ImageProducts;
@@ -19,6 +20,13 @@ class WelcomeController extends Controller
                     ->where('tipo', 'p')
                     ->limit(1)
                 ])
+                ->addSelect(['oferta' => Offers::select('porciento')
+                    ->whereColumn('offers.product_id', 'products.id')
+                    ->whereStatus('A')
+                    ->whereDate('begin_at', '<=', now())
+                    ->whereDate('end_at', '>=', now())
+                    ->limit(1)
+                ])
                 ->when(request('search') ?? null, function ($query, $search) {
                     return $query->where('name', 'like', "%{$search}%");
                 })
@@ -29,8 +37,16 @@ class WelcomeController extends Controller
                 })
                 ->paginate()
                 ->transform(function ($item) {
-                    return array_merge($item->toArray(), ['price' => number_format($item->price)]);
+                    return array_merge($item->toArray(), [
+                        'original_price' => $item->price,
+                        'price' => $item->oferta ? $this->calculateNewPrice($item->price, $item->oferta) : number_format($item->price)
+                    ]);
                 })
         ]);
+    }
+
+    private function calculateNewPrice($price, $discount)
+    {
+        return $price - ($price *  $discount / 100);
     }
 }

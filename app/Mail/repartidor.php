@@ -6,21 +6,18 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use App\User;
 
-class Finalizado extends Mailable
+class repartidor extends Mailable
 {
     use Queueable, SerializesModels;
 
-  
-    private $user;
     
-    public function __construct(User $user)
+    private $nombre;
+
+    public function __construct($nombre)
     {
-        $this->user = $user;
+        $this->nombre = $nombre;
     }
-
-
 
     /**
      * Build the message.
@@ -30,10 +27,10 @@ class Finalizado extends Mailable
     public function build()
     {
         return $this->from('cafeteria3a@gmail.com')
-            ->markdown('emails.orders.finalizada')
-            ->subject('Notificación Cafeteria AAA')
-            ->with([
-                'clientName' => $this->user->name. ' ' . $this->user->last_name
-            ]);
+        ->markdown('emails.orders.repartidor')
+        ->subject('Orden lista para entrega')
+        ->with([
+            'nombre' => $this->nombre
+        ]);
     }
 }

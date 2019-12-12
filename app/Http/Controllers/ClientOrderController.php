@@ -8,6 +8,8 @@ use App\Orders;
 use App\OrderTracking;
 use Cart;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\Proceso;
 
 class ClientOrderController extends Controller
 {
@@ -77,6 +79,14 @@ class ClientOrderController extends Controller
             ]);
 
             Cart::session(auth()->id())->clear();
+
+
+            try{
+                Mail::to(auth()->user()->email)
+                ->send(new Proceso(auth()->user()));
+            }catch(\Exception  $e){
+               
+            }
 
         });
         return redirect()->route('order');

@@ -73,6 +73,10 @@
            </select>
 
         </div>
+
+        <div v-if="loader" class="loader"></div>
+
+
             
       </div>
 
@@ -99,10 +103,12 @@
 
            <select class="form-control" v-model="delivery" name="delivery">
                <option value="">Seleccione un Delivery</option>
-               <option v-for="(item, key) in deliveries" :key="key" :value="item.name">{{ item.name + ' ' + item.last_name }}</option>  
+               <option v-for="(item, key) in deliveries" :key="key" :value="item.id + '|' + item.name + ' ' + item.last_name">{{ item.name + ' ' + item.last_name }}</option>  
            </select>
 
         </div>
+
+         <div v-if="loader"  class="loader"></div>
             
       </div>
 
@@ -195,6 +201,8 @@
              delivery:'',
              total:0,
              orden_envio:'',
+             loader:false,
+             delivery_id:'',
          }
 
      },
@@ -236,15 +244,18 @@
                })
          },
          cambiar_estatus()
-         {    
+         {
+           this.loader = true;    
             axios.post('cambiar_status',{ 
-                
                      'order_id':this.orden.id,  
                      'status':this.state,
                  }
                 )
                 .then((response)=>{
 
+                        this.loader = false;
+                        $('#Onlinestatus').modal('hide');
+                        
                          Swal.fire({
                             position: 'center',
                             type: 'success',
@@ -252,8 +263,7 @@
                             showConfirmButton: false,
                             timer: 5000
                         })
-
-                         $('#Onlinestatus').modal('hide');
+                       
                         this.orden = '';
                         this.state = ' ';
                         this.estado=[];
@@ -262,7 +272,7 @@
                 
                 })
                 .catch((error)=>{
-                  
+                    this.loader =false;
                        Swal.fire({
                             position: 'center',
                             type: 'error',
@@ -301,14 +311,21 @@
 
          AsignarDelivery()
          {
+           this.delivery_id=this.delivery.substring(0,this.delivery.indexOf('|'));
+           this.delivery=this.delivery.substring(this.delivery.indexOf('|') + 1,this.delivery.length);
+
+           this.loader = true;
            axios.post('asignardelivery',{ 
                 
                      'order_id':this.orden_envio,  
                      'delivery':this.delivery,
+                     'delivery_id':this.delivery_id,
                  }
                 )
                 .then((response)=>{
 
+                        this.loader = false;
+                         $('#delivery').modal('hide');
                          Swal.fire({
                             position: 'center',
                             type: 'success',
@@ -317,16 +334,17 @@
                             timer: 5000
                         })
 
-                        $('#delivery').modal('hide');
+                       
                         this.orden = '';
                         this.delivery='';
+                        this.delivery_id = '';
                         this.deliveries=[];
                         this.estado=[];
                         this.status();
                 
                 })
                 .catch((error)=>{
-                  
+                    this.loader =false;
                        Swal.fire({
                             position: 'center',
                             type: 'error',
@@ -380,3 +398,26 @@
  }
 
 </script>
+
+<style>
+.loader {
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  width: 70px;
+  height: 70px;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 2s linear infinite;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+</style>

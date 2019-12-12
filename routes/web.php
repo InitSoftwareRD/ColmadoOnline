@@ -13,6 +13,9 @@
 
 Auth::routes();
 
+
+//Route::post('logoutOthers', 'Auth\LogoutOtherController@logoutOtherDevices');
+
 Route::get('/', 'WelcomeController@index')->name('home');
 
 Route::get('/contacto', function () {
@@ -115,8 +118,6 @@ Route::get('/admin/graficos', 'ChartController@index')->name('graficos');
 Route::post('/admin/ingresos', 'ChartController@getRevenue')->name('ingresos');
 
 Route::get('mail/test', function() {
-    \Illuminate\Support\Facades\Mail::to(\App\User::find(2))
-        ->send(new \App\Mail\OrderShipped);
-
-        dd('Funciona');
+    $user = \App\User::find(2);
+    return (new \App\Mail\Enviado($user))->render();
 });

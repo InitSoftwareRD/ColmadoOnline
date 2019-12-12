@@ -103,33 +103,33 @@
          <table id="clientes" class="table table-striped  table-sm table-bordered table-responsive">
                     <thead>
                         <tr>
-                            <th>ID</th>
                             <th>Nombres</th>
                             <th>Apellidos</th>
                             <th>Telefono</th>
+                            <th>ID</th>
                             <th>Agregar</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr v-for="(item, key) in clientes" :key="key">
-                            <td>{{ item.id }}</td>
                             <td>{{ item.name }}</td>
                             <td>{{ item.last_name }}</td>
                             <th>{{ item.phone }}</th>
+                            <th>{{ item.identificador }}</th>
                             <th>
                                 <button class="btn btn-success btn-sm" @click="customer = item"><i class="fas fa-user-plus"></i></button>
                             </th>
                         </tr>
                     </tbody>
                 </table>
+
+            <div v-if="loader" class="loader"></div>    
             
                 </div>
                 <div class="modal-footer">
                     <button v-if="customer" @click="ordenar()" type="button" class="btn btn-success">Ordenar</button>  
                     <button v-else type="button" class="btn btn-success" disabled>Ordenar</button>    
                     <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="customer ='' " >Cerrar</button>
-                
-
                 </div>
                 </div>
             </div>
@@ -169,6 +169,7 @@
             clientes:[],
             customer:'',
             total:0,
+            loader:false,
         }
 
        },
@@ -181,6 +182,7 @@
 
            ordenar()
            {
+               this.loader = true;
                 axios.post('realizar_orden',
                   {
                       'carrito':this.carrito,
@@ -189,6 +191,9 @@
                   }
                 )
                 .then((response)=>{
+
+                      this.loader =false;
+                      $('#aviso').modal('hide');
 
                          Swal.fire({
                             position: 'center',
@@ -200,12 +205,11 @@
 
                         this.carrito = [];
                         this.total = 0;
-                        $('#aviso').modal('hide')
                 
                 
                 })
                 .catch((error)=>{
-                  
+                       this.loader =false;
                        Swal.fire({
                             position: 'center',
                             type: 'error',
@@ -349,7 +353,30 @@ input[type="number"] {
 {
     border-style:solid;
     background: #ffffff
-
 }
 
+.loader {
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  width: 70px;
+  height: 70px;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 2s linear infinite;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+
 </style>
+
+

@@ -30,7 +30,9 @@ class CartController extends Controller
             ->whereDate('begin_at', '<=', now())
             ->whereDate('end_at', '>=', now())
             ->limit(1)
-        ])->first();
+        ])
+            ->where('id', request('product_id'))
+            ->first();
 
         Cart::session(auth()->id())->add([
             'id' => $product->id,
@@ -51,7 +53,9 @@ class CartController extends Controller
             ->whereDate('begin_at', '<=', now())
             ->whereDate('end_at', '>=', now())
             ->limit(1)
-        ])->first();
+        ])
+            ->where('id', request('product_id'))
+            ->first();
 
         Cart::session(auth()->id())->update($products->id, [
             'id' => $products->id,

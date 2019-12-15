@@ -103,7 +103,7 @@
                                 @auth
                                     <li>
                                         <a href="{{ route('cart') }}">Carrito
-                                            <cart-count/>
+                                           
                                         </a>
                                     </li>
                                     <li><a href="{{ route('order') }}">Mis Pedidos</a></li>

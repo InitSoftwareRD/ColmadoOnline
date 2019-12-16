@@ -80,7 +80,7 @@
 
                                <br>
                                <br>
-                              <button class="btn btn-primary btn-block" type="submit">Actulizar</button>
+                              <button class="btn btn-primary btn-block" type="submit">Actualizar</button>
                      
   </form>
                         

@@ -101,6 +101,7 @@
                                 <li><a href="{{ route('home') }}">Inicio</a></li>
                                 <li><a href="{{ route('contacto') }}">Contacto</a></li>
                                 @auth
+                                
                                     <li>
                                         <a href="{{ route('cart') }}">Carrito
                                            

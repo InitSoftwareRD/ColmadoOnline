@@ -210,7 +210,8 @@ class OrdenarController extends Controller
         $tracking->save();
 
         $order=Orders::findOrFail($request->order_id);
-        $user = User::find($order->customer_id);
+        $customer = \App\Customers::find($order->customer_id);
+        $user = User::find($customer->user_id);
         
         if(in_array($request->status, [2])){
             try{
@@ -291,7 +292,7 @@ class OrdenarController extends Controller
      */
     public function listarClientes()
     {
-        $clientes=DB::select("SELECT u.id as id, u.identity as identificador , u.name as name , u.last_name as last_name ,u.phone as phone FROM 
+        $clientes=DB::select("SELECT c.id as id, u.identity as identificador , u.name as name , u.last_name as last_name ,u.phone as phone FROM 
         customers c,
         users u
         WHERE

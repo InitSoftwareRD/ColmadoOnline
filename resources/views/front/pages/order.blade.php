@@ -55,47 +55,9 @@
                                         {{ $order->created_at->format('d/m/Y') }}
                                     </td>
                                     <td>
-                                        <!-- Button trigger modal -->
-                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Modal{{$order->id}}">
+                                        <a target="_blank" href="{{ route('order.show', $order) }}" class="btn btn-primary">
                                             Detalles
-                                        </button>
-
-                                        <!-- Modal -->
-                                        <div class="modal fade" id="Modal{{$order->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="exampleModalLabel">Articulos Ordenados</h5>
-                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
-                                                        </button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <table class="table">
-                                                            <thead>
-                                                            <tr>
-                                                                <th scope="col">Articulo</th>
-                                                                <th scope="col">Precio</th>
-                                                                <th scope="col">Cantidad</th>
-                                                            </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                            @foreach($order->products as $product)
-                                                                <tr>
-                                                                    <td>{{ $product->name }}</td>
-                                                                    <td>{{ $product->price }}</td>
-                                                                    <td>{{ $product->pivot->quantity }}</td>
-                                                                </tr>
-                                                            @endforeach
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        </a>
                                     </td>
                                 </tr>
                             @empty

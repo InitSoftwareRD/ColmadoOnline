@@ -1,18 +1,54 @@
 <template>
-    <div class="product_item_block">
-        <div class="org_product_block">
-            <span class="product_label" v-if="product.oferta">{{ product.oferta }}% de descuento</span>
-            <div class="org_product_image">
-                <img :src="product.imagen_portada"  width="275" height="275">
-            </div>
-            <h4>{{ product.name }}</h4>
+    <main>
+        <div class="product_item_block">
+            <div class="org_product_block">
+                <span class="product_label" v-if="product.oferta">{{ product.oferta }}% de descuento</span>
+                <div class="org_product_image">
+                    <img :src="product.imagen_portada"  width="275" height="275">
+                </div>
+                <h4>{{ product.name }}</h4>
 
-            <h6 v-if="product.oferta" style="text-decoration: line-through;"><small><i class="fa fa-usd" aria-hidden="true"></i></small>{{ product.original_price }}</h6>
-            <h3><span><i class="fa fa-usd" aria-hidden="true"></i></span>{{ product.price }}</h3>
-            <a style="background-color: #AF0000; color:#fff;" @click="removeCart"v-if="remove == 1" v-show="isAuth">Quiter del carrito</a>
-            <a style="color:#fff" @click="addCart" v-else v-show="isAuth">Agregar a carrito</a>
+                <h6 v-if="product.oferta" style="text-decoration: line-through;"><small><i class="fa fa-usd" aria-hidden="true"></i></small>{{ product.original_price }}</h6>
+                <h3><span><i class="fa fa-usd" aria-hidden="true"></i></span>{{ product.price }}</h3>
+
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-link" data-toggle="modal" :data-target="'#Modal' + product.id">
+                    Ver detalle
+                </button>
+
+                <a style="background-color: #AF0000; color:#fff;" @click="removeCart"v-if="remove == 1" v-show="isAuth">Quiter del carrito</a>
+                <a style="color:#fff" @click="addCart" v-else v-show="isAuth">Agregar a carrito</a>
+            </div>
         </div>
-    </div>
+        <div class="modal fade" :id="'Modal' + product.id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title text-center" id="exampleModalLabel">{{ product.name }} <strong>${{ product.price }}</strong></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="org_product_image">
+                            <img :src="product.imagen_portada"  width="275" height="275">
+                        </div>
+                        <p class="pt-4 font-weight-bold">Categoria:</p>
+                        <p>{{ product.category.name }}</p>
+
+                        <p class="font-weight-bold">Descripcion:</p>
+                        <p>{{ product.description }}</p>
+
+                        <p class="font-weight-bold">Ingredientes</p>
+                        <p>{{ product.ingredients }}</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
 </template>
 
 <script>

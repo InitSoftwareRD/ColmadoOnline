@@ -37,6 +37,7 @@ Route::get('carts/count', 'CartController@cartCount')->name('cart.count');
 
 Route::get('client/order', 'ClientOrderController@index')->name('order');
 Route::post('client/order', 'ClientOrderController@store')->name('order.store');
+Route::get('client/order/{orders}', 'ClientOrderController@show')->name('order.show');
 
 Route::middleware(['auth', 'onlyStaff'])->group(function () {
     /* Panel Administrativo */

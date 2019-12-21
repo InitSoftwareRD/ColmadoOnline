@@ -91,4 +91,19 @@ class ClientOrderController extends Controller
         });
         return redirect()->route('order')->with(['success' => 'Orden completada correctamente']);
     }
+
+    public function show(Orders $orders)
+    {
+        return view('front.pages.order_detail', [
+            'order' => Orders::query()
+                ->where('id', $orders->id)
+                ->addSelect(['last_status' => OrderTracking::select('order_status')
+                    ->whereColumn('order_id', 'orders.id')
+                    ->orderBy('id', 'desc')
+                    ->limit(1)
+                ])
+                ->with(['products', 'category'])
+                ->firstOrFail()
+        ]);
+    }
 }

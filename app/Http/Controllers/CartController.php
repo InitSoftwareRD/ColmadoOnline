@@ -96,10 +96,14 @@ class CartController extends Controller
 
     public function verification()
     {
+        $clientLocation = explode(',', optional(auth()->user()->customer)->location);
+
         return view('front.pages.checkout', [
             'carts' => Cart::session(auth()->id())->getContent(),
             'total' => Cart::session(auth()->id())->getTotal(),
-            'hasLocation' => optional(auth()->user()->customer)->location ? 1 : 0
+            'hasLocation' => optional(auth()->user()->customer)->location ? 1 : 0,
+            'lat' =>  array_filter($clientLocation, 'strlen') != [] ? $clientLocation[0] : '19.22456794056483',
+            'lng' =>  array_filter($clientLocation, 'strlen') != [] ? $clientLocation[1] : '-70.5187199628906',
         ]);
     }
 

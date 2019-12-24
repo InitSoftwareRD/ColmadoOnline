@@ -49,7 +49,7 @@ class ClientOrderController extends Controller
             $customer = Customers::firstOrCreate([
                 'user_id' => auth()->id()
             ], [
-                'location' => request()->location_store ? request('lat') .','. request('lng') : null
+                'location' => request('lat') .','. request('lng')
             ]);
 
             $order = Orders::create([
@@ -59,8 +59,10 @@ class ClientOrderController extends Controller
                 'ping' => rand (100000, 999999),
                 'canal' => 'I',
                 'paid_with' => request('paid_with'),
-                'location' => request()->location_default ? $customer->location : request('lat') .','. request('lng')
+                'location' => $newLocation = request()->location_store  ? request('lat') .','. request('lng') : $customer->location
             ]);
+
+            $customer->update(['location' => $newLocation]);
 
             foreach(Cart::session(auth()->id())->getContent() as $item )
             {
@@ -102,7 +104,7 @@ class ClientOrderController extends Controller
                     ->orderBy('id', 'desc')
                     ->limit(1)
                 ])
-                ->with(['products', 'category'])
+                ->with(['products'])
                 ->firstOrFail()
         ]);
     }

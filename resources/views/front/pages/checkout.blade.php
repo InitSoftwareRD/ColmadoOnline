@@ -41,8 +41,8 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form_block">
-                                            <input type="hidden" class="form_field" id="lat" name="lat" value="19.224167">
-                                            <input type="hidden" class="form_field" id="lng" name="lng" value="-70.528333">
+                                            <input type="hidden" class="form_field" id="lat" name="lat" value="{{ old('lat', $lat) }}">
+                                            <input type="hidden" class="form_field" id="lng" name="lng" value="{{ old('lng', $lng) }}">
                                             <div style="height: 300px; width: 100%;" class="mt-4" id="map"></div>
                                         </div>
                                     </div>
@@ -103,11 +103,11 @@
      function initMap() {
          var map = new google.maps.Map(document.getElementById('map'), {
              zoom: 15,
-             center: {lat: 19.224167, lng: -70.528333 }
+             center: {lat: {{$lat}}, lng: {{$lng}} }
          });
 
          var marker = new google.maps.Marker({
-             position: {lat: 19.224167, lng: -70.528333 },
+             position: {lat: {{$lat}}, lng: {{$lng}} },
              map: map,
              draggable: true
          });

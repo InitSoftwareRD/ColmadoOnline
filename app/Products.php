@@ -8,6 +8,8 @@ class Products extends Model
 {
     protected $table = 'products';
 
+    protected $with = ['category'];
+
     public function category()
     {
         return $this->belongsTo(Categories::class, 'category_id');

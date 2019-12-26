@@ -128,7 +128,7 @@ class OrdenarController extends Controller
         FROM orders o, customers c , users u
         WHERE 
         o.customer_id =c.id 
-        AND c.id = u.id
+        AND c.user_id = u.id
         AND o.canal = 'C'
         AND ( SELECT os.id FROM order_tracking ot ,order_status os
            WHERE

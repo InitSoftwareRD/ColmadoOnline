@@ -16,7 +16,7 @@
                     Ver detalle
                 </button>
 
-                <a style="background-color: #AF0000; color:#fff;" @click="removeCart"v-if="remove == 1" v-show="isAuth">Quiter del carrito</a>
+                <a style="background-color: #AF0000; color:#fff;" @click="removeCart"v-if="remove == 1" v-show="isAuth">Quitar del carrito</a>
                 <a style="color:#fff" @click="addCart" v-else v-show="isAuth">Agregar a carrito</a>
             </div>
         </div>
@@ -33,10 +33,10 @@
                         <div class="org_product_image">
                             <img :src="product.imagen_portada"  width="275" height="275">
                         </div>
-                        <p class="pt-4 font-weight-bold">Categoria:</p>
+                        <p class="pt-4 font-weight-bold">Categoría:</p>
                         <p>{{ product.category.name }}</p>
 
-                        <p class="font-weight-bold">Descripcion:</p>
+                        <p class="font-weight-bold">Descripción:</p>
                         <p>{{ product.description }}</p>
 
                         <p class="font-weight-bold">Ingredientes</p>

@@ -47,11 +47,11 @@
                                         </div>
                                     </div>
                                     <div class="col-md-12">
-                                        <label><input type="checkbox" name="location_store" value="1"> Marcar esta ubicacion predeterminada</label>
+                                        <label><input type="checkbox" name="location_store" value="1"> Marcar esta ubicación predeterminada</label>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form_block">
-                                            <input type="number" name="paid_with" class="form_field" placeholder="Pagaré con: RD$" min="{{$total}}" max="999999">
+                                            <input type="number" name="paid_with" class="form_field" placeholder="Pagaré con: RD$" min="{{$total}}" max="999999" required="">
                                         </div>
                                     </div>
                                 </div>

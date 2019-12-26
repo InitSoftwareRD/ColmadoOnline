@@ -64,7 +64,7 @@
                                         </g>
                                         </svg>
                                     </span>
-                                    <p>809-573-0000</p>
+                                    <p>809-000-0000</p>
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -120,8 +120,8 @@
                                                 </form>
                                     </li>
                                 @else
-                                    <li> <a href="{{ route('login') }}">Login</a></li>
-                                    <li><a href="{{ route('register') }}">Register</a></li>
+                                    <li> <a href="{{ route('login') }}">Iniciar Sesión</a></li>
+                                    <li><a href="{{ route('register') }}">Registrarse</a></li>
                                 @endauth
                                 </ul>
                             </div>

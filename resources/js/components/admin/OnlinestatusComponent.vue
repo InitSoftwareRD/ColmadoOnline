@@ -8,11 +8,11 @@
     
     <div id="products" class="mt-2">
 
-            <div class="row">
+           <!--  <div class="row">
                 <div class="col-md-4">
                       <input class="search" placeholder="Buscar" />
                </div>
-            </div>
+            </div> -->
 
         <table class="table  table-sm table-bordered mt-2">
                     <thead>
@@ -37,9 +37,9 @@
                         <td class="estatus">{{ item.estatus }}</td>
                         <td class="total">{{ item.delivery }}</td>
                         <th> 
-                            <button class="btn btn-success btn-sm" @click="modal(item)" ><i class="fas fa-exchange-alt"></i></button>  
-                            <button class="btn btn-success btn-info btn-sm" @click="detalle_orden(item.id)"><i class="fas fa-list-ol"></i></button>                      
-                            <button class="btn btn-warning btn-sm" @click="listarDelivery(item.id)" ><i class="fas fa-motorcycle"></i></button>                      
+                            <button class="btn btn-success btn-sm" @click="modal(item)" title="Cambiar estatus"><i class="fas fa-exchange-alt"></i></button>  
+                            <button class="btn btn-success btn-info btn-sm" @click="detalle_orden(item.id)" title="Mostrar detalle orden"><i class="fas fa-list-ol"></i></button>                      
+                            <button class="btn btn-warning btn-sm" @click="listarDelivery(item.id)" title="Asignar Delivery"><i class="fas fa-motorcycle"></i></button>                      
                         </th>
                     </tr>
             </tbody>
@@ -59,7 +59,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Selecciones el siguiente estatus</h5>
+        <h5 class="modal-title">Seleccione el siguiente estatus</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -93,7 +93,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Selecciones el  Delivery</h5>
+        <h5 class="modal-title">Seleccione el Delivery</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -259,7 +259,7 @@
                          Swal.fire({
                             position: 'center',
                             type: 'success',
-                            title: 'Orden actulizada',
+                            title: 'Orden actualizada',
                             showConfirmButton: false,
                             timer: 5000
                         })
@@ -276,7 +276,7 @@
                        Swal.fire({
                             position: 'center',
                             type: 'error',
-                            title: 'Error al actulizar Orden',
+                            title: 'Error al actualizar la orden',
                             showConfirmButton: false,
                             timer: 4000
                         })

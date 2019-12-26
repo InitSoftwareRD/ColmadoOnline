@@ -54,19 +54,19 @@
                             <td>
                                 @if ($user->status=='A')
 
-                                <a href="{{ route('Clientestatus',[$user->id,$user->status]) }}" class="btn btn-danger btn-sm">
+                                <a href="{{ route('Clientestatus',[$user->id,$user->status]) }}" class="btn btn-danger btn-sm" title="Desactivar">
                                         <i class="fas fa-power-off"></i>
                                 </a>
                                     
                                 @else
 
-                                <a  href="{{ route('Clientestatus',[$user->id,$user->status]) }}" class="btn btn-success btn-sm">
+                                <a  href="{{ route('Clientestatus',[$user->id,$user->status]) }}" class="btn btn-success btn-sm" title="Activar">
                                         <i class="fas fa-power-off"></i>
                                 </a>
                                     
                                 @endif
                              
-                            <a href="{{ route('editar-cliente',$user->id) }}" class="btn btn-warning btn-sm text-white">
+                            <a href="{{ route('editar-cliente',$user->id) }}" class="btn btn-warning btn-sm text-white" title="Editar">
                                     <i class="fas fa-user-edit"></i>
                                </a>
 
@@ -99,7 +99,34 @@
 <script>
 
 $(document).ready(function() {
-    $('#clientes').DataTable();
+    var idioma_espanol = {
+            "sProcessing": "Procesando..."
+            , "sLengthMenu": "Mostrar _MENU_ registros"
+            , "sZeroRecords": "No se encontraron resultados"
+            , "sEmptyTable": "Ningún dato disponible en esta tabla"
+            , "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros"
+            , "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros"
+            , "sInfoFiltered": "(filtrado de un total de _MAX_ registros)"
+            , "sInfoPostFix": ""
+            , "sSearch": "Buscar:"
+            , "sUrl": ""
+            , "sInfoThousands": ","
+            , "sLoadingRecords": "Cargando..."
+            , "oPaginate": {
+                "sFirst": "Primero"
+                , "sLast": "Último"
+                , "sNext": "Siguiente"
+                , "sPrevious": "Anterior"
+            }
+            , "oAria": {
+                "sSortAscending": ": Activar para ordenar la columna de manera ascendente"
+                , "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+            }
+        }
+        
+    $('#clientes').DataTable({
+            "language":idioma_espanol
+        });
    
 
 } );

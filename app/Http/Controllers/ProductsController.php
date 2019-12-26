@@ -35,7 +35,7 @@ class ProductsController extends Controller
      */
     public function category()
     {
-        $categories = Categories::where('status','A')->get();
+        $categories = Categories::all();
 
         return view('admin.pages.products.category',compact('categories'));
            

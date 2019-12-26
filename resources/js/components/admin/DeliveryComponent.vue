@@ -170,7 +170,7 @@
          {
             Swal.fire({
                 title: '¿Realmente Quiere Finalizar la Orden?',
-                text: "No vas a poder revertirlo una vez hecho!",
+                text: "(No vas a poder revertirlo una vez hecho)",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -214,7 +214,7 @@
                        Swal.fire({
                             position: 'center',
                             type: 'error',
-                            title: 'Error al finalizar orden',
+                            title: 'Error al finalizar la orden',
                             showConfirmButton: false,
                             timer: 4000
                         })

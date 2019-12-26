@@ -11,7 +11,7 @@
                         <span></span>
                         <div class="contact_icon"><img src="{{ asset('front_template/images/contact_icon1.png') }}" alt="image" /></div>
                         <h4>Contacto</h4>
-                        <p>809-573-0000</p>
+                        <p>809-000-0000</p>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-4">

@@ -7,7 +7,7 @@
                         <tr>
                             <th>Imagen</th>
                             <th>Nombre</th>
-                            <th>Categoria</th>
+                            <th>Categoría</th>
                             <th>Precio</th>
                             <th>Agregar</th>
                         </tr>
@@ -19,7 +19,7 @@
                             <td>{{ item.category}}</td>
                             <th>{{ item.price }}</th>
                             <th>
-                                <button class="btn btn-success btn-sm" @click="agregarArticulo(item)"><i class="fas fa-shopping-cart"></i></button>
+                                <button class="btn btn-success btn-sm" @click="agregarArticulo(item)" title="Agregar al carrito"><i class="fas fa-shopping-cart"></i></button>
                             </th>
                         </tr>
                     </tbody>
@@ -34,11 +34,11 @@
         <table class="table  table-sm table-bordered  mt-2">
                     <thead>
                         <tr>
-                        <th scope="col">Articulo</th>
+                        <th scope="col">Artículo</th>
                         <th scope="col">Precio</th>
                         <th scope="col">Cantidad</th>
                         <th scope="col">Suma</th>
-                        <th>Accion</th>
+                        <th>Acción</th>
                         </tr>
                     </thead>
             <tbody class="list" >
@@ -46,14 +46,14 @@
                         <td class="name">{{ item.name }}</td>
                         <td class="born">{{ item.price }}</td>
                         <td class="accion">
-                            <button class="btn btn-info btn-sm" @click=" sumar(item)" >+</button>
+                            <button class="btn btn-info btn-sm" @click=" sumar(item)" title="Aumentar">+</button>
                               <input type="number"  min="1" max="999" name="cantidad" size="3" v-model="item.cantidad"
                               readonly>
-                            <button class="btn btn-warning btn-sm" @click="restar(item)" >--</button>  
+                            <button class="btn btn-warning btn-sm" @click="restar(item)" title="Disminuir">--</button>  
 
                         </td>
                         <th>{{ item.suma }}</th>
-                        <th> <button class="btn btn-danger btn-sm" @click="eliminar(key)"><i class="fas fa-trash-alt"></i></button>
+                        <th> <button class="btn btn-danger btn-sm" @click="eliminar(key)" title="Eliminar"><i class="fas fa-trash-alt"></i></button>
                         </th>
                         </tr>
             </tbody>
@@ -63,7 +63,7 @@
 
            <div class="row">
                  <div class="col-md-4">
-                      <button v-if="total > 0" class="btn btn-success" @click="modal()" ><i class="fas fa-shopping-bag"></i></button>
+                      <button v-if="total > 0" class="btn btn-success" @click="modal()" title="Realizar orden"><i class="fas fa-shopping-bag"></i></button>
                   
                  </div>  
                 <div class="col-md-4">
@@ -71,7 +71,7 @@
                 </div>   
                  
                 <div class="col-md-4">
-                    <button v-if="total > 0" class="btn btn-danger btn-sm" @click="limpiar()"><i class="fas fa-trash-alt"></i> </button>
+                    <button v-if="total > 0" class="btn btn-danger btn-sm" @click="limpiar()" title="Eliminar todo"><i class="fas fa-trash-alt"></i> </button>
 
                 </div>
             </div>
@@ -105,7 +105,7 @@
                         <tr>
                             <th>Nombres</th>
                             <th>Apellidos</th>
-                            <th>Telefono</th>
+                            <th>Teléfono</th>
                             <th>ID</th>
                             <th>Agregar</th>
                         </tr>
@@ -117,7 +117,7 @@
                             <th>{{ item.phone }}</th>
                             <th>{{ item.identificador }}</th>
                             <th>
-                                <button class="btn btn-success btn-sm" @click="customer = item"><i class="fas fa-user-plus"></i></button>
+                                <button class="btn btn-success btn-sm" @click="customer = item" title="Elegir cliente"><i class="fas fa-user-plus"></i></button>
                             </th>
                         </tr>
                     </tbody>
@@ -127,7 +127,7 @@
             
                 </div>
                 <div class="modal-footer">
-                    <button v-if="customer" @click="ordenar()" type="button" class="btn btn-success">Ordenar</button>  
+                    <button v-if="customer" @click="ordenar()" type="button" class="btn btn-success" title="Ordenar">Ordenar</button>  
                     <button v-else type="button" class="btn btn-success" disabled>Ordenar</button>    
                     <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="customer ='' " >Cerrar</button>
                 </div>
@@ -145,7 +145,7 @@
 
 <script>
 
-   import datables from 'datatables'
+    import datables from 'datatables'
    import Swal from 'sweetalert2'
 
 
@@ -170,6 +170,30 @@
             customer:'',
             total:0,
             loader:false,
+            idioma_espanol: {
+            "sProcessing": "Procesando..."
+            , "sLengthMenu": "Mostrar _MENU_ registros"
+            , "sZeroRecords": "No se encontraron resultados"
+            , "sEmptyTable": "Ningún dato disponible en esta tabla"
+            , "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros"
+            , "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros"
+            , "sInfoFiltered": "(filtrado de un total de _MAX_ registros)"
+            , "sInfoPostFix": ""
+            , "sSearch": "Buscar:"
+            , "sUrl": ""
+            , "sInfoThousands": ","
+            , "sLoadingRecords": "Cargando..."
+            , "oPaginate": {
+                "sFirst": "Primero"
+                , "sLast": "Último"
+                , "sNext": "Siguiente"
+                , "sPrevious": "Anterior"
+            }
+            , "oAria": {
+                "sSortAscending": ": Activar para ordenar la columna de manera ascendente"
+                , "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+            }
+        },
         }
 
        },
@@ -213,7 +237,7 @@
                        Swal.fire({
                             position: 'center',
                             type: 'error',
-                            title: 'Error al realizar Orden',
+                            title: 'Error al realizar la orden',
                             showConfirmButton: false,
                             timer: 4000
                         })
@@ -293,7 +317,9 @@
             mytable()
             {
                 $(function () {
-                     $('#productos').DataTable();
+                     $('#productos').DataTable({
+                          "language":this.idioma_espanol
+                        });
                   });          
  
             },
@@ -301,7 +327,9 @@
             tablaClientes()
             {
                 $(function () {
-                     $('#clientes').DataTable();
+                     $('#clientes').DataTable({
+                          "language":this.idioma_espanol
+                        });
                }); 
             },
 

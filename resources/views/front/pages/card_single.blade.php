@@ -7,7 +7,7 @@
         <div class="container">
             <div class="cart_table_section table-responsive">
                 <div class="table_heading">
-                    <h3>Carrito <small><a href="{{ route('cart.deleteAll') }}">Vaciar el carrito</a></small></h3>
+                    <h3>Carrito <small><a href="{{ route('cart.deleteAll') }}" style="text-decoration: underline; color: red;">Vaciar el carrito</a></small></h3>
                     <h4>{{ $carts->count() }} artículos en tu carrito</h4>
                 </div>
                 <table class=" cart_table table-responsive woocommerce-cart-form__contents">
@@ -72,7 +72,7 @@
                     @empty
                         <tr>
                             <td class="text-center" colspan="5">
-                               <h3 class="font-weight-bold"> Ningun articulo añadido al carrito.</h3>
+                               <h3 class="font-weight-bold"> Ningún artículo añadido al carrito.</h3>
                             </td>
                         </tr>
                     @endforelse

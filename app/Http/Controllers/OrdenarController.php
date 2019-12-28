@@ -16,6 +16,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Mail;
+use App\Exports\HistoricoExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class OrdenarController extends Controller
 {
@@ -179,6 +181,79 @@ class OrdenarController extends Controller
         return $status;
 
     }
+
+    public function historico()
+    {
+        $history=DB::SELECT("SELECT 
+        o.id as id,
+        o.ping as ping,
+        o.total as total,
+        IFNULL(o.delivery,'N/A') as delivery,
+        o.canal as canal,
+        IFNULL(o.paid_with,'N/A') as pagado,
+        CONCAT( u.name,' ', u.last_name ) as nombres,
+        CONCAT('(',SUBSTRING(u.phone,1,3),')','-',SUBSTRING(u.phone,4,3),'-',SUBSTRING(u.phone,7,4) ) as phone,
+        u.email as email,
+        ( SELECT os.name FROM order_tracking ot ,order_status os
+           WHERE
+              os.id = ot.order_status
+             AND ot.order_id = o.id
+            ORDER by ot.created_at DESC
+           LIMIT 1
+         ) as estatus,
+         ( SELECT ot.created_at FROM order_tracking ot ,order_status os
+           WHERE
+              os.id = ot.order_status
+             AND ot.order_id = o.id
+            ORDER by ot.created_at DESC
+           LIMIT 1
+         ) as Fecha
+        FROM orders o, customers c , users u
+        WHERE 
+        o.customer_id =c.id 
+        AND c.user_id = u.id
+        AND ( SELECT os.id FROM order_tracking ot ,order_status os
+           WHERE
+              os.id = ot.order_status
+             AND ot.order_id = o.id
+            ORDER by ot.created_at DESC
+           LIMIT 1
+         ) = 3
+         order by o.created_at DESC
+        ");
+
+           return view('admin.pages.orders.historico',compact('history'));
+
+    }
+
+
+    public function DetalleHistorico($id)
+    {
+        $detalle=DB::SELECT("SELECT 
+                orders.id as id,
+                products.name as nombre,
+                order_product.quantity as cantidad,
+                order_product.price as precio,
+                order_product.subtotal as subtotal,
+                orders.total as total
+                FROM orders , order_product , products
+                WHERE 
+                orders.id = order_product.order_id
+                AND order_product.product_id = products.id
+                AND orders.id = ?
+                ORDER BY  products.name DESC
+        ",[$id]);
+
+          return view('admin.pages.orders.detalle',compact('detalle'));
+
+    }
+
+
+    public function HistoricoExport() 
+    {
+        return Excel::download(new HistoricoExport, 'Historico.xlsx');
+    }
+
 
 
     

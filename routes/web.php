@@ -102,4 +102,8 @@ Route::middleware(['auth', 'onlyStaff'])->group(function () {
     Route::get('admin/exportar-clientes','UsuarioController@ClientesExport')->name('expotarClientes');
     Route::get('admin/exportar-empleados','UsuarioController@EmpleadosExport')->name('expotarEmpleados');
     Route::get('admin/exportar-productos','ProductsController@ProductosExport')->name('exportarProductos');
+    Route::get('admin/exportar-historico','OrdenarController@HistoricoExport')->name('exportarHistorico');
+    Route::get('admin/historico','OrdenarController@historico')->name('HistoricoOrdenes');
+    Route::get('admin/detalle-historico/{id}','OrdenarController@DetalleHistorico')->name('DetalleHistorico');
+
 });

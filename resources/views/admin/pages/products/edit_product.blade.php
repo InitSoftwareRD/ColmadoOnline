@@ -5,10 +5,9 @@
 @endsection
 
 @section('css')
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.5.2/css/buttons.bootstrap4.min.css">
 
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
-    
 @endsection
 
 @section('content')
@@ -17,8 +16,10 @@
 @include('admin.fragment.error')
 
 <div class="row">
+    <a href="{{ route('exportarProductos') }}" target="_blank" class="ml-2 btn btn-success btn-lg" title="Exportar a excel"><i class="fas fa-file-excel"></i></a>
+
     <div class="col-md-12">
-            <table id="productos" class="table table-striped table-bordered" style="width:100%">
+            <table id="productos" class="table table-striped table-bordered display" style="width:100%">
                     <thead>
                         <tr>
                             <th>Imagen</th>
@@ -92,9 +93,10 @@
 
 @section('script')
 
-<script src="//cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js"></script>
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+
+
 
 <script>
 
@@ -124,12 +126,10 @@ $(document).ready(function() {
             }
         }
         
-    $('#productos').DataTable({
-      "language":idioma_espanol
-    });
+$('#productos').DataTable({
+    "language":idioma_espanol,
+});
 } );
 
 </script>
-
-
 @endsection

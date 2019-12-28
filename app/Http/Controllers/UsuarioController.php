@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Http\Requests\UserResquest;
 use App\User;
 use App\Customers;
+use App\Exports\ClientesExport;
+use App\Exports\EmpleadosExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class UsuarioController extends Controller
 {
@@ -23,6 +26,16 @@ class UsuarioController extends Controller
     public function index()
     {
         return view('admin.pages.user.users');
+    }
+
+    public function ClientesExport() 
+    {
+        return Excel::download(new ClientesExport, 'ListadoClientes.xlsx');
+    }
+
+    public function EmpleadosExport() 
+    {
+        return Excel::download(new EmpleadosExport, 'ListadoEmpleados.xlsx');
     }
 
     public function personal()

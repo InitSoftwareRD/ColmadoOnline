@@ -15,7 +15,8 @@
 
 <div class="row">
     <div class="col-md-12">
-
+        <a href="{{ route('expotarEmpleados') }}" target="_blank" class="btn btn-success btn-lg" title="Exportar a excel"><i class="fas fa-file-excel"></i></a>
+   
             @include('admin.fragment.flashmessage')
 
             <table id="empleados" class="table table-striped table-bordered" style="width:100%">

@@ -8,6 +8,8 @@ use App\Http\Requests\ProductosRequest;
 use App\Categories;
 use App\Products;
 use App\ImageProducts;
+use App\Exports\ProductosExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ProductsController extends Controller
 {
@@ -26,6 +28,11 @@ class ProductsController extends Controller
     {
         $categories = Categories::all();
         return view('admin.pages.products.create',compact('categories'));
+    }
+
+    public function ProductosExport() 
+    {
+        return Excel::download(new ProductosExport, 'ListadoProductos.xlsx');
     }
 
     /**

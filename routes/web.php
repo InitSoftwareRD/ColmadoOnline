@@ -96,4 +96,10 @@ Route::middleware(['auth', 'onlyStaff'])->group(function () {
     /* gráficos*/
     Route::get('/admin/graficos', 'ChartController@index')->name('graficos');
     Route::post('/admin/ingresos', 'ChartController@getRevenue')->name('ingresos');
+
+    /*Exportar*/
+
+    Route::get('admin/exportar-clientes','UsuarioController@ClientesExport')->name('expotarClientes');
+    Route::get('admin/exportar-empleados','UsuarioController@EmpleadosExport')->name('expotarEmpleados');
+    Route::get('admin/exportar-productos','ProductsController@ProductosExport')->name('exportarProductos');
 });

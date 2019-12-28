@@ -29,7 +29,7 @@ class ProductosRequest extends FormRequest
             'precio'=>'required|min:1|max:99999999',
             'ingredientes'=>'required',
             'descripcion'=>'required',
-            'portada'=>'required',
+            'portada'=>'required|dimensions:min_width=200,min_height=200,max_width=800,max_height=800|mimes:jpeg,bmp,png',
         ];
     }
 }

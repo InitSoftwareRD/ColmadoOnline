@@ -160,7 +160,7 @@
               </li>
 
               <li class="nav-item">
-                <a href="{{ route('orden_status') }}" class="nav-link">
+                <a href="{{ route('HistoricoOrdenes') }}" class="nav-link">
                   <i class="fas fa-history"></i>
                   <p>Histórico de Ordenes</p>
                 </a>

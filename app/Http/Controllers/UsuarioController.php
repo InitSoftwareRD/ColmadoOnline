@@ -9,6 +9,8 @@ use App\Customers;
 use App\Exports\ClientesExport;
 use App\Exports\EmpleadosExport;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UsuarioController extends Controller
 {
@@ -25,7 +27,37 @@ class UsuarioController extends Controller
      */
     public function index()
     {
-        return view('admin.pages.user.users');
+        $hash=substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 8);   
+        return view('admin.pages.user.users',compact('hash'));
+    }
+
+    public function CambiarPass()
+    {
+        return view('admin.pages.user.contrasena');
+
+    }
+
+    public function CambiarContrasena(Request $request)
+    {
+        if(!Hash::check($request->actual, Auth::user()->password))
+        {
+              return redirect()->route('CambiarContrasena')->with('actual', 'Contraseña actual incorrecta!');
+        }
+
+        $request->validate([
+            'NuevaContrasena' => 'required|min:8|same:RepetirContrasena',
+        ]);
+
+
+        $user= User::find( Auth::user()->id);
+
+        $user->password = bcrypt($request->NuevaContrasena);
+
+        $user->save();
+        
+        return redirect()->route('CambiarContrasena')->with('status', 'Contraseña actualizada de manera correcta!');
+
+
     }
 
     public function ClientesExport() 

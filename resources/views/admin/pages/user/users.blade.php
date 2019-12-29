@@ -71,8 +71,7 @@
 
                                   <div class="col-md-4 mb-3">
                                         <label for="pass">Contraseña</label>
-                                      <input type="text" class="form-control" value="cafeteriaaa123" id="contrasena" name="contrasena" placeholder="Contraseña" readonly>   
-                                         <span class="bg-warning">Favor cambiar contraseña predeterminada una vez inicada la session</span>
+                                  <input type="text" class="form-control" value="{{ $hash }}" id="contrasena" name="contrasena" placeholder="Contraseña" readonly> 
                                     </div>
 
                                 </div>

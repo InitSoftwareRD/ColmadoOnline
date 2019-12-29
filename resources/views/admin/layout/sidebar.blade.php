@@ -17,7 +17,7 @@
         @auth
 
         <div class="info">
-          <a href="#" class="d-block">{{  auth()->user()->name.' '.auth()->user()->last_name }}</a>
+        <a href="{{ route('CambiarContrasena') }}" class="d-block">{{  auth()->user()->name.' '.auth()->user()->last_name }}</a>
           </div>
             
         @endauth

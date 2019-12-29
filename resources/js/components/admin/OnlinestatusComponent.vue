@@ -39,7 +39,10 @@
                         <th> 
                             <button class="btn btn-success btn-sm" @click="modal(item)" title="Cambiar estatus"><i class="fas fa-exchange-alt"></i></button>  
                             <button class="btn btn-success btn-info btn-sm" @click="detalle_orden(item.id)" title="Mostrar detalle orden"><i class="fas fa-list-ol"></i></button>                      
-                            <button class="btn btn-warning btn-sm" @click="listarDelivery(item.id)" title="Asignar Delivery"><i class="fas fa-motorcycle"></i></button>                      
+                            <button class="btn btn-warning btn-sm" @click="listarDelivery(item.id)" title="Asignar Delivery"><i class="fas fa-motorcycle"></i></button>   
+                              <a target="_blank" class="btn btn-primary btn-sm" :href=" 'http://localhost/CafeOnline/public/admin/imprimir/' + item.id " title="Imprimir Detalle Orden">
+                              <i class="fas fa-print"></i>
+                            </a>                      
                         </th>
                     </tr>
             </tbody>

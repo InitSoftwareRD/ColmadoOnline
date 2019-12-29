@@ -36,7 +36,10 @@
                         <td class="estatus">{{ item.estatus }}</td>
                         <th> 
                             <button class="btn btn-success btn-sm" @click="modal(item)" title="Cambiar estatus"><i class="fas fa-exchange-alt"></i></button>  
-                            <button class="btn btn-success btn-info btn-sm" @click="detalle_orden(item.id)" title="Detalle de la orden"><i class="fas fa-list-ol"></i></button>                         
+                            <button class="btn btn-success btn-info btn-sm" @click="detalle_orden(item.id)" title="Detalle de la orden"><i class="fas fa-list-ol"></i></button> 
+                            <a target="_blank" class="btn btn-primary btn-sm" :href=" 'http://localhost/CafeOnline/public/admin/imprimir/' + item.id " title="Imprimir Detalle Orden">
+                              <i class="fas fa-print"></i>
+                            </a>                        
                         </th>
                     </tr>
             </tbody>

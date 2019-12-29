@@ -2250,6 +2250,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2808,6 +2811,9 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
 /* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_0__);
+//
+//
+//
 //
 //
 //
@@ -58416,6 +58422,21 @@ var render = function() {
                         }
                       },
                       [_c("i", { staticClass: "fas fa-motorcycle" })]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "a",
+                      {
+                        staticClass: "btn btn-primary btn-sm",
+                        attrs: {
+                          target: "_blank",
+                          href:
+                            "http://localhost/CafeOnline/public/admin/imprimir/" +
+                            item.id,
+                          title: "Imprimir Detalle Orden"
+                        }
+                      },
+                      [_c("i", { staticClass: "fas fa-print" })]
                     )
                   ])
                 ])
@@ -59324,6 +59345,21 @@ var render = function() {
                         }
                       },
                       [_c("i", { staticClass: "fas fa-list-ol" })]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "a",
+                      {
+                        staticClass: "btn btn-primary btn-sm",
+                        attrs: {
+                          target: "_blank",
+                          href:
+                            "http://localhost/CafeOnline/public/admin/imprimir/" +
+                            item.id,
+                          title: "Imprimir Detalle Orden"
+                        }
+                      },
+                      [_c("i", { staticClass: "fas fa-print" })]
                     )
                   ])
                 ])

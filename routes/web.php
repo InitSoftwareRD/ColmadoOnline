@@ -107,6 +107,8 @@ Route::middleware(['auth', 'onlyStaff'])->group(function () {
     Route::get('admin/detalle-historico/{id}','OrdenarController@DetalleHistorico')->name('DetalleHistorico');
     Route::get('admin/cambiar-contrasena','UsuarioController@CambiarPass')->name('CambiarContrasena');
     Route::post('admin/cambiar-pass','UsuarioController@CambiarContrasena')->name('CambiarPass');
+    Route::get('admin/imprimir/{id}','OrdenarController@Imprimir')->name('Imprimir');
+
 
 
 });

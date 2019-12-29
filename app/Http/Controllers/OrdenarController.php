@@ -14,6 +14,7 @@ use App\Mail\repartidor;
 use App\OrderTracking;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Mail;
 use App\Exports\HistoricoExport;
@@ -252,6 +253,50 @@ class OrdenarController extends Controller
     public function HistoricoExport() 
     {
         return Excel::download(new HistoricoExport, 'Historico.xlsx');
+    }
+
+
+    public function Imprimir($id)
+    {
+        $detalle=DB::SELECT("SELECT 
+        orders.id as id,
+        products.name as nombre,
+        order_product.quantity as cantidad,
+        order_product.price as precio,
+        order_product.subtotal as subtotal,
+        orders.total as total
+        FROM orders , order_product , products
+        WHERE 
+        orders.id = order_product.order_id
+        AND order_product.product_id = products.id
+        AND orders.id = ?
+        ORDER BY  products.name DESC
+        ",[$id]);
+
+        $usuario = DB::SELECT("SELECT 
+        CONCAT( u.name,' ', u.last_name ) as nombres,
+        CONCAT('(',SUBSTRING(u.phone,1,3),')','-',SUBSTRING(u.phone,4,3),'-',SUBSTRING(u.phone,7,4) ) as phone,
+        u.identity as indentidad,
+        u.email as email
+       FROM orders o , customers c , users u
+       WHERE
+       o.customer_id = c.id
+       AND c.user_id = u.id
+       AND o.id = ?",[$id]);
+
+
+            $data = [
+                'detalle' =>  $detalle,
+                'cliente' => $usuario
+            ];
+
+      return PDF::loadView('admin.pages.orders.print', $data)
+            ->stream('archivo.pdf');
+
+
+
+
+
     }
 
 

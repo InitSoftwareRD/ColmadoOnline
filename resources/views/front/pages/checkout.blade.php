@@ -63,6 +63,10 @@
                                         <button type="submit" class="clv_btn">¡Ordenar!</button>
                                         <a href="{{ route('cart') }}"><span><i class="fa fa-angle-left" aria-hidden="true"></i></span> Ir al carrito</a>
                                     </div>
+                                    <br><br>
+                                    <div class="alert alert-warning" role="alert">
+                                       <strong>Nota:</strong> Las ordenes realizadas fuera de horario laboral serán procesadas al siguiente día laboral. Para más información de nuestro horarios favor consultar la sección de contacto, también estar pendiente a nuestras publicaciones en las redes sociales. 
+                                    </div>
                                 </div>
                             </div>
                         </div>

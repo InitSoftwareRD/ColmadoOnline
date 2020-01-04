@@ -58131,7 +58131,7 @@ var render = function() {
                     _vm._v(" "),
                     _c("th", [_vm._v(_vm._s(item.devuelta))]),
                     _vm._v(" "),
-                    _c("th", [
+                    _c("th", { attrs: { title: "Ubicación Entrega" } }, [
                       _c(
                         "a",
                         {
@@ -58154,6 +58154,7 @@ var render = function() {
                         "button",
                         {
                           staticClass: "btn btn-success btn-info btn-sm",
+                          attrs: { title: "Detalle de la Orden" },
                           on: {
                             click: function($event) {
                               return _vm.detalle_orden(item.id)
@@ -58167,6 +58168,7 @@ var render = function() {
                         "button",
                         {
                           staticClass: "btn btn-success btn-sm",
+                          attrs: { title: "Finalizar Orden" },
                           on: {
                             click: function($event) {
                               return _vm.confirmacion(item.id)

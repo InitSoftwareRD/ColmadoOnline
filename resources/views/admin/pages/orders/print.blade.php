@@ -10,10 +10,10 @@
 
     <style>
         table, th, td {
-        border: 1px solid black;
+        border: 0.2px dotted black;
         }
 
-        h1, h2, h3{
+        h1, h2, h3, h5{
             text-align: center;
         }
 
@@ -26,6 +26,7 @@
 
     <h1>Orden # {{$detalle[0]->id }}</h1>
     <h2>Cafeteria AAA</h2>
+    <h5>809-000-0000</h5>
  
         <h3>Cliente</h3>
     <table style="width:100%">

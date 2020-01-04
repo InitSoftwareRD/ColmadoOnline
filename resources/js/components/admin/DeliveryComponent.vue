@@ -39,12 +39,12 @@
                   <th>{{ item.total }}</th>
                   <th> {{ item.pagado }}</th>
                   <th>{{ item.devuelta  }}</th>
-                  <th> <a :href=" 'https://maps.google.com/?q=' + item.ubicacion " target="_blank" ><i class="fas fa-map-marked-alt"></i></a> </th>
+                  <th title="Ubicación Entrega" ><a :href=" 'https://maps.google.com/?q=' + item.ubicacion " target="_blank" ><i class="fas fa-map-marked-alt"></i></a> </th>
                   <th> {{ item.ping }}</th>
                   <th> {{ item.delivery }}</th>
                   <th>  
-                    <button class="btn btn-success btn-info btn-sm" @click="detalle_orden(item.id)"><i class="fas fa-list-ol"></i></button>  
-                    <button class="btn btn-success btn-sm" @click="confirmacion(item.id)"><i class="fas fa-check-circle"></i></button>
+                    <button class="btn btn-success btn-info btn-sm" @click="detalle_orden(item.id)" title="Detalle de la Orden" ><i class="fas fa-list-ol"></i></button>  
+                    <button class="btn btn-success btn-sm" @click="confirmacion(item.id)" title="Finalizar Orden" ><i class="fas fa-check-circle"></i></button>
                   </th>
                 </tr>
             </tbody>

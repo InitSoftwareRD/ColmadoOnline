@@ -59,8 +59,14 @@ class ClientOrderController extends Controller
                 'ping' => rand (100000, 999999),
                 'canal' => 'I',
                 'paid_with' => request('paid_with'),
-                'location' => $newLocation = request()->location_store  ? request('lat') .','. request('lng') : $customer->location
+                'location' => $newLocation = request()->location_store  ? request('lat') .','. request('lng') : $customer->location ?: request('lat') .','. request('lng'),
             ]);
+
+            if (request('paid_with') > 0) {
+                $order->update([
+                   'change' => request('paid_with') - $order->total
+                ]);
+            }
 
             $customer->update(['location' => $newLocation]);
 

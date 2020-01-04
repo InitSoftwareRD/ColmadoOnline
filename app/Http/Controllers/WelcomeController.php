@@ -12,7 +12,7 @@ class WelcomeController extends Controller
     public function index()
     {
         return view('front.pages.home', [
-            'categorias' => Categories::all('id', 'name'),
+            'categorias' => Categories::whereStatus('A')->select('id', 'name')->get(),
             'productos' => Products::query()
                 ->with('category')
                 ->addSelect(['imagen_portada' => ImageProducts::select('ruta')
@@ -35,6 +35,10 @@ class WelcomeController extends Controller
                         $query->whereIn('id', $category);
                     });
                 })
+                ->whereHas('category', function ($category) {
+                    $category->wherestatus('A');
+                })
+                ->whereStatus('A')
                 ->paginate()
                 ->transform(function ($item) {
                     return array_merge($item->toArray(), [

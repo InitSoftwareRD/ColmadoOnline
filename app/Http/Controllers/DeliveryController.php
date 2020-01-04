@@ -53,6 +53,7 @@ class DeliveryController extends Controller
             ORDER by ot.created_at DESC
            LIMIT 1
          ) != 3
+         Order by o.id desc 
         ");
 
         return collect($ordenes)->map(function ($item) {

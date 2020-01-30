@@ -64,6 +64,18 @@
     <script src="{{ asset('front_template/js/revolution.extension.slideanims.min.js') }}"></script>
     <script src="{{ asset('front_template/js/revolution.extension.video.min.js') }}"></script>
     <script src="{{ asset('front_template/js/custom.js') }}"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#all').on('change', function () {
+
+                if(this.checked)
+                    $("input[type='checkbox']").each(function() {
+                        this.checked = true;
+                    });
+            });
+        });
+    </script>
+
     @stack('js')
 </body>
 

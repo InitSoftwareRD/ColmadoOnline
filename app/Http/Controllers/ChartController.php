@@ -34,7 +34,7 @@ class ChartController extends Controller
 			SELECT DISTINCT
 				YEAR(o.created_at) AS yyear
 			FROM
-				colmadoonline.orders AS o
+				orders AS o
 			;
 		");
 
@@ -72,7 +72,7 @@ class ChartController extends Controller
 	    		MONTH(o.created_at) AS mes,
 	    		SUM(o.total) AS total
     		FROM
-				colmadoonline.orders AS o
+				orders AS o
     		WHERE
     			YEAR(o.created_at) = ?
     		GROUP BY
@@ -110,16 +110,16 @@ class ChartController extends Controller
 				CONCAT(u.`name`, ' ', u.last_name) AS delivery,
 				COUNT(1) AS total
 			FROM
-				colmadoonline.orders AS o
+				orders AS o
 			 		INNER JOIN
-				colmadoonline.users AS u ON o.delivery_id = u.id
+				users AS u ON o.delivery_id = u.id
 			WHERE
 				EXISTS
 				(
 					SELECT
 						*
 					FROM
-						colmadoonline.order_tracking AS ot
+						order_tracking AS ot
 					WHERE
 						ot.order_id = o.id
 							AND ot.order_status = 3
@@ -151,9 +151,9 @@ class ChartController extends Controller
 				CONCAT(u.`name`, ' ', u.last_name) AS cliente,
 				COUNT(1) AS total
 			FROM
-				colmadoonline.orders AS o
+				orders AS o
 					INNER JOIN
-				colmadoonline.users AS u ON o.user_id = u.id
+				users AS u ON o.user_id = u.id
 			GROUP BY
 				u.`name`,
 				u.last_name
@@ -187,9 +187,9 @@ class ChartController extends Controller
 				SUM(op.quantity) AS cantidad
 				
 			FROM
-				colmadoonline.order_product AS op
+				order_product AS op
 					INNER JOIN
-				colmadoonline.products AS p ON op.product_id = p.id
+				products AS p ON op.product_id = p.id
 			GROUP BY
 				p.`name`
 			;
@@ -222,11 +222,11 @@ class ChartController extends Controller
 				c.`name` AS categoria,
 				SUM(op.quantity) AS cantidad
 			FROM
-				colmadoonline.order_product AS op
+				order_product AS op
 					INNER JOIN
-				colmadoonline.products AS p ON op.product_id = p.id
+				products AS p ON op.product_id = p.id
 					INNER JOIN
-				colmadoonline.category AS c ON p.category_id = c.id
+				category AS c ON p.category_id = c.id
 			GROUP BY
 				c.`name`
 			;
@@ -263,7 +263,7 @@ class ChartController extends Controller
 				END AS canal,
 				COUNT(1) AS cantidad
 			FROM
-				colmadoonline.orders AS o
+				orders AS o
 			GROUP BY
 				o.canal
 			;
@@ -303,11 +303,11 @@ class ChartController extends Controller
 						os.`name` AS `status`,
 						COUNT(1) AS row_number
 					FROM
-						colmadoonline.order_tracking AS ot_1
+						order_tracking AS ot_1
 							INNER JOIN
-						colmadoonline.order_tracking ot_2 ON ot_1.order_id = ot_2.order_id AND ot_1.order_status <= ot_2.order_status
+						order_tracking ot_2 ON ot_1.order_id = ot_2.order_id AND ot_1.order_status <= ot_2.order_status
 							INNER JOIN
-						colmadoonline.order_status AS os ON ot_1.`order_status` = os.id
+						order_status AS os ON ot_1.`order_status` = os.id
 					GROUP BY
 						ot_1.order_id,
 						ot_1.order_status,

@@ -27,6 +27,7 @@
     <h1>Orden # {{$detalle[0]->id }}</h1>
     <h2>Cafeteria AAA</h2>
     <h5>809-000-0000</h5>
+    <h5>Fecha: {{ date('d-m-Y', strtotime($detalle[0]->created_at)) }}</h5>
  
         <h3>Cliente</h3>
     <table style="width:100%">

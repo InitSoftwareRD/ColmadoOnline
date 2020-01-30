@@ -51,7 +51,7 @@
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form_block">
-                                            <input type="number" name="paid_with" class="form_field" placeholder="Pagaré con: RD$" min="{{$total}}" max="999999" required="">
+                                            <input type="number" name="paid_with" class="form_field" placeholder="Digite el monto con que desea pagar:" min="{{$total}}" max="999999" required="">
                                         </div>
                                     </div>
                                 </div>

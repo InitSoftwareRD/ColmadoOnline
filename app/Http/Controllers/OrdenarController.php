@@ -264,7 +264,8 @@ class OrdenarController extends Controller
         order_product.quantity as cantidad,
         order_product.price as precio,
         order_product.subtotal as subtotal,
-        orders.total as total
+        orders.total as total,
+        orders.created_at
         FROM orders , order_product , products
         WHERE 
         orders.id = order_product.order_id

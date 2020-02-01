@@ -76,6 +76,13 @@
                             </td>
                         </tr>
                     @endforelse
+                    @if($carts->count())
+                        <tr>
+                            <td class="text-right" colspan="5">
+                                <h3 class="font-weight-bold"> Total {{ number_format(Cart::session(auth()->id())->getTotal()) }}</h3>
+                            </td>
+                        </tr>
+                    @endif
                 </table>
                 @if($carts->count())
                     <div class="checkout_btn_block">

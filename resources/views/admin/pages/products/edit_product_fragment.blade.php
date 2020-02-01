@@ -12,7 +12,7 @@
 
                                  <div class="col-md-4 mb-3">
                                    <label for="nombre">Nombre</label>
-                                   <input type="text" class="form-control" id="nombre" name="nombre" 
+                                   <input type="text" class="form-control" id="nombre" name="nombre"
                                  placeholder="Nombre Producto" value="{{ $producto->name }}"
                                    onkeyup="javascript:this.value=this.value.toUpperCase();"
                                    required>
@@ -27,14 +27,14 @@
                                        <option  selected value="{{ $categoria->id }}">{{ $categoria->name }}</option>
 
                                        @else
-                                       
+
                                             <option value="{{ $categoria->id }}">{{ $categoria->name }}</option>
                                        @endif
 
                                        @endforeach
-                                   </select> 
+                                   </select>
                                  </div>
-    
+
                                  <div class="col-md-4 mb-3">
                                    <label for="precio">Precio</label>
                                    <div class="input-group">
@@ -45,7 +45,7 @@
                                      required min="1" max="99999999" step="0.1" >
                                    </div>
                                  </div>
-    
+
                                </div>
 
                                <div class="form-row">
@@ -55,22 +55,24 @@
                                         {{ $producto->ingredients }}
                                </textarea>
                                  </div>
-    
+
                                  <div class="col-md-6 mb-3">
                                    <label for="Descripcion">Descripción</label>
                                  <textarea class="form-control" name="descripcion" id="" cols="5" rows="5" placeholder="Descripción" required>
                                         {{ $producto->description }}
                                </textarea>
                                  </div>
-                           
-    
+
+
                                </div>
 
-    
+
                                <div class="form-row">
                                   <div class="col-md-6">
                                      <label for="portada">Portada</label>
-                                     <input type="file" class="form-control" name="portada"  accept="image/png, image/jpeg">
+                                      <br>
+                                      <img src=" {{  asset($producto->images->first()->ruta) }} "  class="img-fluid"/>
+                                      <input type="file" class="form-control" name="portada"  accept="image/png, image/jpeg">
                                   </div>
 
                                </div>
@@ -81,8 +83,8 @@
                                <br>
                                <br>
                               <button class="btn btn-primary btn-block" type="submit">Actualizar</button>
-                     
+
   </form>
-                        
+
 @endsection
 

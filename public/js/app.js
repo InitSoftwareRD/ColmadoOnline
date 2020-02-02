@@ -2592,7 +2592,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     this.getProductos();
-    this.compras();
   },
   created: function created() {
     this.getClientes();
@@ -2684,12 +2683,6 @@ __webpack_require__.r(__webpack_exports__);
         }
       }
     },
-    compras: function compras() {
-      var options = {
-        valueNames: ['name', 'born']
-      };
-      var userList = new List('carrito', options);
-    },
     agregarArticulo: function agregarArticulo(item) {
       this.carrito.push({
         id: item.id,
@@ -2698,16 +2691,11 @@ __webpack_require__.r(__webpack_exports__);
         cantidad: 1,
         suma: item.price
       });
-      this.compras();
       this.sumatoria();
     },
     eliminar: function eliminar(key) {
       this.carrito.splice(key, 1);
       this.sumatoria();
-      var options = {
-        valueNames: ['key', 'name', 'born']
-      };
-      var userList = new List('carrito', options);
     },
     mytable: function mytable() {
       $(function () {
@@ -58906,18 +58894,13 @@ var render = function() {
                   _vm._v(" "),
                   _c(
                     "tbody",
-                    { staticClass: "list" },
                     _vm._l(_vm.carrito, function(item, key) {
                       return _c("tr", { key: key }, [
-                        _c("td", { staticClass: "name" }, [
-                          _vm._v(_vm._s(item.name))
-                        ]),
+                        _c("td", [_vm._v(_vm._s(item.name))]),
                         _vm._v(" "),
-                        _c("td", { staticClass: "born" }, [
-                          _vm._v(_vm._s(item.price))
-                        ]),
+                        _c("td", [_vm._v(_vm._s(item.price))]),
                         _vm._v(" "),
-                        _c("td", { staticClass: "accion" }, [
+                        _c("td", [
                           _c(
                             "button",
                             {

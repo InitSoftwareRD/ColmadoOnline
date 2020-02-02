@@ -41,11 +41,11 @@
                         <th>Acción</th>
                         </tr>
                     </thead>
-            <tbody class="list" >
+            <tbody>
                         <tr v-for="(item, key) in carrito" :key="key" >
-                        <td class="name">{{ item.name }}</td>
-                        <td class="born">{{ item.price }}</td>
-                        <td class="accion">
+                        <td>{{ item.name }}</td>
+                        <td>{{ item.price }}</td>
+                        <td>
                             <button class="btn btn-info btn-sm" @click=" sumar(item)" title="Aumentar">+</button>
                               <input type="number"  min="1" max="999" name="cantidad" size="3" v-model="item.cantidad"
                               readonly>
@@ -152,8 +152,7 @@
     export default {
         mounted() {
 
-           this.getProductos();
-           this.compras();       
+           this.getProductos(); 
 
         },
 
@@ -256,14 +255,7 @@
            },
 
 
-          compras(){
-               var options = {
-                valueNames: [ 'name', 'born' ]
-            };
-
-            var userList = new List('carrito', options);
-
-          },
+       
            
            agregarArticulo(item)
            {
@@ -275,19 +267,13 @@
                  suma:item.price,
 
               });  
-              this.compras();
               this.sumatoria();
            },
 
            eliminar(key){
+                
                     this.carrito.splice(key,1);
-                     this.sumatoria();
-                     
-                    var options = {
-                            valueNames: [ 'key','name', 'born' ]
-                        };
-
-                        var userList = new List('carrito', options);        
+                     this.sumatoria();      
             },
 
             mytable()

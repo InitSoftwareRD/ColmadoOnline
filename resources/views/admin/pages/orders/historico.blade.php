@@ -19,6 +19,22 @@
         
       <a href="{{ route('exportarHistorico') }}" target="_blank" class="btn btn-success btn-lg" title="Exportar a excel"><i class="fas fa-file-excel"></i></a>
 
+      <form action="{{ route('HistoricoOrdenes') }}" method="GET" class="row mt-3">
+        <div class="form-group col-md-2">
+          <label for="fecha_inicio">Fecha inicio:</label>
+          <input class="form-control" type="date" name="fecha_inicio" id="fecha_inicio" value="{{ request('fecha_inicio') }}">
+        </div>
+
+        <div class="form-group col-md-2">
+          <label for="fecha_fin">Fecha fin:</label>
+          <input class="form-control" type="date" name="fecha_fin" id="fecha_fin" value="{{ request('fecha_fin') }}">
+        </div>
+
+        <div class="form-group col-md-2">
+          <button type="submit" class="btn btn-success" style="margin-top: 30px;">Consultar</button>
+        </div>
+      </form>
+
             <table id="historico" class="table table-sm table-responsive" style="width:100%">
                     <thead>
                         <tr>

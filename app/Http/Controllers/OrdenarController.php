@@ -153,6 +153,8 @@ class OrdenarController extends Controller
         o.id as id,
         o.ping as ping,
         o.total as total,
+        o.paid_with as pagado,
+        o.change as cambio,
         o.delivery as delivery,
         CONCAT( u.name,' ', u.last_name ) as nombres,
         CONCAT('(',SUBSTRING(u.phone,1,3),')','-',SUBSTRING(u.phone,4,3),'-',SUBSTRING(u.phone,7,4) ) as phone,
@@ -179,7 +181,15 @@ class OrdenarController extends Controller
          order by o.id desc
         ");
 
-        return $status;
+
+        return collect($status)->map(function ($item) {
+            return array_merge(collect($item)->toArray(), [
+                'total' => number_format($item->total),
+                'pagado' => number_format($item->pagado),
+                'devuelta' => number_format($item->pagado - $item->total)
+            ]);
+        })->toArray();    
+
 
     }
 

@@ -22,6 +22,8 @@
                         <th scope="col">Celular</th>
                         <th scope="col">Email</th>
                         <th scope="col">Total</th>
+                        <th scope="col">Pagado</th>
+                        <th scope="col">Devuelta</th>
                         <th scope="col">Estatus</th>
                         <th scope="col">Delivery</th>
                         <th>Acciones</th>
@@ -34,6 +36,8 @@
                         <td class="celular">{{ item.phone }}</td>
                         <td class="email">{{ item.email }}</td>
                         <td class="total">{{ item.total }}</td>
+                        <td class="pagado">{{ item.pagado  }}</td>
+                        <td class="cambio">{{ item.devuelta  }}</td>
                         <td class="estatus">{{ item.estatus }}</td>
                         <td class="total">{{ item.delivery }}</td>
                         <th> 

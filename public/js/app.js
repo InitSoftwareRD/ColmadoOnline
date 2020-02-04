@@ -2253,6 +2253,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -58363,6 +58367,14 @@ var render = function() {
                     _vm._v(_vm._s(item.total))
                   ]),
                   _vm._v(" "),
+                  _c("td", { staticClass: "pagado" }, [
+                    _vm._v(_vm._s(item.pagado))
+                  ]),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "cambio" }, [
+                    _vm._v(_vm._s(item.devuelta))
+                  ]),
+                  _vm._v(" "),
                   _c("td", { staticClass: "estatus" }, [
                     _vm._v(_vm._s(item.estatus))
                   ]),
@@ -58713,6 +58725,10 @@ var staticRenderFns = [
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Email")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Total")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Pagado")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Devuelta")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Estatus")]),
         _vm._v(" "),
